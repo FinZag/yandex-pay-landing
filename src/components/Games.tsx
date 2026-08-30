@@ -8,24 +8,33 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
+import { useToast } from '@/hooks/use-toast';
 
-type GamesProps = {
-  onAdd: (game: Game) => void;
-};
-
-const Games = ({ onAdd }: GamesProps) => {
+const Games = () => {
   const [active, setActive] = useState<Game | null>(null);
+  const { toast } = useToast();
+
+  const openStore = (url: string | undefined, store: string) => {
+    if (url) {
+      window.open(url, '_blank', 'noopener,noreferrer');
+      return;
+    }
+    toast({
+      title: `Ссылка на ${store} пока не указана`,
+      description: 'Пришлите адрес страницы игры — добавим кнопку.',
+    });
+  };
 
   return (
     <section id="games" className="mx-auto max-w-[1280px] px-5 pt-16 md:px-[76px] md:pt-24">
       <div className="flex items-baseline justify-between">
         <h2 className="font-head text-[22px] font-medium tracking-[-0.01em] md:text-[26px]">
-          Каталог
+          Каталог игр
         </h2>
-        <span className="text-[15px] text-muted-foreground">{games.length} позиции в каталоге</span>
+        <span className="text-[15px] text-muted-foreground">Скачивание в RuStore и AppGallery</span>
       </div>
 
-      <div className="mt-5 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-5 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {games.map((game, i) => (
           <article
             key={game.id}
@@ -35,13 +44,18 @@ const Games = ({ onAdd }: GamesProps) => {
             <button
               type="button"
               onClick={() => setActive(game)}
-              className={`relative h-[86px] overflow-hidden rounded-md bg-gradient-to-br ${game.thumb}`}
+              className={`relative h-[120px] overflow-hidden rounded-md bg-gradient-to-br ${game.thumb}`}
               aria-label={`Подробнее об игре ${game.title}`}
             >
               <span className="absolute -right-6 -top-6 h-[88px] w-[88px] rounded-full bg-background/25" />
             </button>
 
-            <h3 className="font-head text-[17px] font-bold tracking-[-0.01em]">{game.title}</h3>
+            <div className="flex items-center justify-between gap-3">
+              <h3 className="font-head text-[17px] font-bold tracking-[-0.01em]">{game.title}</h3>
+              <span className="shrink-0 rounded-full bg-background px-3 py-1 text-[13px] font-medium text-muted-foreground">
+                {game.priceLabel}
+              </span>
+            </div>
             <p className="text-[15px] leading-[1.35] text-muted-foreground">{game.tagline}</p>
 
             <button
@@ -52,14 +66,22 @@ const Games = ({ onAdd }: GamesProps) => {
               Подробнее <Icon name="ChevronRight" size={14} />
             </button>
 
-            <div className="mt-auto flex items-center justify-between pt-1">
-              <span className="font-head text-[19px] font-bold">{game.priceLabel}</span>
+            <div className="mt-auto flex flex-wrap gap-2 pt-2">
               <button
                 type="button"
-                onClick={() => onAdd(game)}
-                className="inline-flex h-9 items-center rounded-[18px] bg-primary px-[18px] text-[14px] font-medium text-primary-foreground transition-transform hover:scale-[1.04] active:scale-[0.98]"
+                onClick={() => openStore(game.rustore, 'RuStore')}
+                className="inline-flex h-10 flex-1 items-center justify-center gap-2 rounded-[20px] bg-primary px-4 text-[14px] font-medium text-primary-foreground transition-transform hover:scale-[1.03] active:scale-[0.98]"
               >
-                {game.ctaLabel}
+                <Icon name="Download" size={16} />
+                RuStore
+              </button>
+              <button
+                type="button"
+                onClick={() => openStore(game.appgallery, 'AppGallery')}
+                className="inline-flex h-10 flex-1 items-center justify-center gap-2 rounded-[20px] bg-background px-4 text-[14px] font-medium text-foreground transition-colors hover:bg-border"
+              >
+                <Icon name="Download" size={16} />
+                AppGallery
               </button>
             </div>
           </article>
@@ -89,18 +111,22 @@ const Games = ({ onAdd }: GamesProps) => {
                   <dd className="mt-0.5 font-medium">{active.platforms}</dd>
                 </div>
               </dl>
-              <div className="flex items-center justify-between gap-4">
-                <span className="font-head text-[24px] font-bold">{active.priceLabel}</span>
+              <div className="flex flex-wrap gap-3">
                 <button
                   type="button"
-                  onClick={() => {
-                    onAdd(active);
-                    setActive(null);
-                  }}
-                  className="inline-flex h-[52px] items-center gap-2 rounded-[26px] bg-primary px-7 font-bold text-primary-foreground"
+                  onClick={() => openStore(active.rustore, 'RuStore')}
+                  className="inline-flex h-[52px] flex-1 items-center justify-center gap-2 rounded-[26px] bg-primary px-6 font-bold text-primary-foreground"
                 >
-                  {active.ctaLabel}
-                  <Icon name="ArrowRight" size={18} />
+                  Скачать в RuStore
+                  <Icon name="ArrowUpRight" size={18} />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => openStore(active.appgallery, 'AppGallery')}
+                  className="inline-flex h-[52px] flex-1 items-center justify-center gap-2 rounded-[26px] bg-secondary px-6 font-bold text-foreground"
+                >
+                  AppGallery
+                  <Icon name="ArrowUpRight" size={18} />
                 </button>
               </div>
             </>

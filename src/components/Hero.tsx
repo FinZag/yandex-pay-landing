@@ -9,24 +9,27 @@ const Hero = () => {
         </div>
 
         <h1 className="mt-6 max-w-[15ch] font-head text-[30px] font-bold leading-[1.08] tracking-[-0.025em] md:mt-[26px] md:text-[32px]">
-          Играйте и поддержите разработку
+          Бесплатные игры от независимой студии
         </h1>
 
         <p className="mt-4 max-w-[34ch] text-[17px] font-medium leading-[1.4] text-muted-foreground">
-          Четыре игры на своём движке. Купить или закинуть на кофе автору — в один тап, картой или
-          Яндекс Пэй.
+          Три игры на своём движке — скачивайте в RuStore и AppGallery. Понравилось? Поддержите
+          разработку картой или через Яндекс Пэй.
         </p>
 
         <div className="mt-8 flex flex-wrap items-center gap-4 md:mt-auto">
           <a
-            href="#payment"
+            href="#games"
             className="inline-flex h-[56px] items-center gap-2.5 rounded-[28px] bg-primary px-[30px] text-[17px] font-bold tracking-[-0.01em] text-primary-foreground transition-transform hover:scale-[1.02] active:scale-[0.99]"
           >
-            Оплатить <span className="cond">Пэй</span>
+            Смотреть игры
           </a>
-          <span className="max-w-[22ch] text-[15px] leading-[1.35] text-muted-foreground">
-            Платежи принимает ИП Финенко Л. В.
-          </span>
+          <a
+            href="#payment"
+            className="inline-flex h-[56px] items-center gap-2.5 rounded-[28px] bg-background px-[30px] text-[17px] font-bold tracking-[-0.01em] text-foreground transition-transform hover:scale-[1.02] active:scale-[0.99]"
+          >
+            Поддержать <span className="cond">Пэй</span>
+          </a>
         </div>
 
         <img
@@ -38,9 +41,9 @@ const Hero = () => {
 
       <div className="mt-6 grid gap-3 sm:grid-cols-3">
         {[
-          { icon: 'ShieldCheck', text: 'Оплата через защищённый шлюз Яндекс Пэй' },
-          { icon: 'Download', text: 'Ключ и ссылка на загрузку сразу после оплаты' },
-          { icon: 'RotateCcw', text: 'Возврат в течение 14 дней по правилам оферты' },
+          { icon: 'Download', text: 'Игры бесплатны — RuStore и AppGallery' },
+          { icon: 'ShieldCheck', text: 'Поддержка через защищённый шлюз Яндекс Пэй' },
+          { icon: 'BadgeCheck', text: 'Платежи принимает ИП Финенко Л. В.' },
         ].map((f) => (
           <div
             key={f.icon}

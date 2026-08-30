@@ -4,18 +4,13 @@ import { cn } from '@/lib/utils';
 
 const links = [
   { href: '#games', label: 'Игры' },
-  { href: '#payment', label: 'Оплата' },
+  { href: '#payment', label: 'Поддержать' },
   { href: '#requisites', label: 'Реквизиты' },
   { href: '#legal', label: 'Документы' },
   { href: '#contacts', label: 'Контакты' },
 ];
 
-type HeaderProps = {
-  cartCount: number;
-  onCartClick: () => void;
-};
-
-const Header = ({ cartCount, onCartClick }: HeaderProps) => {
+const Header = () => {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -49,35 +44,16 @@ const Header = ({ cartCount, onCartClick }: HeaderProps) => {
               {l.label}
             </a>
           ))}
-          <button
-            type="button"
-            onClick={onCartClick}
+          <a
+            href="#games"
             className="inline-flex h-[52px] items-center gap-2.5 rounded-[26px] bg-secondary px-6 font-medium text-foreground transition-colors hover:bg-border"
           >
-            Корзина
-            {cartCount > 0 && (
-              <span className="grid h-[22px] min-w-[22px] place-items-center rounded-full bg-primary px-1.5 text-[13px] font-bold text-primary-foreground">
-                {cartCount}
-              </span>
-            )}
-            <Icon name="ShoppingBag" size={20} />
-          </button>
+            Скачать игры
+            <Icon name="Download" size={20} />
+          </a>
         </nav>
 
         <div className="flex items-center gap-2 lg:hidden">
-          <button
-            type="button"
-            onClick={onCartClick}
-            aria-label="Корзина"
-            className="relative grid h-11 w-11 place-items-center rounded-full bg-secondary"
-          >
-            <Icon name="ShoppingBag" size={20} />
-            {cartCount > 0 && (
-              <span className="absolute -right-0.5 -top-0.5 grid h-[20px] min-w-[20px] place-items-center rounded-full bg-primary px-1 text-[12px] font-bold text-primary-foreground">
-                {cartCount}
-              </span>
-            )}
-          </button>
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}

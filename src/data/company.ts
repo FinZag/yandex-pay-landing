@@ -21,15 +21,15 @@ export type Game = {
   title: string;
   tagline: string;
   description: string;
-  price: number;
   priceLabel: string;
-  ctaLabel: string;
   thumb: string;
   genre: string;
   platforms: string;
-  free?: boolean;
+  rustore?: string;
+  appgallery?: string;
 };
 
+// ВАЖНО: подставьте реальные ссылки на страницы игр в RuStore и AppGallery.
 export const games: Game[] = [
   {
     id: 'ledger-rush',
@@ -37,12 +37,12 @@ export const games: Game[] = [
     tagline: 'Аркада про биржевой день. 30 уровней.',
     description:
       'Динамичная аркада, где вы сводите баланс на скорость: сделки летят быстрее, чем вы успеваете считать. 30 уровней, режим бесконечной смены и таблица рекордов.',
-    price: 349,
-    priceLabel: '349 ₽',
-    ctaLabel: 'Купить',
+    priceLabel: 'Бесплатно',
     thumb: 'from-accent to-banner-to',
     genre: 'Аркада',
-    platforms: 'Windows, macOS',
+    platforms: 'Android',
+    rustore: '',
+    appgallery: '',
   },
   {
     id: 'night-shift',
@@ -50,12 +50,12 @@ export const games: Game[] = [
     tagline: 'Тихий детектив в офисе на 12 этаже.',
     description:
       'Неспешный детектив без погонь и стрельбы. Вы — ночной аудитор, который находит в отчётах то, чего там быть не должно. Пять вечеров, три концовки.',
-    price: 590,
-    priceLabel: '590 ₽',
-    ctaLabel: 'Купить',
+    priceLabel: 'Бесплатно',
     thumb: 'from-bar to-muted-foreground',
     genre: 'Детектив, квест',
-    platforms: 'Windows, macOS, Linux',
+    platforms: 'Android',
+    rustore: '',
+    appgallery: '',
   },
   {
     id: 'pixel-vault',
@@ -63,25 +63,11 @@ export const games: Game[] = [
     tagline: 'Головоломка о взломе старых сейфов.',
     description:
       'Пиксельная головоломка: 60 механических замков, каждый со своей логикой. Подсказки не продаются — до всего доходите сами.',
-    price: 249,
-    priceLabel: '249 ₽',
-    ctaLabel: 'Купить',
+    priceLabel: 'Бесплатно',
     thumb: 'from-ok to-badge',
     genre: 'Головоломка',
-    platforms: 'Windows, Android',
-  },
-  {
-    id: 'support',
-    title: 'Поддержать студию',
-    tagline: 'Свободная сумма без подписки и автосписаний.',
-    description:
-      'Добровольный взнос в разработку новых игр. Сумму выбираете сами, подписки и регулярных списаний нет. Взамен — упоминание в титрах ближайшего релиза.',
-    price: 100,
-    priceLabel: 'от 100 ₽',
-    ctaLabel: 'Внести',
-    thumb: 'from-badge to-accent',
-    genre: 'Поддержка разработки',
-    platforms: 'Не требует установки',
-    free: true,
+    platforms: 'Android',
+    rustore: '',
+    appgallery: '',
   },
 ];
