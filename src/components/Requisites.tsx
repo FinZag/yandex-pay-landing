@@ -13,7 +13,6 @@ const rows: { label: string; value: string }[] = [
   { label: 'Корр. счёт', value: company.corrAccount },
   { label: 'БИК', value: company.bik },
   { label: 'E-mail', value: company.email },
-  { label: 'Телефон', value: company.phone },
 ];
 
 const Requisites = () => {
@@ -34,7 +33,7 @@ const Requisites = () => {
     <section id="requisites" className="mx-auto max-w-[1280px] px-5 pt-16 md:px-[76px] md:pt-24">
       <div className="flex flex-wrap items-baseline justify-between gap-3">
         <h2 className="font-head text-[22px] font-medium tracking-[-0.01em] md:text-[26px]">
-          Реквизиты продавца
+          Реквизиты получателя платежей
         </h2>
         <button
           type="button"
@@ -58,8 +57,8 @@ const Requisites = () => {
       </div>
 
       <p className="mt-4 text-[14px] leading-[1.45] text-muted-foreground">
-        Продавцом цифровых товаров и получателем платежей является {company.legalName}. Деятельность
-        ведётся на территории Российской Федерации, режим работы: {company.schedule}.
+        Получателем платежей является {company.legalName}. Деятельность ведётся на территории
+        Российской Федерации.
       </p>
     </section>
   );

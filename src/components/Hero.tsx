@@ -17,16 +17,16 @@ const Hero = () => {
           разработку картой или через Яндекс Пэй.
         </p>
 
-        <div className="mt-8 flex flex-wrap items-center gap-4 md:mt-auto">
+        <div className="mt-8 flex flex-wrap items-center gap-3 md:mt-auto">
           <a
             href="#games"
-            className="inline-flex h-[56px] items-center gap-2.5 rounded-[28px] bg-primary px-[30px] text-[17px] font-bold tracking-[-0.01em] text-primary-foreground transition-transform hover:scale-[1.02] active:scale-[0.99]"
+            className="inline-flex h-[56px] shrink-0 items-center whitespace-nowrap rounded-[28px] bg-primary px-[30px] text-[17px] font-bold tracking-[-0.01em] text-primary-foreground transition-transform hover:scale-[1.02] active:scale-[0.99]"
           >
             Смотреть игры
           </a>
           <a
             href="#payment"
-            className="inline-flex h-[56px] items-center gap-2.5 rounded-[28px] bg-background px-[30px] text-[17px] font-bold tracking-[-0.01em] text-foreground transition-transform hover:scale-[1.02] active:scale-[0.99]"
+            className="inline-flex h-[56px] shrink-0 items-center gap-2 whitespace-nowrap rounded-[28px] bg-background px-[30px] text-[17px] font-bold tracking-[-0.01em] text-foreground transition-transform hover:scale-[1.02] active:scale-[0.99]"
           >
             Поддержать <span className="cond">Пэй</span>
           </a>
@@ -43,7 +43,7 @@ const Hero = () => {
         {[
           { icon: 'Download', text: 'Игры бесплатны — RuStore и AppGallery' },
           { icon: 'ShieldCheck', text: 'Поддержка через защищённый шлюз Яндекс Пэй' },
-          { icon: 'BadgeCheck', text: 'Платежи принимает ИП Финенко Л. В.' },
+          { icon: 'BadgeCheck', text: 'Поддержка — добровольно, без подписок' },
         ].map((f) => (
           <div
             key={f.icon}

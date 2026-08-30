@@ -11,7 +11,7 @@ const Contacts = () => {
         <span className="text-[15px] text-muted-foreground">{company.answerTime}</span>
       </div>
 
-      <div className="mt-5 grid gap-6 md:grid-cols-3">
+      <div className="mt-5 grid gap-6 md:grid-cols-2">
         <a
           href={`mailto:${company.email}`}
           className="group rounded-lg bg-secondary p-6 transition-colors hover:bg-border md:p-8"
@@ -22,20 +22,10 @@ const Contacts = () => {
             {company.email}
           </p>
         </a>
-        <a
-          href={`tel:${company.phone.replace(/[^\d+]/g, '')}`}
-          className="group rounded-lg bg-secondary p-6 transition-colors hover:bg-border md:p-8"
-        >
-          <Icon name="Phone" size={22} />
-          <h3 className="mt-4 font-head text-[17px] font-bold">Телефон</h3>
-          <p className="mt-1 text-[16px] text-muted-foreground group-hover:text-foreground">
-            {company.phone}
-          </p>
-        </a>
         <div className="rounded-lg bg-secondary p-6 md:p-8">
-          <Icon name="Clock" size={22} />
-          <h3 className="mt-4 font-head text-[17px] font-bold">Режим работы</h3>
-          <p className="mt-1 text-[16px] text-muted-foreground">{company.schedule}</p>
+          <Icon name="MessageCircle" size={22} />
+          <h3 className="mt-4 font-head text-[17px] font-bold">Обращения</h3>
+          <p className="mt-1 text-[16px] text-muted-foreground">{company.answerTime}</p>
         </div>
       </div>
 
@@ -43,8 +33,8 @@ const Contacts = () => {
         <h3 className="font-head text-[17px] font-bold">Адрес места ведения деятельности</h3>
         <p className="mt-1 text-[16px] text-muted-foreground">{company.address}</p>
         <p className="mt-3 text-[15px] leading-[1.45] text-muted-foreground">
-          Продажа цифровых товаров ведётся дистанционно через сайт. Офис для очного посещения
-          покупателей не предусмотрен, все обращения принимаются по почте и телефону.
+          Деятельность ведётся дистанционно. Офис для очного посещения не предусмотрен, все
+          обращения принимаются по электронной почте.
         </p>
       </div>
     </section>
