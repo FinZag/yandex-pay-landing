@@ -18,7 +18,23 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				sans: ['YS Text', 'Inter', 'system-ui', 'sans-serif'],
+				head: ['YS Text', 'Manrope', 'sans-serif'],
+				cond: ['YS Text Cond', 'Manrope', 'sans-serif'],
+			},
 			colors: {
+				'banner-from': 'hsl(var(--banner-from))',
+				'banner-to': 'hsl(var(--banner-to))',
+				badge: {
+					DEFAULT: 'hsl(var(--badge))',
+					foreground: 'hsl(var(--badge-ink))'
+				},
+				bar: {
+					DEFAULT: 'hsl(var(--bar))',
+					foreground: 'hsl(var(--bar-ink))'
+				},
+				ok: 'hsl(var(--ok))',
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',
@@ -65,10 +81,18 @@ export default {
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
-				md: 'calc(var(--radius) - 2px)',
-				sm: 'calc(var(--radius) - 4px)'
+				md: 'calc(var(--radius) - 6px)',
+				sm: 'calc(var(--radius) - 10px)'
 			},
 			keyframes: {
+				rise: {
+					from: { opacity: '0', transform: 'translateY(14px)' },
+					to: { opacity: '1', transform: 'none' }
+				},
+				float: {
+					'0%, 100%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(-10px)' }
+				},
 				'accordion-down': {
 					from: {
 						height: '0'
@@ -88,7 +112,9 @@ export default {
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				rise: 'rise 0.6s ease both',
+				float: 'float 7s ease-in-out infinite'
 			}
 		}
 	},

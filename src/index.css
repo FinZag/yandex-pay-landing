@@ -2,83 +2,159 @@
 @tailwind components;
 @tailwind utilities;
 
+/* YS Text — фирменное семейство Яндекса, используется в референсе */
+@font-face {
+  font-family: "YS Text";
+  src: url(https://storage.yandexcloud.net/poehali-cdn/projects/f66c7488-88ec-49b0-bfc4-ee80d5e44ff2/fonts/29104a6e1efdd389.woff2)
+    format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "YS Text";
+  src: url(https://storage.yandexcloud.net/poehali-cdn/projects/f66c7488-88ec-49b0-bfc4-ee80d5e44ff2/fonts/fce729ab7efa5552.woff2)
+    format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "YS Text";
+  src: url(https://storage.yandexcloud.net/poehali-cdn/projects/f66c7488-88ec-49b0-bfc4-ee80d5e44ff2/fonts/4d1d924e4cbae116.woff2)
+    format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "YS Text";
+  src: url(https://storage.yandexcloud.net/poehali-cdn/projects/f66c7488-88ec-49b0-bfc4-ee80d5e44ff2/fonts/837536449c4afdb1.woff2)
+    format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "YS Text";
+  src: url(https://storage.yandexcloud.net/poehali-cdn/projects/f66c7488-88ec-49b0-bfc4-ee80d5e44ff2/fonts/0a5640ed5df5968f.woff2)
+    format("woff2");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "YS Text Cond";
+  src: url(https://storage.yandexcloud.net/poehali-cdn/projects/f66c7488-88ec-49b0-bfc4-ee80d5e44ff2/fonts/30df4d430388e938.woff2)
+    format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "YS Text Cond";
+  src: url(https://storage.yandexcloud.net/poehali-cdn/projects/f66c7488-88ec-49b0-bfc4-ee80d5e44ff2/fonts/1fc973e0b8fcc139.woff2)
+    format("woff2");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
   :root {
+    /* --hero-bg #ffffff */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* --hero-text #202632 */
+    --foreground: 220 23% 16%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 220 23% 16%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 220 23% 16%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* --hero-accent #121214 */
+    --primary: 240 5% 7%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* --hero-surface #f5f6f8 */
+    --secondary: 220 18% 97%;
+    --secondary-foreground: 220 23% 16%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 220 18% 97%;
+    /* --hero-muted #68748a */
+    --muted-foreground: 219 14% 47%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* --hero-x-plus #7a4df0 */
+    --accent: 257 84% 62%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* --hero-x-line #e1e3e8 */
+    --border: 223 13% 90%;
+    --input: 223 13% 90%;
+    --ring: 257 84% 62%;
 
-    --radius: 0.5rem;
+    --radius: 1.25rem;
+
+    /* дополнительные акценты варианта */
+    --banner-from: 260 47% 96%;
+    --banner-to: 263 46% 90%;
+    --badge: 48 100% 65%;
+    --badge-ink: 49 100% 10%;
+    --bar: 0 0% 14%;
+    --bar-ink: 220 16% 96%;
+    --ok: 128 56% 45%;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 240 5% 7%;
+    --foreground: 220 16% 96%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 0 0% 11%;
+    --card-foreground: 220 16% 96%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 0 0% 11%;
+    --popover-foreground: 220 16% 96%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 0 0% 100%;
+    --primary-foreground: 240 5% 7%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 0 0% 14%;
+    --secondary-foreground: 220 16% 96%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 0 0% 14%;
+    --muted-foreground: 219 10% 65%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 257 84% 62%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 220 16% 96%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 257 84% 62%;
+
+    --banner-from: 260 20% 16%;
+    --banner-to: 263 25% 24%;
+    --badge: 48 100% 65%;
+    --badge-ink: 49 100% 10%;
+    --bar: 0 0% 11%;
+    --bar-ink: 220 16% 96%;
+    --ok: 128 56% 45%;
+
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -95,7 +171,22 @@
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 90px;
+  }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    font-family: "YS Text", "Inter", system-ui, sans-serif;
+    font-size: 17px;
+    overflow-x: hidden;
+  }
+}
+
+@layer components {
+  .cond {
+    font-family: "YS Text Cond", "Manrope", sans-serif;
+    font-weight: 900;
   }
 }
