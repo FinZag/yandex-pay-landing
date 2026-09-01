@@ -1,0 +1,43 @@
+{
+  "tests": [
+    {
+      "name": "CORS preflight",
+      "method": "OPTIONS",
+      "path": "/",
+      "expectedStatus": 200
+    },
+    {
+      "name": "Отклоняет GET",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 405
+    },
+    {
+      "name": "Требует сумму",
+      "method": "POST",
+      "path": "/",
+      "body": { "email": "user@example.com" },
+      "expectedStatus": 400,
+      "expectedBody": { "error": "string" },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Отклоняет сумму меньше 100",
+      "method": "POST",
+      "path": "/",
+      "body": { "amount": 50, "email": "user@example.com" },
+      "expectedStatus": 400,
+      "expectedBody": { "error": "string" },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Проверяет почту",
+      "method": "POST",
+      "path": "/",
+      "body": { "amount": 300, "email": "not-an-email" },
+      "expectedStatus": 400,
+      "expectedBody": { "error": "string" },
+      "bodyMatcher": "partial"
+    }
+  ]
+}

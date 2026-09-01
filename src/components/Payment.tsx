@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import Icon from '@/components/ui/icon';
 import MailLink from '@/components/MailLink';
+import { PAYMENT_URL } from '@/data/company';
 import { useToast } from '@/hooks/use-toast';
 
 const presets = [100, 300, 500, 1000];
@@ -11,6 +12,7 @@ const Payment = () => {
   const [email, setEmail] = useState('');
   const [agree, setAgree] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
   const { toast } = useToast();
 
   const total = useMemo(() => {
@@ -21,7 +23,7 @@ const Payment = () => {
     return support ?? 0;
   }, [custom, support]);
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (total < 100) {
       setError('Минимальная сумма поддержки — 100 ₽.');
@@ -36,10 +38,35 @@ const Payment = () => {
       return;
     }
     setError(null);
-    toast({
-      title: 'Платёж сформирован',
-      description: `Сумма ${total.toLocaleString('ru-RU')} ₽. Приём онлайн-оплаты через Яндекс Пэй подключается — подтверждение отправим на ${email.trim()}.`,
-    });
+    setLoading(true);
+
+    try {
+      const res = await fetch(PAYMENT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          amount: total,
+          email: email.trim(),
+          returnUrl: `${window.location.origin}/#payment`,
+        }),
+      });
+      const data = await res.json();
+
+      if (!res.ok || !data.paymentUrl) {
+        setError(data.error || 'Не удалось создать платёж. Попробуйте позже.');
+        return;
+      }
+
+      toast({
+        title: 'Переходим к оплате',
+        description: `Сумма ${total.toLocaleString('ru-RU')} ₽. Открывается защищённая страница Яндекс Пэй.`,
+      });
+      window.location.href = data.paymentUrl;
+    } catch {
+      setError('Нет связи с платёжным сервисом. Проверьте интернет и попробуйте снова.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -132,9 +159,19 @@ const Payment = () => {
             </span>
             <button
               type="submit"
-              className="inline-flex h-[56px] items-center gap-2.5 rounded-[28px] bg-primary px-[30px] text-[17px] font-bold tracking-[-0.01em] text-primary-foreground transition-transform hover:scale-[1.02] active:scale-[0.99]"
+              disabled={loading}
+              className="inline-flex h-[56px] items-center gap-2.5 rounded-[28px] bg-primary px-[30px] text-[17px] font-bold tracking-[-0.01em] text-primary-foreground transition-transform hover:scale-[1.02] active:scale-[0.99] disabled:pointer-events-none disabled:opacity-60"
             >
-              Оплатить <span className="cond">Пэй</span>
+              {loading ? (
+                <>
+                  <Icon name="LoaderCircle" size={18} className="animate-spin" />
+                  Создаём платёж
+                </>
+              ) : (
+                <>
+                  Оплатить <span className="cond">Пэй</span>
+                </>
+              )}
             </button>
           </div>
         </form>
