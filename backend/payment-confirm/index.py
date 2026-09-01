@@ -99,7 +99,8 @@ def handler(event: dict, context) -> dict:
         return reply(405, {'error': 'Method not allowed'})
 
     body = json.loads(event.get('body') or '{}')
-    order_id = (body.get('orderId') or '').strip()
+    callback_order = body.get('order') or {}
+    order_id = (body.get('orderId') or callback_order.get('orderId') or '').strip()
 
     if not re.match(r'^donation-[a-zA-Z0-9\-]{4,80}$', order_id):
         return reply(400, {'error': 'Некорректный номер платежа'})
