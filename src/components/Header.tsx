@@ -7,7 +7,6 @@ const links = [
   { href: '#about', label: 'О студии' },
   { href: '#games', label: 'Игры' },
   { href: '#payment', label: 'Поддержать' },
-  { href: '/legal', label: 'Документы' },
   { href: '#faq', label: 'Вопросы' },
   { href: '#contacts', label: 'Контакты' },
 ];
@@ -42,7 +41,7 @@ const Header = () => {
           </span>
         </a>
 
-        <nav className="hidden items-center gap-7 text-[16px] text-muted-foreground lg:flex">
+        <nav className="hidden items-center gap-7 text-[16px] text-muted-foreground xl:flex">
           {links.map((l) =>
             l.href.startsWith('/') ? (
               <Link key={l.href} to={l.href} className="transition-colors hover:text-foreground">
@@ -61,9 +60,24 @@ const Header = () => {
             Скачать игры
             <Icon name="Download" size={20} />
           </a>
+          <Link
+            to="/legal"
+            className="inline-flex h-[52px] items-center gap-2.5 rounded-[26px] bg-badge px-6 font-bold text-badge-foreground transition-transform hover:scale-[1.03]"
+          >
+            <Icon name="FileText" size={20} />
+            Документы и реквизиты
+          </Link>
         </nav>
 
-        <div className="flex items-center gap-2 lg:hidden">
+        <div className="flex items-center gap-2 xl:hidden">
+          <Link
+            to="/legal"
+            className="inline-flex h-11 items-center gap-2 rounded-[22px] bg-badge px-4 text-[15px] font-bold text-badge-foreground"
+          >
+            <Icon name="FileText" size={18} />
+            <span className="hidden sm:inline">Документы и реквизиты</span>
+            <span className="sm:hidden">Документы</span>
+          </Link>
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
@@ -77,7 +91,7 @@ const Header = () => {
       </div>
 
       {open && (
-        <nav className="border-t border-border bg-background px-5 pb-5 pt-2 lg:hidden">
+        <nav className="border-t border-border bg-background px-5 pb-5 pt-2 xl:hidden">
           {links.map((l) =>
             l.href.startsWith('/') ? (
               <Link
