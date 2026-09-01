@@ -12,6 +12,7 @@ const Payment = () => {
   const [email, setEmail] = useState('');
   const [agree, setAgree] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [notConfigured, setNotConfigured] = useState(false);
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
 
@@ -38,6 +39,7 @@ const Payment = () => {
       return;
     }
     setError(null);
+    setNotConfigured(false);
     setLoading(true);
 
     try {
@@ -54,6 +56,7 @@ const Payment = () => {
 
       if (!res.ok || !data.paymentUrl) {
         setError(data.error || 'Не удалось создать платёж. Попробуйте позже.');
+        setNotConfigured(Boolean(data.notConfigured));
         return;
       }
 
@@ -147,8 +150,16 @@ const Payment = () => {
           </label>
 
           {error && (
-            <p className="mt-4 flex items-start gap-2 text-[14px] text-destructive">
-              <Icon name="TriangleAlert" size={16} className="mt-0.5 shrink-0" />
+            <p
+              className={`mt-4 flex items-start gap-2 text-[14px] ${
+                notConfigured ? 'text-muted-foreground' : 'text-destructive'
+              }`}
+            >
+              <Icon
+                name={notConfigured ? 'Info' : 'TriangleAlert'}
+                size={16}
+                className="mt-0.5 shrink-0"
+              />
               {error}
             </p>
           )}

@@ -18,6 +18,14 @@ CORS = {
 }
 
 
+PLACEHOLDERS = {'placeholder', 'changeme', 'todo', 'test', 'xxx', 'none', '-'}
+
+
+def clean_secret(value: str | None) -> str:
+    value = (value or '').strip()
+    return '' if value.lower() in PLACEHOLDERS else value
+
+
 def reply(status: int, payload: dict) -> dict:
     return {
         'statusCode': status,
@@ -57,11 +65,15 @@ def handler(event: dict, context) -> dict:
     if not re.match(r'^[^@\s]+@[^@\s]+\.[^@\s]+$', email):
         return reply(400, {'error': 'Проверьте адрес электронной почты'})
 
-    api_key = os.environ.get('YANDEX_PAY_API_KEY')
-    merchant_id = os.environ.get('YANDEX_PAY_MERCHANT_ID')
+    api_key = clean_secret(os.environ.get('YANDEX_PAY_API_KEY'))
+    merchant_id = clean_secret(os.environ.get('YANDEX_PAY_MERCHANT_ID'))
 
     if not api_key or not merchant_id:
-        return reply(503, {'error': 'Приём оплаты пока не подключён'})
+        return reply(503, {
+            'error': 'Приём взносов сейчас настраивается — магазин проходит регистрацию в Яндекс Пэй. '
+                     'Напишите нам, и мы сообщим, когда оплата заработает.',
+            'notConfigured': True,
+        })
 
     env = (os.environ.get('YANDEX_PAY_ENV') or 'sandbox').strip().lower()
     api_url = PRODUCTION_URL if env == 'production' else SANDBOX_URL

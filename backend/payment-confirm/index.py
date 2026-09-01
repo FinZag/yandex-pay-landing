@@ -31,8 +31,16 @@ def reply(status: int, payload: dict) -> dict:
     }
 
 
+PLACEHOLDERS = {'placeholder', 'changeme', 'todo', 'test', 'xxx', 'none', '-'}
+
+
+def clean_secret(value: str | None) -> str:
+    value = (value or '').strip()
+    return '' if value.lower() in PLACEHOLDERS else value
+
+
 def fetch_order_status(order_id: str, env: str) -> str:
-    api_key = os.environ.get('YANDEX_PAY_API_KEY')
+    api_key = clean_secret(os.environ.get('YANDEX_PAY_API_KEY'))
     if not api_key:
         return 'unknown'
 
@@ -58,7 +66,7 @@ def fetch_order_status(order_id: str, env: str) -> str:
 
 
 def send_email(amount: int, email: str, order_id: str, sandbox: bool) -> None:
-    password = os.environ.get('YANDEX_MAIL_APP_PASSWORD')
+    password = clean_secret(os.environ.get('YANDEX_MAIL_APP_PASSWORD'))
     if not password:
         print('Mail password missing, notification skipped')
         return
