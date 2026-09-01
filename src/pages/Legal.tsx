@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import Seo from '@/components/Seo';
 import Icon from '@/components/ui/icon';
 import MailLink from '@/components/MailLink';
 import LegalRequisites from '@/components/LegalRequisites';
@@ -26,6 +27,11 @@ const LegalPage = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Seo
+        title="Документы и реквизиты — публичная оферта FinGame"
+        description="Публичная оферта, условия оплаты и возврата, политика конфиденциальности и банковские реквизиты ИП Финенко Л. В. — получателя добровольных взносов FinGame."
+        path="/legal"
+      />
       <header className="sticky top-0 z-50 bg-background/90 backdrop-blur">
         <div className="mx-auto flex h-[76px] max-w-[1280px] items-center justify-between px-5 md:h-[92px] md:px-[76px]">
           <Link to="/" className="flex items-center gap-2.5" aria-label="FinGame — на главную">

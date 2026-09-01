@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
+import Seo from '@/components/Seo';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Icon from '@/components/ui/icon';
@@ -22,6 +23,12 @@ const ThankYou = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Seo
+        title="Спасибо за поддержку — FinGame"
+        description="Взнос принят. Спасибо, что поддерживаете разработку игр FinGame."
+        path="/thanks"
+        noindex
+      />
       <Header />
       <main className="mx-auto max-w-[1280px] px-5 pt-2 md:px-[76px]">
         <section className="flex animate-rise flex-col overflow-hidden rounded-lg bg-[linear-gradient(105deg,hsl(var(--banner-from))_0%,hsl(var(--banner-from))_42%,hsl(var(--banner-to))_100%)] px-6 py-10 md:px-10 md:py-[46px]">

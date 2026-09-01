@@ -1,3 +1,4 @@
+import Seo from '@/components/Seo';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import About from '@/components/About';
@@ -10,6 +11,11 @@ import Footer from '@/components/Footer';
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
+      <Seo
+        title="FinGame — бесплатные инди-игры на Unity в RuStore"
+        description="Инди-студия FinGame разрабатывает мобильные игры на Unity. Скачивайте бесплатно в RuStore и поддержите разработку добровольным взносом через Яндекс Пэй."
+        path="/"
+      />
       <Header />
       <main>
         <Hero />
