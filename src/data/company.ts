@@ -1,18 +1,14 @@
-// ВАЖНО: замените значения-заглушки на реальные данные ИП перед подключением Яндекс Пэй.
 export const company = {
   brand: 'FinGame',
   legalName: 'Индивидуальный предприниматель Финенко Лариса Валерьевна',
   shortName: 'ИП Финенко Л. В.',
-  inn: '000000000000',
-  ogrnip: '000000000000000',
-  address: 'Российская Федерация, г. Москва',
+  inn: '253304385316',
+  ogrnip: '326253600015200',
   email: 'support@fingame.ru',
-  phone: '+7 (900) 000-00-00',
-  bankName: 'АО «Тинькофф Банк»',
-  account: '40802810000000000000',
-  corrAccount: '30101810000000000000',
-  bik: '000000000',
-  schedule: 'Пн–Пт, 10:00–19:00 (МСК)',
+  bankName: 'Дальневосточный банк ПАО Сбербанк',
+  account: '40802810650710009449',
+  corrAccount: '30101810600000000608',
+  bik: '040813608',
   answerTime: 'Отвечаем в течение одного рабочего дня',
 };
 
@@ -26,10 +22,9 @@ export type Game = {
   genre: string;
   platforms: string;
   rustore?: string;
-  appgallery?: string;
 };
 
-// ВАЖНО: подставьте реальные ссылки на страницы игр в RuStore и AppGallery.
+// ВАЖНО: подставьте реальные ссылки на страницы игр в RuStore.
 export const games: Game[] = [
   {
     id: 'ledger-rush',
@@ -42,7 +37,6 @@ export const games: Game[] = [
     genre: 'Аркада',
     platforms: 'Android',
     rustore: '',
-    appgallery: '',
   },
   {
     id: 'night-shift',
@@ -55,7 +49,6 @@ export const games: Game[] = [
     genre: 'Детектив, квест',
     platforms: 'Android',
     rustore: '',
-    appgallery: '',
   },
   {
     id: 'pixel-vault',
@@ -68,6 +61,5 @@ export const games: Game[] = [
     genre: 'Головоломка',
     platforms: 'Android',
     rustore: '',
-    appgallery: '',
   },
 ];

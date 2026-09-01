@@ -31,7 +31,7 @@ const Games = () => {
         <h2 className="font-head text-[22px] font-medium tracking-[-0.01em] md:text-[26px]">
           Каталог игр
         </h2>
-        <span className="text-[15px] text-muted-foreground">Скачивание в RuStore и AppGallery</span>
+        <span className="text-[15px] text-muted-foreground">Скачивание в RuStore</span>
       </div>
 
       <div className="mt-5 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -103,24 +103,14 @@ const Games = () => {
                   <dd className="mt-0.5 font-medium">{active.platforms}</dd>
                 </div>
               </dl>
-              <div className="flex flex-wrap gap-3">
-                <button
-                  type="button"
-                  onClick={() => openStore(active.rustore, 'RuStore')}
-                  className="inline-flex h-[52px] flex-1 items-center justify-center gap-2 rounded-[26px] bg-primary px-6 font-bold text-primary-foreground"
-                >
-                  Скачать в RuStore
-                  <Icon name="ArrowUpRight" size={18} />
-                </button>
-                <button
-                  type="button"
-                  onClick={() => openStore(active.appgallery, 'AppGallery')}
-                  className="inline-flex h-[52px] flex-1 items-center justify-center gap-2 rounded-[26px] bg-secondary px-6 font-bold text-foreground"
-                >
-                  AppGallery
-                  <Icon name="ArrowUpRight" size={18} />
-                </button>
-              </div>
+              <button
+                type="button"
+                onClick={() => openStore(active.rustore, 'RuStore')}
+                className="inline-flex h-[52px] w-full items-center justify-center gap-2 rounded-[26px] bg-primary px-6 font-bold text-primary-foreground"
+              >
+                Скачать в RuStore
+                <Icon name="ArrowUpRight" size={18} />
+              </button>
             </>
           )}
         </DialogContent>

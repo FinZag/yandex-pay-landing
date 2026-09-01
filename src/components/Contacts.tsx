@@ -29,14 +29,10 @@ const Contacts = () => {
         </div>
       </div>
 
-      <div className="mt-6 rounded-lg bg-secondary p-6 md:p-8">
-        <h3 className="font-head text-[17px] font-bold">Адрес места ведения деятельности</h3>
-        <p className="mt-1 text-[16px] text-muted-foreground">{company.address}</p>
-        <p className="mt-3 text-[15px] leading-[1.45] text-muted-foreground">
-          Деятельность ведётся дистанционно. Офис для очного посещения не предусмотрен, все
-          обращения принимаются по электронной почте.
-        </p>
-      </div>
+      <p className="mt-6 text-[15px] leading-[1.45] text-muted-foreground">
+        Деятельность ведётся дистанционно, офис для очного посещения не предусмотрен. Все обращения
+        принимаются по электронной почте.
+      </p>
     </section>
   );
 };

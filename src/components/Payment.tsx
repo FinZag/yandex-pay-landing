@@ -55,7 +55,7 @@ const Payment = () => {
         <form onSubmit={submit} className="rounded-lg bg-secondary p-6 md:p-8" noValidate>
           <h3 className="font-head text-[18px] font-bold">Добровольный взнос на разработку</h3>
           <p className="mt-1 text-[15px] leading-[1.35] text-muted-foreground">
-            Игры распространяются бесплатно в RuStore и AppGallery. Взнос — по желанию, без подписки
+            Игры распространяются бесплатно в RuStore. Взнос — по желанию, без подписки
             и автосписаний. Минимум 100 ₽.
           </p>
 

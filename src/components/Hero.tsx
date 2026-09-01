@@ -13,7 +13,7 @@ const Hero = () => {
         </h1>
 
         <p className="mt-4 max-w-[34ch] text-[17px] font-medium leading-[1.4] text-muted-foreground">
-          Три игры на своём движке — скачивайте в RuStore и AppGallery. Понравилось? Поддержите
+          Три игры на своём движке — скачивайте в RuStore. Понравилось? Поддержите
           разработку картой или через Яндекс Пэй.
         </p>
 
@@ -41,7 +41,7 @@ const Hero = () => {
 
       <div className="mt-6 grid gap-3 sm:grid-cols-3">
         {[
-          { icon: 'Download', text: 'Игры бесплатны — RuStore и AppGallery' },
+          { icon: 'Download', text: 'Игры бесплатны — RuStore' },
           { icon: 'ShieldCheck', text: 'Поддержка через защищённый шлюз Яндекс Пэй' },
           { icon: 'BadgeCheck', text: 'Поддержка — добровольно, без подписок' },
         ].map((f) => (
