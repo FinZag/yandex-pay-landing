@@ -3,6 +3,7 @@ import Icon from '@/components/ui/icon';
 import { cn } from '@/lib/utils';
 
 const links = [
+  { href: '#about', label: 'О студии' },
   { href: '#games', label: 'Игры' },
   { href: '#payment', label: 'Поддержать' },
   { href: '#requisites', label: 'Реквизиты' },
