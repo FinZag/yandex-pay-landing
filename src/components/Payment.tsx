@@ -47,7 +47,7 @@ const Payment = () => {
         body: JSON.stringify({
           amount: total,
           email: email.trim(),
-          returnUrl: `${window.location.origin}/#payment`,
+          returnUrl: window.location.origin,
         }),
       });
       const data = await res.json();

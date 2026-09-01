@@ -67,6 +67,8 @@ def handler(event: dict, context) -> dict:
     request_id = getattr(context, 'request_id', '') or 'order'
     order_id = f'donation-{request_id}'
 
+    site_url = return_url.rstrip('/') if return_url.startswith('http') else 'https://fingame.ru'
+
     payload = {
         'availablePaymentMethods': ['CARD', 'SPLIT'],
         'cart': {
@@ -86,8 +88,9 @@ def handler(event: dict, context) -> dict:
         'orderId': order_id,
         'orderSource': 'WEBSITE',
         'redirectUrls': {
-            'onError': return_url or 'https://fingame.ru/#payment',
-            'onSuccess': return_url or 'https://fingame.ru/#payment',
+            'onError': f'{site_url}/#payment',
+            'onAbort': f'{site_url}/#payment',
+            'onSuccess': f'{site_url}/thanks?orderId={order_id}',
         },
         'merchantId': merchant_id,
         'metadata': json.dumps({'email': email}, ensure_ascii=False),
