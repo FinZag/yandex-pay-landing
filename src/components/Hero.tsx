@@ -13,8 +13,8 @@ const Hero = () => {
         </h1>
 
         <p className="mt-4 max-w-[34ch] text-[17px] font-medium leading-[1.4] text-muted-foreground">
-          Три игры на своём движке — скачивайте в RuStore. Понравилось? Поддержите
-          разработку картой или через Яндекс Пэй.
+          Игры на своём движке — скачивайте в RuStore. Понравилось? Поддержите разработку картой
+          или через Яндекс Пэй.
         </p>
 
         <div className="mt-8 flex flex-wrap items-center gap-3 pb-1 md:mt-auto md:pt-6">

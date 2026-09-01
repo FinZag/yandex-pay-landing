@@ -40,40 +40,4 @@ export const games: Game[] = [
     rustore: 'https://www.rustore.ru/catalog/app/com.FinGame.ByteTrace',
     icon: 'https://cdn.poehali.dev/projects/f66c7488-88ec-49b0-bfc4-ee80d5e44ff2/bucket/7f835ab3-e9d3-401d-9266-530a364c2f39.jpeg',
   },
-  {
-    id: 'ledger-rush',
-    title: 'Ledger Rush',
-    tagline: 'Аркада про биржевой день. 30 уровней.',
-    description:
-      'Динамичная аркада, где вы сводите баланс на скорость: сделки летят быстрее, чем вы успеваете считать. 30 уровней, режим бесконечной смены и таблица рекордов.',
-    priceLabel: 'Бесплатно',
-    thumb: 'from-accent to-banner-to',
-    genre: 'Аркада',
-    platforms: 'Android',
-    rustore: '',
-  },
-  {
-    id: 'night-shift',
-    title: 'Ночная смена',
-    tagline: 'Тихий детектив в офисе на 12 этаже.',
-    description:
-      'Неспешный детектив без погонь и стрельбы. Вы — ночной аудитор, который находит в отчётах то, чего там быть не должно. Пять вечеров, три концовки.',
-    priceLabel: 'Бесплатно',
-    thumb: 'from-bar to-muted-foreground',
-    genre: 'Детектив, квест',
-    platforms: 'Android',
-    rustore: '',
-  },
-  {
-    id: 'pixel-vault',
-    title: 'Pixel Vault',
-    tagline: 'Головоломка о взломе старых сейфов.',
-    description:
-      'Пиксельная головоломка: 60 механических замков, каждый со своей логикой. Подсказки не продаются — до всего доходите сами.',
-    priceLabel: 'Бесплатно',
-    thumb: 'from-ok to-badge',
-    genre: 'Головоломка',
-    platforms: 'Android',
-    rustore: '',
-  },
 ];

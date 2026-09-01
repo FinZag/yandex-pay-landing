@@ -34,7 +34,7 @@ const Games = () => {
         <span className="text-[15px] text-muted-foreground">Скачивание в RuStore</span>
       </div>
 
-      <div className="mt-5 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-5 grid max-w-[420px] gap-6 sm:grid-cols-[repeat(auto-fill,minmax(280px,1fr))]">
         {games.map((game, i) => (
           <article
             key={game.id}
