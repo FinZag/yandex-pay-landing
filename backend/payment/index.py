@@ -84,7 +84,7 @@ def handler(event: dict, context) -> dict:
         },
         'currencyCode': 'RUB',
         'orderId': order_id,
-        'orderSource': 'WEB',
+        'orderSource': 'WEBSITE',
         'redirectUrls': {
             'onError': return_url or 'https://fingame.ru/#payment',
             'onSuccess': return_url or 'https://fingame.ru/#payment',
