@@ -47,7 +47,16 @@ const Games = () => {
               className={`relative h-[120px] overflow-hidden rounded-md bg-gradient-to-br ${game.thumb}`}
               aria-label={`Подробнее об игре ${game.title}`}
             >
-              <span className="absolute -right-6 -top-6 h-[88px] w-[88px] rounded-full bg-background/25" />
+              {game.icon ? (
+                <img
+                  src={game.icon}
+                  alt={game.title}
+                  loading="lazy"
+                  className="h-full w-full object-cover"
+                />
+              ) : (
+                <span className="absolute -right-6 -top-6 h-[88px] w-[88px] rounded-full bg-background/25" />
+              )}
             </button>
 
             <div className="flex items-center justify-between gap-3">
@@ -84,7 +93,17 @@ const Games = () => {
         <DialogContent className="max-w-lg rounded-lg">
           {active && (
             <>
-              <div className={`h-[110px] rounded-md bg-gradient-to-br ${active.thumb}`} />
+              <div
+                className={`h-[110px] overflow-hidden rounded-md bg-gradient-to-br ${active.thumb}`}
+              >
+                {active.icon && (
+                  <img
+                    src={active.icon}
+                    alt={active.title}
+                    className="h-full w-full object-cover"
+                  />
+                )}
+              </div>
               <DialogHeader>
                 <DialogTitle className="font-head text-[22px] font-bold tracking-[-0.01em]">
                   {active.title}

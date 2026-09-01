@@ -22,10 +22,24 @@ export type Game = {
   genre: string;
   platforms: string;
   rustore?: string;
+  icon?: string;
 };
 
 // ВАЖНО: подставьте реальные ссылки на страницы игр в RuStore.
 export const games: Game[] = [
+  {
+    id: 'byte-trace',
+    title: 'ByteTrace',
+    tagline: 'Кибер-головоломка о поиске цифрового следа.',
+    description:
+      'Вы — специалист по цифровой криминалистике. Ищете следы взлома в потоках данных, восстанавливаете цепочку событий и вычисляете того, кто был в системе. Без таймеров и рекламы — только логика.',
+    priceLabel: 'Бесплатно',
+    thumb: 'from-ok to-badge',
+    genre: 'Головоломка, детектив',
+    platforms: 'Android',
+    rustore: 'https://www.rustore.ru/catalog/app/com.FinGame.ByteTrace',
+    icon: 'https://cdn.poehali.dev/projects/f66c7488-88ec-49b0-bfc4-ee80d5e44ff2/bucket/7f835ab3-e9d3-401d-9266-530a364c2f39.jpeg',
+  },
   {
     id: 'ledger-rush',
     title: 'Ledger Rush',
