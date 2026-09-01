@@ -70,18 +70,10 @@ const Games = () => {
               <button
                 type="button"
                 onClick={() => openStore(game.rustore, 'RuStore')}
-                className="inline-flex h-10 flex-1 items-center justify-center gap-2 rounded-[20px] bg-primary px-4 text-[14px] font-medium text-primary-foreground transition-transform hover:scale-[1.03] active:scale-[0.98]"
+                className="inline-flex h-10 w-full items-center justify-center gap-2 rounded-[20px] bg-primary px-4 text-[14px] font-medium text-primary-foreground transition-transform hover:scale-[1.03] active:scale-[0.98]"
               >
                 <Icon name="Download" size={16} />
-                RuStore
-              </button>
-              <button
-                type="button"
-                onClick={() => openStore(game.appgallery, 'AppGallery')}
-                className="inline-flex h-10 flex-1 items-center justify-center gap-2 rounded-[20px] bg-background px-4 text-[14px] font-medium text-foreground transition-colors hover:bg-border"
-              >
-                <Icon name="Download" size={16} />
-                AppGallery
+                Скачать в RuStore
               </button>
             </div>
           </article>
