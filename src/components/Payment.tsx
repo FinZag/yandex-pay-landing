@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Icon from '@/components/ui/icon';
 import MailLink from '@/components/MailLink';
 import { PAYMENT_URL } from '@/data/company';
@@ -138,13 +139,19 @@ const Payment = () => {
             />
             <span>
               Согласен с{' '}
-              <a href="#legal" className="text-foreground underline underline-offset-2">
+              <Link
+                to="/legal#offer"
+                className="text-foreground underline underline-offset-2"
+              >
                 договором оферты
-              </a>{' '}
+              </Link>{' '}
               и{' '}
-              <a href="#legal" className="text-foreground underline underline-offset-2">
+              <Link
+                to="/legal#privacy"
+                className="text-foreground underline underline-offset-2"
+              >
                 политикой конфиденциальности
-              </a>
+              </Link>
               , даю согласие на обработку персональных данных.
             </span>
           </label>

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { company } from '@/data/company';
 
 const Footer = () => {
@@ -13,13 +14,28 @@ const Footer = () => {
           <span className="hidden h-1 w-1 rounded-full bg-bar-foreground/45 md:block" />
           <span className="text-bar-foreground/85">Возврат в течение 14 дней</span>
         </div>
-        <a
-          href="#legal"
+        <Link
+          to="/legal"
           className="inline-flex h-9 shrink-0 items-center self-start rounded-[18px] bg-badge px-5 font-bold text-badge-foreground transition-transform hover:scale-[1.03] md:self-auto"
         >
           Реквизиты и оферта
-        </a>
+        </Link>
       </div>
+
+      <nav className="mt-5 flex flex-wrap justify-center gap-x-6 gap-y-2 text-[14px] text-muted-foreground">
+        <Link to="/legal#offer" className="transition-colors hover:text-foreground">
+          Публичная оферта
+        </Link>
+        <Link to="/legal#privacy" className="transition-colors hover:text-foreground">
+          Политика конфиденциальности
+        </Link>
+        <Link to="/legal#refund" className="transition-colors hover:text-foreground">
+          Оплата и возврат
+        </Link>
+        <Link to="/legal#requisites" className="transition-colors hover:text-foreground">
+          Реквизиты
+        </Link>
+      </nav>
 
       <p className="mt-5 text-center text-[14px] text-muted-foreground">
         © {new Date().getFullYear()} {company.brand}. {company.legalName}. Все права на игры и
