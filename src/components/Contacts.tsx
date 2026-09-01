@@ -22,11 +22,16 @@ const Contacts = () => {
             {company.email}
           </p>
         </a>
-        <div className="rounded-lg bg-secondary p-6 md:p-8">
+        <a
+          href={`mailto:${company.email}?subject=${encodeURIComponent('Обращение с сайта FinGame')}`}
+          className="group rounded-lg bg-secondary p-6 transition-colors hover:bg-border md:p-8"
+        >
           <Icon name="MessageCircle" size={22} />
           <h3 className="mt-4 font-head text-[17px] font-bold">Обращения</h3>
-          <p className="mt-1 text-[16px] text-muted-foreground">{company.answerTime}</p>
-        </div>
+          <p className="mt-1 text-[16px] text-muted-foreground group-hover:text-foreground">
+            Написать в поддержку — {company.answerTime.toLowerCase()}
+          </p>
+        </a>
       </div>
 
       <p className="mt-6 text-[15px] leading-[1.45] text-muted-foreground">
