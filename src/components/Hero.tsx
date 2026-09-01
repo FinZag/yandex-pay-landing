@@ -32,11 +32,13 @@ const Hero = () => {
           </a>
         </div>
 
-        <img
-          className="pointer-events-none absolute bottom-6 right-8 hidden h-[300px] w-[300px] animate-float rounded-[36px] object-cover shadow-[0_24px_60px_-24px_hsl(var(--foreground)/0.45)] lg:block"
-          alt="Логотип FinGame"
-          src="/logo.jpg"
-        />
+        <div className="pointer-events-none absolute right-8 top-1/2 hidden -translate-y-1/2 lg:block">
+          <img
+            className="h-[300px] w-[300px] animate-float rounded-[36px] object-cover shadow-[0_24px_60px_-24px_hsl(var(--foreground)/0.45)]"
+            alt="Логотип FinGame"
+            src="/logo.jpg"
+          />
+        </div>
       </div>
 
       <div className="mt-6 grid gap-3 sm:grid-cols-3">

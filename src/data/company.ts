@@ -4,7 +4,7 @@ export const company = {
   shortName: 'ИП Финенко Л. В.',
   inn: '253304385316',
   ogrnip: '326253600015200',
-  email: 'support@fingame.ru',
+  email: 'game-fin-ip@yandex.ru',
   bankName: 'Дальневосточный банк ПАО Сбербанк',
   account: '40802810650710009449',
   corrAccount: '30101810600000000608',
