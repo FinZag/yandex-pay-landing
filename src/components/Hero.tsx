@@ -3,7 +3,7 @@ import Icon from '@/components/ui/icon';
 const Hero = () => {
   return (
     <section id="top" className="mx-auto max-w-[1280px] px-5 pt-2 md:px-[76px]">
-      <div className="relative flex animate-rise flex-col overflow-hidden rounded-lg bg-[linear-gradient(105deg,hsl(var(--banner-from))_0%,hsl(var(--banner-from))_42%,hsl(var(--banner-to))_100%)] px-6 py-8 md:h-[372px] md:px-10 md:py-[38px]">
+      <div className="relative flex animate-rise flex-col overflow-hidden rounded-lg bg-[linear-gradient(105deg,hsl(var(--banner-from))_0%,hsl(var(--banner-from))_42%,hsl(var(--banner-to))_100%)] px-6 py-8 md:min-h-[420px] md:px-10 md:py-[38px]">
         <div className="cond text-[22px] leading-none tracking-[-0.01em] md:text-[26px]">
           Fin<span className="text-accent">Game</span> · студия инди-игр
         </div>
@@ -17,7 +17,7 @@ const Hero = () => {
           разработку картой или через Яндекс Пэй.
         </p>
 
-        <div className="mt-8 flex flex-wrap items-center gap-3 md:mt-auto">
+        <div className="mt-8 flex flex-wrap items-center gap-3 pb-1 md:mt-auto md:pt-6">
           <a
             href="#games"
             className="inline-flex h-[56px] shrink-0 items-center whitespace-nowrap rounded-[28px] bg-primary px-[30px] text-[17px] font-bold tracking-[-0.01em] text-primary-foreground transition-transform hover:scale-[1.02] active:scale-[0.99]"
@@ -33,9 +33,9 @@ const Hero = () => {
         </div>
 
         <img
-          className="pointer-events-none absolute -bottom-2.5 -right-4 hidden h-[420px] w-[420px] animate-float rounded-full object-cover [mask-image:radial-gradient(circle_at_50%_50%,#000_62%,transparent_74%)] lg:block"
-          alt=""
-          src="https://cdn.poehali.dev/projects/f66c7488-88ec-49b0-bfc4-ee80d5e44ff2/files/bf0db199-0905-4151-8207-c90aad9aee8e.jpg"
+          className="pointer-events-none absolute bottom-6 right-8 hidden h-[300px] w-[300px] animate-float rounded-[36px] object-cover shadow-[0_24px_60px_-24px_hsl(var(--foreground)/0.45)] lg:block"
+          alt="Логотип FinGame"
+          src="/logo.jpg"
         />
       </div>
 

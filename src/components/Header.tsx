@@ -30,9 +30,11 @@ const Header = () => {
     >
       <div className="mx-auto flex h-[76px] max-w-[1280px] items-center justify-between px-5 md:h-[92px] md:px-[76px]">
         <a href="#top" className="flex items-center gap-2.5" aria-label="FinGame — на главную">
-          <span className="grid h-[34px] w-[34px] place-items-center rounded-[10px] bg-primary">
-            <span className="font-head text-[18px] font-bold leading-none text-primary-foreground">F</span>
-          </span>
+          <img
+            src="/logo-mark.jpg"
+            alt=""
+            className="h-[38px] w-[38px] rounded-[11px] object-cover"
+          />
           <span className="font-head text-[24px] font-bold tracking-[-0.02em]">
             Fin<span className="cond">Game</span>
           </span>

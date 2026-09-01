@@ -1,1 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140"><path fill="#FF6637" transform="translate(0.305 0.525)" d="M25.6,0c26.59,33.33,26.54,80.64-.15,113.92,33.28-26.69,80.6-26.74,113.93-.14h0s-35.7,25.17-35.7,25.17H0V36.31L25.6,0ZM139.39,113.7c-26.51-33.25-26.51-80.42,0-113.67v113.67ZM139.33,0C106.08,26.49,58.94,26.49,25.69,0h113.64Z"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#12232b"/>
+      <stop offset="0.55" stop-color="#0a1216"/>
+      <stop offset="1" stop-color="#101f26"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0" stop-color="#2ee6d6" stop-opacity="0.4"/>
+      <stop offset="1" stop-color="#2ee6d6" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#bg)"/>
+  <rect width="64" height="64" rx="14" fill="url(#glow)"/>
+  <path fill="#ffffff" d="M54 11 H29.2 C20.6 11 14.7 15.6 11.9 24.2 L2.6 53 L13.9 53 L19.5 35.8 L40.6 35.8 L44.2 26.4 L22.5 26.4 L23.6 23 C24.9 19.2 27.2 17.8 31.2 17.8 L50.4 17.8 Z"/>
+</svg>
