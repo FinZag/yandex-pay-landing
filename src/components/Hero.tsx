@@ -43,7 +43,7 @@ const Hero = () => {
 
       <div className="mt-6 grid gap-3 sm:grid-cols-3">
         {[
-          { icon: 'Download', text: 'Игры бесплатны — RuStore' },
+          { icon: 'Download', text: 'Скачивание бесплатно — RuStore' },
           { icon: 'ShieldCheck', text: 'Поддержка через защищённый шлюз Яндекс Пэй' },
           { icon: 'BadgeCheck', text: 'Поддержка — добровольно, без подписок' },
         ].map((f) => (

@@ -55,7 +55,7 @@ const Payment = () => {
         <form onSubmit={submit} className="rounded-lg bg-secondary p-6 md:p-8" noValidate>
           <h3 className="font-head text-[18px] font-bold">Добровольный взнос на разработку</h3>
           <p className="mt-1 text-[15px] leading-[1.35] text-muted-foreground">
-            Игры распространяются бесплатно в RuStore. Взнос — по желанию, без подписки
+            Игры доступны для бесплатного скачивания в RuStore. Взнос — по желанию, без подписки
             и автосписаний. Минимум 100 ₽.
           </p>
 
@@ -169,7 +169,7 @@ const Payment = () => {
             <ul className="mt-4 space-y-3 text-[15px] leading-[1.4] text-muted-foreground">
               <li className="flex gap-2.5">
                 <Icon name="Check" size={18} className="mt-0.5 shrink-0 text-ok" />
-                Игры бесплатны — сайт не продаёт товары, взнос является добровольным.
+                Скачивание игр бесплатно — сайт не продаёт товары, взнос является добровольным.
               </li>
               <li className="flex gap-2.5">
                 <Icon name="Check" size={18} className="mt-0.5 shrink-0 text-ok" />
