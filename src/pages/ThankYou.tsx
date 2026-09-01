@@ -1,14 +1,24 @@
+import { useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Icon from '@/components/ui/icon';
 import MailLink from '@/components/MailLink';
-import { company, games } from '@/data/company';
+import { PAYMENT_CONFIRM_URL, company, games } from '@/data/company';
 
 const ThankYou = () => {
   const [params] = useSearchParams();
   const orderId = params.get('orderId');
   const game = games[0];
+
+  useEffect(() => {
+    if (!orderId) return;
+    fetch(PAYMENT_CONFIRM_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ orderId }),
+    }).catch(() => undefined);
+  }, [orderId]);
 
   return (
     <div className="min-h-screen bg-background">

@@ -4,6 +4,8 @@ import re
 import urllib.request
 import urllib.error
 
+import psycopg2
+
 SANDBOX_URL = 'https://sandbox.pay.yandex.ru/api/merchant/v1/orders'
 PRODUCTION_URL = 'https://pay.yandex.ru/api/merchant/v1/orders'
 
@@ -122,5 +124,18 @@ def handler(event: dict, context) -> dict:
     if not payment_url:
         print(f'YandexPay unexpected response: {json.dumps(data)[:500]}')
         return reply(502, {'error': 'Платёжный сервис не вернул ссылку на оплату.'})
+
+    dsn = os.environ.get('DATABASE_URL')
+    schema = os.environ.get('MAIN_DB_SCHEMA') or 'public'
+
+    if dsn:
+        safe_email = email.replace("'", "''")
+        with psycopg2.connect(dsn) as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    f"INSERT INTO {schema}.donations (order_id, amount, email, status) "
+                    f"VALUES ('{order_id}', {amount}, '{safe_email}', 'pending') "
+                    f"ON CONFLICT (order_id) DO NOTHING"
+                )
 
     return reply(200, {'paymentUrl': payment_url, 'orderId': order_id, 'sandbox': env != 'production'})

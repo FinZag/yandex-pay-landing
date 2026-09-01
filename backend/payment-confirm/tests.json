@@ -1,0 +1,24 @@
+{
+  "tests": [
+    { "name": "CORS preflight", "method": "OPTIONS", "path": "/", "expectedStatus": 200 },
+    { "name": "Отклоняет GET", "method": "GET", "path": "/", "expectedStatus": 405 },
+    {
+      "name": "Проверяет номер платежа",
+      "method": "POST",
+      "path": "/",
+      "body": { "orderId": "hack" },
+      "expectedStatus": 400,
+      "expectedBody": { "error": "string" },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Неизвестный платёж не найден",
+      "method": "POST",
+      "path": "/",
+      "body": { "orderId": "donation-00000000-0000-0000-0000-000000000000" },
+      "expectedStatus": 404,
+      "expectedBody": { "error": "string" },
+      "bodyMatcher": "partial"
+    }
+  ]
+}
