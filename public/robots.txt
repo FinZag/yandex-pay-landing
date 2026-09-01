@@ -13,5 +13,5 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://fingame.poehali.dev/sitemap.xml
-Host: https://fingame.poehali.dev
+Sitemap: https://yandex-pay-landing--preview.poehali.dev/sitemap.xml
+Host: https://yandex-pay-landing--preview.poehali.dev

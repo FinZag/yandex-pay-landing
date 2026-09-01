@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 
-export const SITE_URL = 'https://fingame.poehali.dev';
+export const SITE_URL = 'https://yandex-pay-landing--preview.poehali.dev';
 
 type SeoProps = {
   title: string;
