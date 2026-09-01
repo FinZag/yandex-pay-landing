@@ -4,6 +4,7 @@ import Games from '@/components/Games';
 import Payment from '@/components/Payment';
 import Requisites from '@/components/Requisites';
 import Legal from '@/components/Legal';
+import Faq from '@/components/Faq';
 import Contacts from '@/components/Contacts';
 import Footer from '@/components/Footer';
 
@@ -17,6 +18,7 @@ const Index = () => {
         <Payment />
         <Requisites />
         <Legal />
+        <Faq />
         <Contacts />
       </main>
       <Footer />

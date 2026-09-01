@@ -1,5 +1,6 @@
 import Icon from '@/components/ui/icon';
 import { company } from '@/data/company';
+import ContactForm from '@/components/ContactForm';
 
 const Contacts = () => {
   return (
@@ -12,32 +13,30 @@ const Contacts = () => {
       </div>
 
       <div className="mt-5 grid gap-6 md:grid-cols-2">
-        <a
-          href={`mailto:${company.email}`}
-          className="group rounded-lg bg-secondary p-6 transition-colors hover:bg-border md:p-8"
-        >
-          <Icon name="Mail" size={22} />
-          <h3 className="mt-4 font-head text-[17px] font-bold">Почта поддержки</h3>
-          <p className="mt-1 text-[16px] text-muted-foreground group-hover:text-foreground">
-            {company.email}
-          </p>
-        </a>
-        <a
-          href={`mailto:${company.email}?subject=${encodeURIComponent('Обращение с сайта FinGame')}`}
-          className="group rounded-lg bg-secondary p-6 transition-colors hover:bg-border md:p-8"
-        >
-          <Icon name="MessageCircle" size={22} />
-          <h3 className="mt-4 font-head text-[17px] font-bold">Обращения</h3>
-          <p className="mt-1 text-[16px] text-muted-foreground group-hover:text-foreground">
-            Написать в поддержку — {company.answerTime.toLowerCase()}
-          </p>
-        </a>
-      </div>
+        <ContactForm />
 
-      <p className="mt-6 text-[15px] leading-[1.45] text-muted-foreground">
-        Деятельность ведётся дистанционно, офис для очного посещения не предусмотрен. Все обращения
-        принимаются по электронной почте.
-      </p>
+        <div className="flex flex-col gap-6">
+          <a
+            href={`mailto:${company.email}`}
+            className="group rounded-lg bg-secondary p-6 transition-colors hover:bg-border md:p-8"
+          >
+            <Icon name="Mail" size={22} />
+            <h3 className="mt-4 font-head text-[17px] font-bold">Почта поддержки</h3>
+            <p className="mt-1 text-[16px] text-muted-foreground group-hover:text-foreground">
+              {company.email}
+            </p>
+          </a>
+
+          <div className="flex-1 rounded-lg bg-secondary p-6 md:p-8">
+            <Icon name="Clock" size={22} />
+            <h3 className="mt-4 font-head text-[17px] font-bold">Как мы работаем</h3>
+            <p className="mt-1 text-[15px] leading-[1.5] text-muted-foreground">
+              {company.answerTime}. Деятельность ведётся дистанционно, офис для очного посещения не
+              предусмотрен — все обращения принимаются через форму или по электронной почте.
+            </p>
+          </div>
+        </div>
+      </div>
     </section>
   );
 };

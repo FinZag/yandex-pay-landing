@@ -1,3 +1,5 @@
+export const CONTACT_URL = 'https://functions.poehali.dev/e9b7fc8d-4436-4b9b-9a98-905e863b6377';
+
 export const company = {
   brand: 'FinGame',
   legalName: 'Индивидуальный предприниматель Финенко Лариса Валерьевна',

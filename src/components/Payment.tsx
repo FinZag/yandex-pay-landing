@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import Icon from '@/components/ui/icon';
-import { company } from '@/data/company';
+import MailLink from '@/components/MailLink';
 import { useToast } from '@/hooks/use-toast';
 
 const presets = [100, 300, 500, 1000];
@@ -177,7 +177,8 @@ const Payment = () => {
               </li>
               <li className="flex gap-2.5">
                 <Icon name="Check" size={18} className="mt-0.5 shrink-0 text-ok" />
-                Ошибочный платёж возвращается в течение 14 дней по заявке на {company.email}, срок
+                Ошибочный платёж возвращается в течение 14 дней по заявке на{' '}
+                <MailLink subject="Заявление на возврат платежа" />, срок
                 зачисления — 3–10 рабочих дней.
               </li>
               <li className="flex gap-2.5">

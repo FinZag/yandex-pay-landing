@@ -7,6 +7,7 @@ const links = [
   { href: '#payment', label: 'Поддержать' },
   { href: '#requisites', label: 'Реквизиты' },
   { href: '#legal', label: 'Документы' },
+  { href: '#faq', label: 'Вопросы' },
   { href: '#contacts', label: 'Контакты' },
 ];
 
