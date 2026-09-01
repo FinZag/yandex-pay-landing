@@ -5,16 +5,16 @@ const Hero = () => {
     <section id="top" className="mx-auto max-w-[1280px] px-5 pt-2 md:px-[76px]">
       <div className="relative flex animate-rise flex-col overflow-hidden rounded-lg bg-[linear-gradient(105deg,hsl(var(--banner-from))_0%,hsl(var(--banner-from))_42%,hsl(var(--banner-to))_100%)] px-6 py-8 md:min-h-[420px] md:px-10 md:py-[38px]">
         <div className="cond text-[22px] leading-none tracking-[-0.01em] md:text-[26px]">
-          Fin<span className="text-accent">Game</span> · студия инди-игр
+          Fin<span className="text-accent">Game</span> · инди-игры на Unity
         </div>
 
         <h1 className="mt-6 max-w-[15ch] font-head text-[30px] font-bold leading-[1.08] tracking-[-0.025em] md:mt-[26px] md:text-[32px]">
-          Бесплатные игры от независимой студии
+          Бесплатные игры от инди-разработчика
         </h1>
 
         <p className="mt-4 max-w-[34ch] text-[17px] font-medium leading-[1.4] text-muted-foreground">
-          Игры на своём движке — скачивайте в RuStore. Понравилось? Поддержите разработку картой
-          или через Яндекс Пэй.
+          Мобильные игры на Unity — скачивайте бесплатно в RuStore. Понравилось? Поддержите
+          разработку картой или через Яндекс Пэй.
         </p>
 
         <div className="mt-8 flex flex-wrap items-center gap-3 pb-1 md:mt-auto md:pt-6">
