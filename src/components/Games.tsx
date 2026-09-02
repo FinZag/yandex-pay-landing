@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Icon from '@/components/ui/icon';
 import { games, type Game } from '@/data/company';
 import {
@@ -41,10 +42,9 @@ const Games = () => {
             style={{ animationDelay: `${0.06 * i}s` }}
             className="flex animate-rise flex-col gap-3 rounded-lg bg-secondary p-4 pb-[18px] transition-shadow hover:shadow-[0_8px_28px_-16px_hsl(var(--foreground)/0.35)]"
           >
-            <button
-              type="button"
-              onClick={() => setActive(game)}
-              className={`relative h-[120px] overflow-hidden rounded-md bg-gradient-to-br ${game.thumb}`}
+            <Link
+              to={`/games/${game.slug}`}
+              className={`relative block h-[120px] overflow-hidden rounded-md bg-gradient-to-br ${game.thumb}`}
               aria-label={`Подробнее об игре ${game.title}`}
             >
               {game.icon ? (
@@ -57,7 +57,7 @@ const Games = () => {
               ) : (
                 <span className="absolute -right-6 -top-6 h-[88px] w-[88px] rounded-full bg-background/25" />
               )}
-            </button>
+            </Link>
 
             <div className="flex items-center justify-between gap-3">
               <h3 className="font-head text-[17px] font-bold tracking-[-0.01em]">{game.title}</h3>
@@ -67,13 +67,12 @@ const Games = () => {
             </div>
             <p className="text-[15px] leading-[1.35] text-muted-foreground">{game.tagline}</p>
 
-            <button
-              type="button"
-              onClick={() => setActive(game)}
+            <Link
+              to={`/games/${game.slug}`}
               className="inline-flex items-center gap-1 self-start text-[14px] text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline"
             >
               Подробнее <Icon name="ChevronRight" size={14} />
-            </button>
+            </Link>
 
             <div className="mt-auto flex flex-wrap gap-2 pt-2">
               <button
@@ -122,14 +121,23 @@ const Games = () => {
                   <dd className="mt-0.5 font-medium">{active.platforms}</dd>
                 </div>
               </dl>
-              <button
-                type="button"
-                onClick={() => openStore(active.rustore, 'RuStore')}
-                className="inline-flex h-[52px] w-full items-center justify-center gap-2 rounded-[26px] bg-primary px-6 font-bold text-primary-foreground"
-              >
-                Скачать в RuStore
-                <Icon name="ArrowUpRight" size={18} />
-              </button>
+              <div className="grid gap-2">
+                <button
+                  type="button"
+                  onClick={() => openStore(active.rustore, 'RuStore')}
+                  className="inline-flex h-[52px] w-full items-center justify-center gap-2 rounded-[26px] bg-primary px-6 font-bold text-primary-foreground"
+                >
+                  Скачать в RuStore
+                  <Icon name="ArrowUpRight" size={18} />
+                </button>
+                <Link
+                  to={`/games/${active.slug}`}
+                  className="inline-flex h-[52px] w-full items-center justify-center gap-2 rounded-[26px] bg-secondary px-6 font-medium text-foreground transition-colors hover:bg-border"
+                >
+                  Страница игры и покупки
+                  <Icon name="ChevronRight" size={18} />
+                </Link>
+              </div>
             </>
           )}
         </DialogContent>
