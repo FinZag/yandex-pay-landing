@@ -141,11 +141,68 @@ def check_order(order_id: str) -> dict:
     })
 
 
+def check_player(game_id: str, player_id: str) -> dict:
+    if not re.match(r'^[A-Za-z0-9_\-]{1,64}$', player_id):
+        return reply(400, {'error': 'Некорректный идентификатор игрока'})
+
+    game = GAMES.get(game_id)
+    if not game:
+        return reply(404, {'error': 'Неизвестная игра', 'games': list(GAMES.keys())})
+
+    dsn = os.environ.get('DATABASE_URL')
+    schema = os.environ.get('MAIN_DB_SCHEMA') or 'public'
+
+    if not dsn:
+        return reply(503, {'error': 'Хранилище платежей недоступно'})
+
+    safe_game = game_id.replace("'", "''")
+    safe_player = player_id.replace("'", "''")
+
+    conn = psycopg2.connect(dsn)
+    try:
+        with conn.cursor() as cur:
+            cur.execute(
+                f"SELECT order_id, payment_id FROM {schema}.game_purchases "
+                f"WHERE game_id = '{safe_game}' AND player_id = '{safe_player}' "
+                f"AND status = 'pending'"
+            )
+            pending = cur.fetchall()
+
+        for order_id, payment_id in pending:
+            if fetch_payment_status(payment_id or '') == 'succeeded':
+                safe_order = order_id.replace("'", "''")
+                with conn.cursor() as cur:
+                    cur.execute(
+                        f"UPDATE {schema}.game_purchases SET status = 'paid', "
+                        f"delivered_at = COALESCE(delivered_at, now()) "
+                        f"WHERE order_id = '{safe_order}'"
+                    )
+                conn.commit()
+
+        with conn.cursor() as cur:
+            cur.execute(
+                f"SELECT DISTINCT product_id FROM {schema}.game_purchases "
+                f"WHERE game_id = '{safe_game}' AND player_id = '{safe_player}' "
+                f"AND status = 'paid'"
+            )
+            owned = sorted({r[0] for r in cur.fetchall()})
+    finally:
+        conn.close()
+
+    return reply(200, {
+        'gameId': game_id,
+        'playerId': player_id,
+        'products': owned,
+        'noAds': 'no-ads' in owned,
+    })
+
+
 def handler(event: dict, context) -> dict:
     '''
     Приём оплаты внутриигровых товаров из приложения через ЮKassa и проверка статуса заказа.
-    Args: event с httpMethod, body (productId, playerId, email) для покупки либо (orderId) для проверки
-    Returns: список товаров, ссылка на оплату или статус заказа
+    Args: event с httpMethod, body (productId, playerId, email) для покупки, (orderId) для статуса заказа
+          либо GET с playerId для списка купленных товаров игрока
+    Returns: список товаров, ссылка на оплату, статус заказа или покупки игрока
     '''
     method = event.get('httpMethod', 'GET')
 
@@ -155,6 +212,11 @@ def handler(event: dict, context) -> dict:
     if method == 'GET':
         params = event.get('queryStringParameters') or {}
         game_id = (params.get('gameId') or DEFAULT_GAME).strip().lower()
+        player_id = (params.get('playerId') or '').strip()
+
+        if player_id:
+            return check_player(game_id, player_id)
+
         game = GAMES.get(game_id)
 
         if not game:
@@ -177,6 +239,12 @@ def handler(event: dict, context) -> dict:
 
     if check_id:
         return check_order(check_id)
+
+    if body.get('action') == 'purchases':
+        return check_player(
+            (body.get('gameId') or DEFAULT_GAME).strip().lower(),
+            (body.get('playerId') or '').strip(),
+        )
 
     game_id = (body.get('gameId') or DEFAULT_GAME).strip().lower()
     product_id = (body.get('productId') or '').strip()

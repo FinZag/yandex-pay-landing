@@ -98,6 +98,28 @@
         "error": "string"
       },
       "bodyMatcher": "partial"
+    },
+    {
+      "name": "Покупки игрока",
+      "method": "GET",
+      "path": "/?gameId=bytetrace&playerId=player-42",
+      "expectedStatus": 200,
+      "expectedBody": {
+        "gameId": "bytetrace",
+        "playerId": "player-42"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Покупки нового игрока",
+      "method": "GET",
+      "path": "/?gameId=bytetrace&playerId=brand-new-player-999",
+      "expectedStatus": 200,
+      "expectedBody": {
+        "products": [],
+        "noAds": false
+      },
+      "bodyMatcher": "partial"
     }
   ]
 }
