@@ -32,7 +32,7 @@
       "method": "POST",
       "path": "/",
       "body": {
-        "productId": "coins-100",
+        "productId": "no-ads",
         "playerId": "!!",
         "email": "a@b.ru"
       },
@@ -47,7 +47,7 @@
       "method": "POST",
       "path": "/",
       "body": {
-        "productId": "coins-100",
+        "productId": "no-ads",
         "playerId": "p1",
         "email": "bad"
       },
@@ -78,6 +78,22 @@
         "orderId": "hack"
       },
       "expectedStatus": 400,
+      "expectedBody": {
+        "error": "string"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Каталог ByteTrace",
+      "method": "GET",
+      "path": "/?gameId=bytetrace",
+      "expectedStatus": 200
+    },
+    {
+      "name": "Неизвестная игра",
+      "method": "GET",
+      "path": "/?gameId=nope",
+      "expectedStatus": 404,
       "expectedBody": {
         "error": "string"
       },
