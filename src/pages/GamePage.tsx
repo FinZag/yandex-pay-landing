@@ -33,7 +33,7 @@ const GamePage = () => {
     <div className="min-h-screen bg-background">
       <Seo
         title={`${game.title} — ${game.genre} для Android | FinGame`}
-        description={`${game.tagline} Скачивание бесплатно в RuStore. Отключение рекламы — разовая покупка без подписки.`}
+        description={`${game.description} Бесплатно в RuStore, отключение рекламы — разовая покупка.`}
         path={`/games/${game.slug}`}
       />
       <Header />
@@ -110,20 +110,22 @@ const GamePage = () => {
           <h2 className="font-head text-[22px] font-medium tracking-[-0.01em] md:text-[26px]">
             Скриншоты
           </h2>
-          <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
             {game.screenshots.map((shot, i) => (
               <figure
                 key={shot.src}
                 style={{ animationDelay: `${0.06 * i}s` }}
                 className="animate-rise overflow-hidden rounded-lg bg-secondary"
               >
-                <img
-                  src={shot.src}
-                  alt={shot.alt}
-                  loading="lazy"
-                  className="aspect-square w-full object-cover"
-                />
-                <figcaption className="px-4 py-3 text-[14px] leading-[1.35] text-muted-foreground">
+                <div className="aspect-[9/16] w-full bg-[#141414]">
+                  <img
+                    src={shot.src}
+                    alt={shot.alt}
+                    loading="lazy"
+                    className="h-full w-full object-contain"
+                  />
+                </div>
+                <figcaption className="px-4 py-3 text-[13px] leading-[1.35] text-muted-foreground">
                   {shot.alt.replace(`${game.title} — `, '')}
                 </figcaption>
               </figure>
@@ -162,11 +164,11 @@ const GamePage = () => {
         <section className="mx-auto max-w-[1280px] px-5 pt-16 md:px-[76px] md:pt-24">
           <div className="rounded-lg bg-[linear-gradient(105deg,hsl(var(--banner-from))_0%,hsl(var(--banner-to))_100%)] p-6 md:p-10">
             <h2 className="font-head text-[24px] font-bold leading-[1.1] tracking-[-0.02em] md:text-[30px]">
-              Готовы начать расследование?
+              Телефон Prometheus ждёт владельца
             </h2>
             <p className="mt-2 max-w-[560px] text-[16px] leading-[1.4]">
-              Скачивание бесплатное, регистрация не нужна. Первое дело занимает около
-              десяти минут.
+              Скачивание бесплатное, регистрация не нужна. Расследование начинается
+              с первого экрана.
             </p>
             <button
               type="button"
