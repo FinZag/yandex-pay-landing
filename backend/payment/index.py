@@ -123,7 +123,7 @@ def handler(event: dict, context) -> dict:
     except urllib.error.HTTPError as exc:
         detail = exc.read().decode('utf-8', errors='replace')[:500]
         print(f'YooKassa HTTP {exc.code}: {detail}')
-        return reply(502, {'error': 'Платёжный сервис отклонил запрос. Попробуйте позже.'})
+        return reply(502, {'error': 'Платёжный сервис отклонил запрос. Попробуйте позже.', 'debug': detail, 'code': exc.code})
     except Exception as exc:
         print(f'YooKassa request failed: {exc}')
         return reply(502, {'error': 'Не удалось связаться с платёжным сервисом.'})

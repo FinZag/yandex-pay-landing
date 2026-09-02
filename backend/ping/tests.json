@@ -1,0 +1,8 @@
+{
+  "tests": [
+    { "name": "CORS preflight", "method": "OPTIONS", "path": "/", "expectedStatus": 200 },
+    { "name": "Возвращает OK", "method": "GET", "path": "/", "expectedStatus": 200 },
+    { "name": "JSON-статус", "method": "GET", "path": "/?format=json", "expectedStatus": 200 },
+    { "name": "POST тоже отвечает", "method": "POST", "path": "/", "expectedStatus": 200 }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "tests": [
+    {
+      "name": "CORS preflight",
+      "method": "OPTIONS",
+      "path": "/",
+      "expectedStatus": 200
+    },
+    {
+      "name": "Список товаров",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 200
+    },
+    {
+      "name": "Неизвестный товар",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "productId": "nope",
+        "playerId": "p1",
+        "email": "a@b.ru"
+      },
+      "expectedStatus": 400,
+      "expectedBody": {
+        "error": "string"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Проверяет игрока",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "productId": "coins-100",
+        "playerId": "!!",
+        "email": "a@b.ru"
+      },
+      "expectedStatus": 400,
+      "expectedBody": {
+        "error": "string"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Проверяет почту",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "productId": "coins-100",
+        "playerId": "p1",
+        "email": "bad"
+      },
+      "expectedStatus": 400,
+      "expectedBody": {
+        "error": "string"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Статус неизвестного заказа",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "orderId": "game-00000000000000000000000000000000"
+      },
+      "expectedStatus": 404,
+      "expectedBody": {
+        "error": "string"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Некорректный номер заказа",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "orderId": "hack"
+      },
+      "expectedStatus": 400,
+      "expectedBody": {
+        "error": "string"
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}
