@@ -14,7 +14,7 @@ const Hero = () => {
 
         <p className="mt-4 max-w-[34ch] text-[17px] font-medium leading-[1.4] text-muted-foreground">
           Мобильные игры на Unity — скачивайте бесплатно в RuStore. Понравилось? Поддержите
-          разработку картой или через Яндекс Пэй.
+          разработку картой или через СБП.
         </p>
 
         <div className="mt-8 flex flex-wrap items-center gap-3 pb-1 md:mt-auto md:pt-6">
@@ -28,7 +28,7 @@ const Hero = () => {
             href="#payment"
             className="inline-flex h-[56px] shrink-0 items-center gap-2 whitespace-nowrap rounded-[28px] bg-background px-[30px] text-[17px] font-bold tracking-[-0.01em] text-foreground transition-transform hover:scale-[1.02] active:scale-[0.99]"
           >
-            Поддержать <span className="cond">Пэй</span>
+            Поддержать студию
           </a>
         </div>
 
@@ -44,7 +44,7 @@ const Hero = () => {
       <div className="mt-6 grid gap-3 sm:grid-cols-3">
         {[
           { icon: 'Download', text: 'Скачивание бесплатно — RuStore' },
-          { icon: 'ShieldCheck', text: 'Поддержка через защищённый шлюз Яндекс Пэй' },
+          { icon: 'ShieldCheck', text: 'Поддержка через защищённый шлюз ЮKassa' },
           { icon: 'BadgeCheck', text: 'Поддержка — добровольно, без подписок' },
         ].map((f) => (
           <div

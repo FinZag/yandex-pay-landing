@@ -63,7 +63,7 @@ const Payment = () => {
 
       toast({
         title: 'Переходим к оплате',
-        description: `Сумма ${total.toLocaleString('ru-RU')} ₽. Открывается защищённая страница Яндекс Пэй.`,
+        description: `Сумма ${total.toLocaleString('ru-RU')} ₽. Открывается защищённая страница ЮKassa.`,
       });
       window.location.href = data.paymentUrl;
     } catch {
@@ -79,7 +79,7 @@ const Payment = () => {
         <h2 className="font-head text-[22px] font-medium tracking-[-0.01em] md:text-[26px]">
           Поддержать студию
         </h2>
-        <span className="text-[15px] text-muted-foreground">Картой или через Яндекс Пэй</span>
+        <span className="text-[15px] text-muted-foreground">Картой или через СБП</span>
       </div>
 
       <div className="mt-5 grid gap-6 lg:grid-cols-[1.15fr_1fr]">
@@ -187,7 +187,7 @@ const Payment = () => {
                 </>
               ) : (
                 <>
-                  Оплатить <span className="cond">Пэй</span>
+                  Перейти к оплате
                 </>
               )}
             </button>
@@ -197,7 +197,7 @@ const Payment = () => {
         <div className="space-y-6">
           <div className="rounded-lg bg-[linear-gradient(105deg,hsl(var(--banner-from))_0%,hsl(var(--banner-to))_100%)] p-6 md:p-8">
             <span className="inline-flex h-8 items-center rounded-full bg-badge px-3.5 text-[13px] font-bold text-badge-foreground">
-              Яндекс Пэй
+              ЮKassa
             </span>
             <h3 className="mt-4 font-head text-[20px] font-bold leading-[1.15] tracking-[-0.02em]">
               Как проходит оплата
@@ -205,8 +205,8 @@ const Payment = () => {
             <ol className="mt-4 space-y-3 text-[15px] leading-[1.4]">
               {[
                 'Выбираете сумму поддержки и указываете e-mail.',
-                'Нажимаете «Оплатить» — открывается защищённая форма Яндекс Пэй.',
-                'Платите картой, СБП или балансом Яндекс Пэй. Данные карты остаются у банка.',
+                'Нажимаете «Оплатить» — открывается защищённая форма ЮKassa.',
+                'Платите картой или через СБП. Данные карты остаются у банка.',
                 'Чек приходит на e-mail в течение 15 минут.',
               ].map((t, n) => (
                 <li key={t} className="flex gap-3">

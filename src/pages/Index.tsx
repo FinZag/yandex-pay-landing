@@ -13,7 +13,7 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Seo
         title="FinGame — бесплатные инди-игры на Unity в RuStore"
-        description="Инди-студия FinGame разрабатывает мобильные игры на Unity. Скачивайте бесплатно в RuStore и поддержите разработку добровольным взносом через Яндекс Пэй."
+        description="Инди-студия FinGame разрабатывает мобильные игры на Unity. Скачивайте бесплатно в RuStore и поддержите разработку добровольным взносом через ЮKassa."
         path="/"
       />
       <Header />
