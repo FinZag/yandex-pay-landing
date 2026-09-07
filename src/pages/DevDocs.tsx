@@ -156,14 +156,14 @@ const DevDocsPage = () => {
                 <dd className="mt-0.5 font-mono text-[15px] font-medium">butter-clicker</dd>
               </div>
               <div className="rounded-md bg-background px-4 py-3">
-                <dt className="text-[14px] text-muted-foreground">Номер игрока</dt>
+                <dt className="text-[14px] text-muted-foreground">ID игрока</dt>
                 <dd className="mt-0.5 font-mono text-[15px] font-medium">playerId</dd>
               </div>
             </dl>
             <p className="mt-4 flex items-start gap-2.5 text-[15px] leading-[1.45] text-muted-foreground">
               <Icon name="Info" size={18} className="mt-0.5 shrink-0" />
-              Номер игрока — латиница, цифры, дефис и подчёркивание, до 64 символов. Его нужно
-              показать игроку в разделе «Настройки»: именно по нему покупка попадает в профиль.
+              ID игрока — латиница, цифры, дефис и подчёркивание, до 64 символов. Он показан
+              игроку на главном меню игры: именно по нему покупка попадает в профиль.
             </p>
           </section>
 
@@ -259,7 +259,7 @@ const DevDocsPage = () => {
             </h2>
             <ol className="mt-4 space-y-3.5 text-[16px] leading-[1.45]">
               {[
-                'Показать игроку его номер в разделе «Настройки» и дать кнопку копирования.',
+                'Показать ID игрока на главном меню и дать кнопку копирования.',
                 'Запрашивать адрес проверки при запуске игры и при возврате из браузера.',
                 'Есть код no-ads — отключить рекламу навсегда, сохранив признак на устройстве.',
                 'Для монет пройти по orders: начислять пак только для тех номеров заказов, которых ещё нет в локальном списке выданных.',

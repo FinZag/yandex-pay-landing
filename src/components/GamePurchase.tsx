@@ -53,7 +53,7 @@ const GamePurchase = ({
     if (!/^[A-Za-z0-9_-]{1,64}$/.test(playerId.trim())) {
       setSoft(false);
       setError(
-        "Укажите номер игрока — его видно в игре, в разделе «Настройки».",
+        "Укажите ID игрока — он показан в игре на главном меню.",
       );
       return;
     }
@@ -218,7 +218,7 @@ const GamePurchase = ({
                 className="mt-7 block text-[15px] font-medium"
                 htmlFor="buy-player"
               >
-                Номер игрока
+                ID игрока
               </label>
               <input
                 id="buy-player"
@@ -229,8 +229,8 @@ const GamePurchase = ({
                 className="mt-2 h-[52px] w-full rounded-[26px] bg-background px-5 text-[16px] outline-none ring-ring/40 placeholder:text-muted-foreground focus:ring-2"
               />
               <p className="mt-2 text-[13px] leading-[1.4] text-muted-foreground">
-                Откройте игру → «Настройки» → «Номер игрока». По нему покупка
-                попадёт именно в ваш профиль.
+                ID показан в игре на главном меню. По нему покупка попадёт
+                именно в ваш профиль.
               </p>
 
               <label
@@ -326,7 +326,7 @@ const GamePurchase = ({
             </h3>
             <ol className="mt-4 space-y-3 text-[15px] leading-[1.4]">
               {[
-                "Указываете номер игрока из настроек игры и e-mail.",
+                "Указываете ID игрока с главного меню игры и e-mail.",
                 "Платите картой или через СБП на защищённой форме ЮKassa.",
                 "Возвращаетесь на сайт — покупка подтверждается автоматически.",
                 "Открываете игру: покупка уже на месте, чек пришёл на почту.",
