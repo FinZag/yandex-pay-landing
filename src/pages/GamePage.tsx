@@ -164,11 +164,10 @@ const GamePage = () => {
         <section className="mx-auto max-w-[1280px] px-5 pt-16 md:px-[76px] md:pt-24">
           <div className="rounded-lg bg-[linear-gradient(105deg,hsl(var(--banner-from))_0%,hsl(var(--banner-to))_100%)] p-6 md:p-10">
             <h2 className="font-head text-[24px] font-bold leading-[1.1] tracking-[-0.02em] md:text-[30px]">
-              Телефон Prometheus ждёт владельца
+              {game.ctaTitle ?? `Попробуйте ${game.title}`}
             </h2>
             <p className="mt-2 max-w-[560px] text-[16px] leading-[1.4]">
-              Скачивание бесплатное, регистрация не нужна. Расследование начинается
-              с первого экрана.
+              {game.ctaText ?? 'Скачивание бесплатное, регистрация не нужна.'}
             </p>
             <button
               type="button"

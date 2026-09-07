@@ -39,6 +39,8 @@ export type Game = {
   size: string;
   rustore?: string;
   icon?: string;
+  ctaTitle?: string;
+  ctaText?: string;
   screenshots: { src: string; alt: string }[];
 };
 
@@ -87,6 +89,9 @@ export const games: Game[] = [
     size: 'около 60 МБ',
     rustore: 'https://www.rustore.ru/catalog/app/com.FinGame.ByteTrace',
     icon: 'https://cdn.poehali.dev/projects/f66c7488-88ec-49b0-bfc4-ee80d5e44ff2/bucket/3dd7089f-eb58-4946-9308-eafedccdcc7b.jpeg',
+    ctaTitle: 'Телефон Prometheus ждёт владельца',
+    ctaText:
+      'Скачивание бесплатное, регистрация не нужна. Расследование начинается с первого экрана.',
     screenshots: [
       {
         src: 'https://cdn.poehali.dev/projects/f66c7488-88ec-49b0-bfc4-ee80d5e44ff2/bucket/6fd78cd9-2218-443c-97b3-3c2b25e78e6c.png',
@@ -103,6 +108,67 @@ export const games: Game[] = [
       {
         src: 'https://cdn.poehali.dev/projects/f66c7488-88ec-49b0-bfc4-ee80d5e44ff2/bucket/453e331d-9a22-4ca0-9be9-5c12ee7c76a8.png',
         alt: 'ByteTrace — плеер с аудиозаписями из памяти телефона',
+      },
+    ],
+  },
+  {
+    id: 'butter-clicker',
+    slug: 'butter-clicker',
+    gameId: 'butter-clicker',
+    title: 'Масло Кликер: Антистресс ASMR',
+    tagline: 'Мягкое масло, сочный шлепок и приятная вибрация в вашем телефоне.',
+    description:
+      'Залипательный ASMR-кликер, чтобы расслабиться после тяжёлого дня. Кликайте, тапайте и шмякайте мягкое упругое масло, собирайте коллекцию скинов и прокачивайте силу клика.',
+    about: [
+      'Каждое прикосновение к маслу отзывается мягким шлепком, сочным визуальным сжатием и приятной вибрацией смартфона. Физика мягкого масла ощущается так, будто вы держите брусок в ладонях.',
+      'Собирайте коллекцию из 19 уникальных скинов: шоколадное и клубничное масло, любимцы интернета, космические, неоновые и абстрактные жидкие узоры. У каждого — свой стиль и собственный звук шмяка.',
+      'Зарабатывайте монеты и опыт за каждый тап, качайте «Сильные пальцы», автокликер и крит-клик, растите в уровнях далеко за сотый и открывайте самые редкие скины.',
+    ],
+    features: [
+      {
+        icon: 'Hand',
+        title: 'Настоящий ASMR-эффект',
+        text: 'Мягкий шлепок, сочное сжатие и упругая вибрация на каждый тап.',
+      },
+      {
+        icon: 'Palette',
+        title: '19 уникальных скинов',
+        text: 'От классического бруска до неоновых и космических узоров со своим звуком.',
+      },
+      {
+        icon: 'TrendingUp',
+        title: 'Прокачка и уровни',
+        text: 'Сильные пальцы, автокликер и крит-клик — за сотый уровень и дальше.',
+      },
+      {
+        icon: 'Gift',
+        title: 'Подарки каждый день',
+        text: 'Календарь наград и XP-ускорители: заходите ежедневно и забирайте джекпот.',
+      },
+    ],
+    priceLabel: 'Бесплатно',
+    thumb: 'from-badge to-banner-to',
+    genre: 'Кликер, антистресс',
+    platforms: 'Android 8.0 и новее',
+    ageRating: '3+',
+    size: 'около 80 МБ',
+    rustore: 'https://www.rustore.ru/catalog/app/com.com.asmr.butter.Squishbutter',
+    icon: 'https://cdn.poehali.dev/projects/f66c7488-88ec-49b0-bfc4-ee80d5e44ff2/bucket/82510c79-e40e-4ddc-a7cb-62ac7977ad92.jpg',
+    ctaTitle: 'Мягкое масло уже ждёт ваших тапов',
+    ctaText:
+      'Скачивание бесплатное, регистрация не нужна. Расслабляйтесь под ASMR-звуки и открывайте любимые скины.',
+    screenshots: [
+      {
+        src: 'https://cdn.poehali.dev/projects/f66c7488-88ec-49b0-bfc4-ee80d5e44ff2/bucket/0d7a8d85-8be7-43dc-bdf0-3cf6e6239976.png',
+        alt: 'Масло Кликер — брусок масла и шкала опыта на третьем уровне',
+      },
+      {
+        src: 'https://cdn.poehali.dev/projects/f66c7488-88ec-49b0-bfc4-ee80d5e44ff2/bucket/0856ddb7-3202-4447-8d63-a3a11a4391f6.png',
+        alt: 'Масло Кликер — сжатие масла в ладони и начисление опыта',
+      },
+      {
+        src: 'https://cdn.poehali.dev/projects/f66c7488-88ec-49b0-bfc4-ee80d5e44ff2/bucket/8e222203-946c-40d8-955f-9ee31eeb32c9.png',
+        alt: 'Масло Кликер — масло смялось в кулаке, монеты и кнопка скинов',
       },
     ],
   },

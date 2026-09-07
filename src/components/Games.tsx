@@ -35,7 +35,7 @@ const Games = () => {
         <span className="text-[15px] text-muted-foreground">Скачивание в RuStore</span>
       </div>
 
-      <div className="mt-5 grid max-w-[420px] gap-6 sm:grid-cols-[repeat(auto-fill,minmax(280px,1fr))]">
+      <div className="mt-5 grid gap-6 sm:grid-cols-[repeat(auto-fill,minmax(280px,1fr))]">
         {games.map((game, i) => (
           <article
             key={game.id}
@@ -44,7 +44,7 @@ const Games = () => {
           >
             <Link
               to={`/games/${game.slug}`}
-              className={`relative block h-[120px] overflow-hidden rounded-md bg-gradient-to-br ${game.thumb}`}
+              className={`relative block aspect-[16/10] overflow-hidden rounded-md bg-gradient-to-br ${game.thumb}`}
               aria-label={`Подробнее об игре ${game.title}`}
             >
               {game.icon ? (

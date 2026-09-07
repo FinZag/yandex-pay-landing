@@ -27,6 +27,12 @@ GAMES = {
             'no-ads': {'title': 'Отключение рекламы', 'amount': 199},
         },
     },
+    'butter-clicker': {
+        'title': 'Масло Кликер: Антистресс ASMR',
+        'products': {
+            'no-ads': {'title': 'Отключение рекламы', 'amount': 199},
+        },
+    },
 }
 
 DEFAULT_GAME = 'bytetrace'

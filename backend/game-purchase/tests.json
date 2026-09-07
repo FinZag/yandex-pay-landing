@@ -120,6 +120,16 @@
         "noAds": false
       },
       "bodyMatcher": "partial"
+    },
+    {
+      "name": "Каталог Масло Кликер",
+      "method": "GET",
+      "path": "/?gameId=butter-clicker",
+      "expectedStatus": 200,
+      "expectedBody": {
+        "gameId": "butter-clicker"
+      },
+      "bodyMatcher": "partial"
     }
   ]
 }
