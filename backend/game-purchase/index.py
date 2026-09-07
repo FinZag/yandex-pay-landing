@@ -30,10 +30,10 @@ GAMES = {
     'butter-clicker': {
         'title': 'Масло Кликер: Антистресс ASMR',
         'products': {
-            'no-ads': {'title': 'Отключение рекламы', 'amount': 199},
-            'coins-small': {'title': 'Маленький пак — 5 000 монет', 'amount': 99},
-            'coins-medium': {'title': 'Средний пак — 25 000 монет', 'amount': 349},
-            'coins-large': {'title': 'Крупный пак — 100 000 монет', 'amount': 999},
+            'no-ads': {'title': 'Отключение рекламы', 'amount': 199, 'note': 'навсегда'},
+            'coins-small': {'title': 'Маленький пак', 'amount': 99, 'note': '5 000 монет'},
+            'coins-medium': {'title': 'Средний пак', 'amount': 349, 'note': '25 000 монет'},
+            'coins-large': {'title': 'Крупный пак', 'amount': 849, 'note': '100 000 монет'},
         },
     },
 }
@@ -190,18 +190,22 @@ def check_player(game_id: str, player_id: str) -> dict:
 
         with conn.cursor() as cur:
             cur.execute(
-                f"SELECT DISTINCT product_id FROM {schema}.game_purchases "
+                f"SELECT order_id, product_id FROM {schema}.game_purchases "
                 f"WHERE game_id = '{safe_game}' AND player_id = '{safe_player}' "
-                f"AND status = 'paid'"
+                f"AND status = 'paid' ORDER BY order_id"
             )
-            owned = sorted({r[0] for r in cur.fetchall()})
+            rows = cur.fetchall()
     finally:
         conn.close()
+
+    owned = sorted({r[1] for r in rows})
+    orders = [{'orderId': r[0], 'productId': r[1]} for r in rows]
 
     return reply(200, {
         'gameId': game_id,
         'playerId': player_id,
         'products': owned,
+        'orders': orders,
         'noAds': 'no-ads' in owned,
     })
 
@@ -232,7 +236,7 @@ def handler(event: dict, context) -> dict:
             return reply(404, {'error': 'Неизвестная игра', 'games': list(GAMES.keys())})
 
         items = [
-            {'productId': k, 'title': v['title'], 'amount': v['amount']}
+            {'productId': k, 'title': v['title'], 'amount': v['amount'], 'note': v.get('note', '')}
             for k, v in game['products'].items()
         ]
         return reply(200, {'gameId': game_id, 'game': game['title'], 'products': items})

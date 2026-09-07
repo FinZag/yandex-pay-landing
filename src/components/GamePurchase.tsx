@@ -5,7 +5,12 @@ import MailLink from "@/components/MailLink";
 import { GAME_PURCHASE_URL } from "@/data/company";
 import { useToast } from "@/hooks/use-toast";
 
-type Product = { productId: string; title: string; amount: number };
+type Product = {
+  productId: string;
+  title: string;
+  amount: number;
+  note?: string;
+};
 
 const GamePurchase = ({
   gameId,
@@ -140,6 +145,9 @@ const GamePurchase = ({
                 <div>
                   <h3 className="font-head text-[18px] font-bold">
                     {product.title}
+                    {product.note && product.productId !== "no-ads"
+                      ? ` — ${product.note}`
+                      : ""}
                   </h3>
                   <p className="mt-1 text-[15px] leading-[1.35] text-muted-foreground">
                     {product.productId === "no-ads"
@@ -176,18 +184,25 @@ const GamePurchase = ({
                             : "border-transparent bg-background/60 hover:bg-background"
                         }`}
                       >
-                        <span className="flex items-center gap-2.5">
+                        <span className="flex min-w-0 items-center gap-2.5">
                           <Icon
                             name={
                               p.productId === "no-ads" ? "BadgeCheck" : "Coins"
                             }
                             size={18}
-                            className={
+                            className={`shrink-0 ${
                               on ? "text-primary" : "text-muted-foreground"
-                            }
+                            }`}
                           />
-                          <span className="text-[15px] font-medium leading-[1.2]">
-                            {p.title}
+                          <span className="min-w-0">
+                            <span className="block text-[15px] font-medium leading-[1.2]">
+                              {p.title}
+                            </span>
+                            {p.note && (
+                              <span className="mt-0.5 block text-[13px] leading-[1.2] text-muted-foreground">
+                                {p.note}
+                              </span>
+                            )}
                           </span>
                         </span>
                         <span className="shrink-0 text-[15px] font-bold">
