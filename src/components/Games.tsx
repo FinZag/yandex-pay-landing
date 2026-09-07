@@ -28,7 +28,7 @@ const Games = () => {
 
   return (
     <section id="games" className="mx-auto max-w-[1280px] px-5 pt-16 md:px-[76px] md:pt-24">
-      <div className="flex items-baseline justify-between">
+      <div className="flex flex-col gap-1.5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
         <h2 className="font-head text-[22px] font-medium tracking-[-0.01em] md:text-[26px]">
           Каталог игр
         </h2>

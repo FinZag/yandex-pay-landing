@@ -30,13 +30,17 @@ const Header = () => {
       )}
     >
       <div className="mx-auto flex h-[76px] max-w-[1280px] items-center justify-between px-5 md:h-[92px] md:px-[76px]">
-        <a href="#top" className="flex items-center gap-2.5" aria-label="FinGame — на главную">
+        <a
+          href="#top"
+          className="flex shrink-0 items-center gap-2.5"
+          aria-label="FinGame — на главную"
+        >
           <img
             src="/logo-mark.jpg"
             alt=""
             className="h-[38px] w-[38px] rounded-[11px] object-cover"
           />
-          <span className="font-head text-[24px] font-bold tracking-[-0.02em]">
+          <span className="font-head text-[21px] font-bold tracking-[-0.02em] sm:text-[24px]">
             Fin<span className="cond">Game</span>
           </span>
         </a>
@@ -69,14 +73,15 @@ const Header = () => {
           </Link>
         </nav>
 
-        <div className="flex items-center gap-2 xl:hidden">
+        <div className="flex shrink-0 items-center gap-2 xl:hidden">
           <Link
             to="/legal"
-            className="inline-flex h-11 items-center gap-2 rounded-[22px] bg-badge px-4 text-[15px] font-bold text-badge-foreground"
+            aria-label="Документы и реквизиты"
+            className="inline-flex h-11 items-center gap-2 rounded-[22px] bg-badge px-3 text-[15px] font-bold text-badge-foreground xs:px-4"
           >
             <Icon name="FileText" size={18} />
+            <span className="hidden xs:inline sm:hidden">Документы</span>
             <span className="hidden sm:inline">Документы и реквизиты</span>
-            <span className="sm:hidden">Документы</span>
           </Link>
           <button
             type="button"
