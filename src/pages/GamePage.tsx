@@ -89,7 +89,7 @@ const GamePage = () => {
                   href="#purchase"
                   className="inline-flex h-[56px] items-center gap-2.5 rounded-[28px] bg-secondary px-[30px] text-[17px] font-medium text-foreground transition-colors hover:bg-border"
                 >
-                  Отключить рекламу
+                  Покупки в игре
                   <Icon name="ArrowDown" size={18} />
                 </a>
               </div>

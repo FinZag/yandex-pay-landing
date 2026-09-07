@@ -15,6 +15,7 @@ const GamePurchase = ({
   gameTitle: string;
 }) => {
   const [products, setProducts] = useState<Product[] | null>(null);
+  const [chosen, setChosen] = useState<string | null>(null);
   const [playerId, setPlayerId] = useState("");
   const [email, setEmail] = useState("");
   const [agree, setAgree] = useState(false);
@@ -37,7 +38,8 @@ const GamePurchase = ({
     };
   }, [gameId]);
 
-  const product = products?.[0];
+  const product =
+    products?.find((p) => p.productId === chosen) ?? products?.[0];
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -140,14 +142,62 @@ const GamePurchase = ({
                     {product.title}
                   </h3>
                   <p className="mt-1 text-[15px] leading-[1.35] text-muted-foreground">
-                    Разовая покупка для {gameTitle}. Реклама пропадает навсегда,
-                    подписки и автосписаний нет.
+                    {product.productId === "no-ads"
+                      ? `Разовая покупка для ${gameTitle}. Реклама пропадает навсегда, подписки и автосписаний нет.`
+                      : `Монеты зачисляются в ваш профиль в ${gameTitle} сразу после оплаты. Подписки и автосписаний нет.`}
                   </p>
                 </div>
                 <span className="shrink-0 rounded-full bg-background px-4 py-2 font-head text-[18px] font-bold">
                   {product.amount} ₽
                 </span>
               </div>
+
+              {products.length > 1 && (
+                <div
+                  role="radiogroup"
+                  aria-label="Что покупаем"
+                  className="mt-6 grid gap-2.5 sm:grid-cols-2"
+                >
+                  {products.map((p) => {
+                    const on = p.productId === product.productId;
+                    return (
+                      <button
+                        key={p.productId}
+                        type="button"
+                        role="radio"
+                        aria-checked={on}
+                        onClick={() => {
+                          setChosen(p.productId);
+                          setError(null);
+                        }}
+                        className={`flex items-center justify-between gap-3 rounded-[18px] border-2 px-4 py-3 text-left transition-colors ${
+                          on
+                            ? "border-primary bg-background"
+                            : "border-transparent bg-background/60 hover:bg-background"
+                        }`}
+                      >
+                        <span className="flex items-center gap-2.5">
+                          <Icon
+                            name={
+                              p.productId === "no-ads" ? "BadgeCheck" : "Coins"
+                            }
+                            size={18}
+                            className={
+                              on ? "text-primary" : "text-muted-foreground"
+                            }
+                          />
+                          <span className="text-[15px] font-medium leading-[1.2]">
+                            {p.title}
+                          </span>
+                        </span>
+                        <span className="shrink-0 text-[15px] font-bold">
+                          {p.amount} ₽
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
 
               <label
                 className="mt-7 block text-[15px] font-medium"
@@ -264,7 +314,7 @@ const GamePurchase = ({
                 "Указываете номер игрока из настроек игры и e-mail.",
                 "Платите картой или через СБП на защищённой форме ЮKassa.",
                 "Возвращаетесь на сайт — покупка подтверждается автоматически.",
-                "Открываете игру: реклама отключена, чек пришёл на почту.",
+                "Открываете игру: покупка уже на месте, чек пришёл на почту.",
               ].map((t, n) => (
                 <li key={t} className="flex gap-3">
                   <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-primary text-[13px] font-bold text-primary-foreground">
@@ -307,8 +357,8 @@ const GamePurchase = ({
                   className="mt-0.5 shrink-0 text-ok"
                 />
                 <span>
-                  Сама игра бесплатная — покупка нужна только для отключения
-                  рекламы.
+                  Сама игра бесплатная — покупки нужны только для отключения
+                  рекламы и монет.
                 </span>
               </li>
               <li className="flex gap-2.5">
@@ -318,7 +368,7 @@ const GamePurchase = ({
                   className="mt-0.5 shrink-0 text-ok"
                 />
                 <span>
-                  Деньги списались, а реклама осталась — напишите на{" "}
+                  Деньги списались, а покупка не пришла — напишите на{" "}
                   <MailLink subject={`Покупка в игре ${gameTitle}`} /> с номером
                   заказа, решим вопрос.
                 </span>

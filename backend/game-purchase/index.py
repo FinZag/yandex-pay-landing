@@ -31,6 +31,9 @@ GAMES = {
         'title': 'Масло Кликер: Антистресс ASMR',
         'products': {
             'no-ads': {'title': 'Отключение рекламы', 'amount': 199},
+            'coins-small': {'title': 'Маленький пак — 5 000 монет', 'amount': 99},
+            'coins-medium': {'title': 'Средний пак — 25 000 монет', 'amount': 349},
+            'coins-large': {'title': 'Крупный пак — 100 000 монет', 'amount': 999},
         },
     },
 }
