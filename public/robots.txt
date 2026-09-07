@@ -14,6 +14,7 @@ User-agent: *
 Allow: /
 Disallow: /pay/
 Disallow: /thanks
+Disallow: /dev
 
 Sitemap: https://fingame-coder.ru/sitemap.xml
 Host: https://fingame-coder.ru

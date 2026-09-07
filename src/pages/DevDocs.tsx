@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import Seo from '@/components/Seo';
 import Icon from '@/components/ui/icon';
 import MailLink from '@/components/MailLink';
@@ -42,7 +42,9 @@ const Code = ({ children }: { children: string }) => {
 
 const DevDocsPage = () => {
   const { hash } = useLocation();
-  const game = games.find((g) => g.gameId === 'butter-clicker');
+  const { slug } = useParams();
+  const game = games.find((g) => g.slug === slug) ?? games[0];
+  const gameId = game.gameId;
   const [products, setProducts] = useState<Product[] | null>(null);
 
   useEffect(() => {
@@ -56,19 +58,23 @@ const DevDocsPage = () => {
 
   useEffect(() => {
     let stop = false;
-    fetch(`${GAME_PURCHASE_URL}?gameId=butter-clicker`)
+    setProducts(null);
+    fetch(`${GAME_PURCHASE_URL}?gameId=${gameId}`)
       .then((r) => r.json())
       .then((d) => !stop && setProducts(Array.isArray(d.products) ? d.products : []))
       .catch(() => !stop && setProducts([]));
     return () => {
       stop = true;
     };
-  }, []);
+  }, [gameId]);
 
-  const checkExample = `GET ${GAME_PURCHASE_URL}?gameId=butter-clicker&playerId=player-42`;
+  const hasCoins = (products ?? []).some((p) => p.productId.startsWith('coins'));
 
-  const responseExample = `{
-  "gameId": "butter-clicker",
+  const checkExample = `GET ${GAME_PURCHASE_URL}?gameId=${gameId}&playerId=player-42`;
+
+  const responseExample = hasCoins
+    ? `{
+  "gameId": "${gameId}",
   "playerId": "player-42",
   "products": ["coins-medium", "no-ads"],
   "orders": [
@@ -76,22 +82,44 @@ const DevDocsPage = () => {
     { "orderId": "FG-8B04E2", "productId": "coins-medium" }
   ],
   "noAds": true
+}`
+    : `{
+  "gameId": "${gameId}",
+  "playerId": "player-42",
+  "products": ["no-ads"],
+  "orders": [
+    { "orderId": "FG-7C31A9", "productId": "no-ads" }
+  ],
+  "noAds": true
 }`;
 
   const emptyExample = `{
-  "gameId": "butter-clicker",
+  "gameId": "${gameId}",
   "playerId": "player-42",
   "products": [],
   "orders": [],
   "noAds": false
 }`;
 
+  const steps = [
+    'Показать ID игрока на главном меню и дать кнопку копирования.',
+    'Запрашивать адрес проверки при запуске игры и при возврате из браузера.',
+    'Есть код no-ads — отключить рекламу навсегда, сохранив признак на устройстве.',
+    ...(hasCoins
+      ? [
+          'Для монет пройти по orders: начислять пак только для тех номеров заказов, которых ещё нет в локальном списке выданных.',
+          'Записать номер заказа в локальный список сразу после начисления.',
+        ]
+      : ['Ответ приходит при каждом запуске — храните признак локально, чтобы игра работала без интернета.']),
+  ];
+
   return (
     <div className="min-h-screen bg-background">
       <Seo
-        title="Инструкция для разработчика — покупки в играх FinGame"
-        description="Техническая инструкция: адрес проверки покупок, коды товаров, пример ответа сервера и порядок начисления монет в игре Масло Кликер."
-        path="/dev"
+        title={`Инструкция для разработчика — покупки в игре ${game.title}`}
+        description={`Техническая инструкция: адрес проверки покупок, коды товаров и пример ответа сервера для игры ${game.title}.`}
+        path={`/dev/${game.slug}`}
+        noindex
       />
 
       <header className="sticky top-0 z-50 bg-background/90 backdrop-blur">
@@ -107,7 +135,7 @@ const DevDocsPage = () => {
             </span>
           </Link>
           <Link
-            to="/games/butter-clicker"
+            to={`/games/${game.slug}`}
             className="inline-flex h-[46px] items-center gap-2 rounded-[23px] bg-secondary px-5 text-[15px] font-medium transition-colors hover:bg-border"
           >
             <Icon name="ArrowLeft" size={18} />
@@ -121,7 +149,7 @@ const DevDocsPage = () => {
           Для разработчика
         </span>
         <h1 className="mt-3 font-head text-[30px] font-bold leading-[1.1] tracking-[-0.02em] md:text-[42px]">
-          Покупки в игре: подключение
+          {game.title}: подключение покупок
         </h1>
         <p className="mt-3 max-w-[760px] text-[17px] leading-[1.45] text-muted-foreground">
           Покупки оформляются на сайте через ЮKassa. Игре нужно только спросить сервер, что
@@ -129,7 +157,24 @@ const DevDocsPage = () => {
           не требуется.
         </p>
 
-        <nav className="mt-6 flex flex-wrap gap-2">
+        <div className="mt-6 flex flex-wrap gap-2">
+          {games.map((g) => (
+            <Link
+              key={g.slug}
+              to={`/dev/${g.slug}`}
+              className={`inline-flex h-11 items-center gap-2 rounded-[22px] px-4 text-[15px] font-medium transition-colors ${
+                g.slug === game.slug
+                  ? 'bg-primary text-primary-foreground'
+                  : 'bg-secondary hover:bg-border'
+              }`}
+            >
+              <Icon name="Gamepad2" size={17} />
+              {g.title}
+            </Link>
+          ))}
+        </div>
+
+        <nav className="mt-4 flex flex-wrap gap-2">
           {nav.map((n) => (
             <a
               key={n.href}
@@ -153,7 +198,7 @@ const DevDocsPage = () => {
             <dl className="mt-5 grid gap-3 sm:grid-cols-2">
               <div className="rounded-md bg-background px-4 py-3">
                 <dt className="text-[14px] text-muted-foreground">Идентификатор игры</dt>
-                <dd className="mt-0.5 font-mono text-[15px] font-medium">butter-clicker</dd>
+                <dd className="mt-0.5 font-mono text-[15px] font-medium">{gameId}</dd>
               </div>
               <div className="rounded-md bg-background px-4 py-3">
                 <dt className="text-[14px] text-muted-foreground">ID игрока</dt>
@@ -217,7 +262,9 @@ const DevDocsPage = () => {
               Пример ответа сервера
             </h2>
             <p className="mt-2 text-[16px] leading-[1.45] text-muted-foreground">
-              Игрок купил отключение рекламы и средний пак монет:
+              {hasCoins
+                ? 'Игрок купил отключение рекламы и средний пак монет:'
+                : 'Игрок купил отключение рекламы:'}
             </p>
             <Code>{responseExample}</Code>
 
@@ -238,11 +285,11 @@ const DevDocsPage = () => {
                 },
                 {
                   field: 'orders',
-                  text: 'Каждая оплата отдельной строкой со своим номером заказа. По нему начисляются монеты.',
+                  text: 'Каждая оплата отдельной строкой со своим номером заказа.',
                 },
                 {
                   field: 'orderId',
-                  text: 'Номер заказа. Сохраните выданные номера на устройстве, чтобы не начислить пак дважды.',
+                  text: 'Номер заказа. Сохраните выданные номера на устройстве, чтобы не выдать товар дважды.',
                 },
               ].map((r) => (
                 <div key={r.field} className="rounded-lg bg-secondary px-5 py-4">
@@ -258,13 +305,7 @@ const DevDocsPage = () => {
               Как встроить в игру
             </h2>
             <ol className="mt-4 space-y-3.5 text-[16px] leading-[1.45]">
-              {[
-                'Показать ID игрока на главном меню и дать кнопку копирования.',
-                'Запрашивать адрес проверки при запуске игры и при возврате из браузера.',
-                'Есть код no-ads — отключить рекламу навсегда, сохранив признак на устройстве.',
-                'Для монет пройти по orders: начислять пак только для тех номеров заказов, которых ещё нет в локальном списке выданных.',
-                'Записать номер заказа в локальный список сразу после начисления.',
-              ].map((t, n) => (
+              {steps.map((t, n) => (
                 <li key={t} className="flex gap-3">
                   <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-primary text-[13px] font-bold text-primary-foreground">
                     {n + 1}
@@ -275,16 +316,16 @@ const DevDocsPage = () => {
             </ol>
             <p className="mt-5 flex items-start gap-2.5 text-[15px] leading-[1.45]">
               <Icon name="TriangleAlert" size={18} className="mt-0.5 shrink-0" />
-              Отключение рекламы возвращается в ответе всегда, монеты — тоже. Поэтому монеты
-              начисляются строго по номеру заказа, иначе при каждом запуске игрок будет
-              получать пак заново.
+              {hasCoins
+                ? 'Отключение рекламы возвращается в ответе всегда, монеты — тоже. Поэтому монеты начисляются строго по номеру заказа, иначе при каждом запуске игрок будет получать пак заново.'
+                : 'Покупка возвращается в ответе при каждом запросе. Это не новая оплата, а текущий статус игрока — просто применяйте его.'}
             </p>
           </section>
         </article>
 
         <div className="mt-10 flex flex-wrap items-center gap-4">
           <Link
-            to={`/games/${game?.slug ?? 'butter-clicker'}`}
+            to={`/games/${game.slug}`}
             className="inline-flex h-[56px] items-center gap-2.5 rounded-[28px] bg-primary px-[30px] text-[17px] font-bold tracking-[-0.01em] text-primary-foreground transition-transform hover:scale-[1.02]"
           >
             Страница игры
