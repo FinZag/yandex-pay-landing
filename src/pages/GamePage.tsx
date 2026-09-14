@@ -14,12 +14,12 @@ const GamePage = () => {
 
   if (!game) return <Navigate to="/" replace />;
 
-  const openStore = () => {
-    if (game.rustore) {
-      window.open(game.rustore, '_blank', 'noopener,noreferrer');
+  const openStore = (url?: string, store = 'RuStore') => {
+    if (url) {
+      window.open(url, '_blank', 'noopener,noreferrer');
       return;
     }
-    toast({ title: 'Ссылка на RuStore пока не указана' });
+    toast({ title: `Ссылка на ${store} пока не указана` });
   };
 
   const specs = [
@@ -33,7 +33,7 @@ const GamePage = () => {
     <div className="min-h-screen bg-background">
       <Seo
         title={`${game.title} — ${game.genre} для Android | FinGame`}
-        description={`${game.description} Бесплатно в RuStore, отключение рекламы — разовая покупка.`}
+        description={`${game.description} Бесплатно в ${game.appgallery ? 'RuStore и AppGallery' : 'RuStore'}, отключение рекламы — разовая покупка.`}
         path={`/games/${game.slug}`}
       />
       <Header />
@@ -67,7 +67,7 @@ const GamePage = () => {
 
             <div>
               <span className="inline-flex h-8 items-center rounded-full bg-badge px-3.5 text-[13px] font-bold text-badge-foreground">
-                {game.priceLabel} в RuStore
+                {game.priceLabel} в RuStore{game.appgallery ? ' и AppGallery' : ''}
               </span>
               <h1 className="mt-3 font-head text-[34px] font-bold leading-[1.05] tracking-[-0.03em] md:text-[52px]">
                 {game.title}
@@ -79,12 +79,23 @@ const GamePage = () => {
               <div className="mt-6 flex flex-wrap gap-3">
                 <button
                   type="button"
-                  onClick={openStore}
+                  onClick={() => openStore(game.rustore, 'RuStore')}
                   className="inline-flex h-[56px] items-center gap-2.5 rounded-[28px] bg-primary px-[30px] text-[17px] font-bold tracking-[-0.01em] text-primary-foreground transition-transform hover:scale-[1.02] active:scale-[0.99]"
                 >
                   <Icon name="Download" size={20} />
                   Скачать в RuStore
                 </button>
+                {game.appgallery && (
+                  <a
+                    href={game.appgallery}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex h-[56px] items-center gap-2.5 rounded-[28px] bg-foreground px-[30px] text-[17px] font-bold tracking-[-0.01em] text-background transition-transform hover:scale-[1.02] active:scale-[0.99]"
+                  >
+                    <Icon name="Download" size={20} />
+                    Скачать в AppGallery
+                  </a>
+                )}
                 <a
                   href="#purchase"
                   className="inline-flex h-[56px] items-center gap-2.5 rounded-[28px] bg-secondary px-[30px] text-[17px] font-medium text-foreground transition-colors hover:bg-border"
@@ -169,14 +180,27 @@ const GamePage = () => {
             <p className="mt-2 max-w-[560px] text-[16px] leading-[1.4]">
               {game.ctaText ?? 'Скачивание бесплатное, регистрация не нужна.'}
             </p>
-            <button
-              type="button"
-              onClick={openStore}
-              className="mt-6 inline-flex h-[56px] items-center gap-2.5 rounded-[28px] bg-primary px-[30px] text-[17px] font-bold text-primary-foreground transition-transform hover:scale-[1.02] active:scale-[0.99]"
-            >
-              Скачать в RuStore
-              <Icon name="ArrowUpRight" size={18} />
-            </button>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <button
+                type="button"
+                onClick={() => openStore(game.rustore, 'RuStore')}
+                className="inline-flex h-[56px] items-center gap-2.5 rounded-[28px] bg-primary px-[30px] text-[17px] font-bold text-primary-foreground transition-transform hover:scale-[1.02] active:scale-[0.99]"
+              >
+                Скачать в RuStore
+                <Icon name="ArrowUpRight" size={18} />
+              </button>
+              {game.appgallery && (
+                <a
+                  href={game.appgallery}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex h-[56px] items-center gap-2.5 rounded-[28px] bg-foreground px-[30px] text-[17px] font-bold text-background transition-transform hover:scale-[1.02] active:scale-[0.99]"
+                >
+                  Скачать в AppGallery
+                  <Icon name="ArrowUpRight" size={18} />
+                </a>
+              )}
+            </div>
           </div>
         </section>
       </main>

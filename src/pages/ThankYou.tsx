@@ -72,6 +72,17 @@ const ThankYou = () => {
                 {game.title} в RuStore
               </a>
             )}
+            {game?.appgallery && (
+              <a
+                href={game.appgallery}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex h-[56px] items-center gap-2.5 rounded-[28px] bg-background px-[30px] text-[17px] font-bold tracking-[-0.01em] text-foreground transition-transform hover:scale-[1.02] active:scale-[0.99]"
+              >
+                <Icon name="Download" size={18} />
+                {game.title} в AppGallery
+              </a>
+            )}
           </div>
         </section>
 

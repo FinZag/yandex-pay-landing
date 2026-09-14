@@ -38,6 +38,7 @@ export type Game = {
   ageRating: string;
   size: string;
   rustore?: string;
+  appgallery?: string;
   icon?: string;
   ctaTitle?: string;
   ctaText?: string;
@@ -154,6 +155,7 @@ export const games: Game[] = [
     ageRating: '3+',
     size: 'около 80 МБ',
     rustore: 'https://www.rustore.ru/catalog/app/com.com.asmr.butter.Squishbutter',
+    appgallery: 'https://appgallery.huawei.com/app/C118940595',
     icon: 'https://cdn.poehali.dev/projects/f66c7488-88ec-49b0-bfc4-ee80d5e44ff2/bucket/82510c79-e40e-4ddc-a7cb-62ac7977ad92.jpg',
     ctaTitle: 'Мягкое масло уже ждёт ваших тапов',
     ctaText:
