@@ -12,10 +12,7 @@ const Hero = () => {
           Бесплатные игры от инди-разработчика
         </h1>
 
-        <p className="mt-4 max-w-[34ch] text-[17px] font-medium leading-[1.4] text-muted-foreground">
-          Мобильные игры на Unity — скачивайте бесплатно в RuStore. Понравилось? Поддержите
-          разработку картой или через СБП.
-        </p>
+        <p className="mt-4 max-w-[34ch] text-[17px] font-medium leading-[1.4] text-muted-foreground">Мобильные игры на Unity — скачивайте бесплатно в RuStore и AppGallery. Понравилось? Поддержите разработку картой или через СБП.</p>
 
         <div className="mt-8 flex flex-wrap items-center gap-3 pb-1 md:mt-auto md:pt-6">
           <a
