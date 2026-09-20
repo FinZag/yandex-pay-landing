@@ -12,6 +12,7 @@ import PayDone from "./pages/PayDone";
 import GamePage from "./pages/GamePage";
 import DevDocs from "./pages/DevDocs";
 import DevGate from "./components/DevGate";
+import Metrika from "./components/Metrika";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -23,6 +24,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <Metrika />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/thanks" element={<ThankYou />} />
