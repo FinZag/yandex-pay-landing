@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Icon from '@/components/ui/icon';
 import { useToast } from '@/hooks/use-toast';
 import { CONTACT_URL } from '@/data/company';
+import { reachGoal } from '@/lib/metrika';
 
 const ContactForm = () => {
   const [name, setName] = useState('');
@@ -23,6 +24,7 @@ const ContactForm = () => {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Не удалось отправить');
       setSent(true);
+      reachGoal('contact_sent');
       setName('');
       setEmail('');
       setMessage('');

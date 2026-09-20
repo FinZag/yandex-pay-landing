@@ -4,6 +4,7 @@ import Icon from "@/components/ui/icon";
 import MailLink from "@/components/MailLink";
 import { GAME_PURCHASE_URL } from "@/data/company";
 import { useToast } from "@/hooks/use-toast";
+import { reachGoal } from "@/lib/metrika";
 
 type Product = {
   productId: string;
@@ -93,6 +94,12 @@ const GamePurchase = ({
         setError(data.error || "Не удалось создать платёж. Попробуйте позже.");
         return;
       }
+
+      reachGoal("purchase_start", {
+        gameId,
+        productId: product.productId,
+        amount: product.amount,
+      });
 
       toast({
         title: "Переходим к оплате",

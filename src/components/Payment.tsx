@@ -4,6 +4,7 @@ import Icon from "@/components/ui/icon";
 import MailLink from "@/components/MailLink";
 import { PAYMENT_URL } from "@/data/company";
 import { useToast } from "@/hooks/use-toast";
+import { reachGoal } from "@/lib/metrika";
 
 const presets = [100, 300, 500, 1000];
 
@@ -62,6 +63,8 @@ const Payment = () => {
         setNotConfigured(Boolean(data.notConfigured));
         return;
       }
+
+      reachGoal("support_start", { amount: total });
 
       toast({
         title: "Переходим к оплате",

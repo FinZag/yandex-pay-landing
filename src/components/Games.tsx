@@ -10,13 +10,18 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { useToast } from '@/hooks/use-toast';
+import { reachGoal } from '@/lib/metrika';
 
 const Games = () => {
   const [active, setActive] = useState<Game | null>(null);
   const { toast } = useToast();
 
-  const openStore = (url: string | undefined, store: string) => {
+  const openStore = (url: string | undefined, store: string, gameId?: string) => {
     if (url) {
+      reachGoal(store === 'AppGallery' ? 'download_appgallery' : 'download_rustore', {
+        gameId,
+        place: 'catalog',
+      });
       window.open(url, '_blank', 'noopener,noreferrer');
       return;
     }
@@ -77,7 +82,7 @@ const Games = () => {
             <div className="mt-auto flex flex-wrap gap-2 pt-2">
               <button
                 type="button"
-                onClick={() => openStore(game.rustore, 'RuStore')}
+                onClick={() => openStore(game.rustore, 'RuStore', game.gameId)}
                 className="inline-flex h-10 w-full items-center justify-center gap-2 rounded-[20px] bg-primary px-4 text-[14px] font-medium text-primary-foreground transition-transform hover:scale-[1.03] active:scale-[0.98]"
               >
                 <Icon name="Download" size={16} />
@@ -88,6 +93,7 @@ const Games = () => {
                   href={game.appgallery}
                   target="_blank"
                   rel="noreferrer"
+                  onClick={() => reachGoal('download_appgallery', { gameId: game.gameId, place: 'catalog' })}
                   className="inline-flex h-10 w-full items-center justify-center gap-2 rounded-[20px] bg-background px-4 text-[14px] font-medium text-foreground transition-transform hover:scale-[1.03] active:scale-[0.98]"
                 >
                   <Icon name="Download" size={16} />
@@ -135,7 +141,7 @@ const Games = () => {
               <div className="grid gap-2">
                 <button
                   type="button"
-                  onClick={() => openStore(active.rustore, 'RuStore')}
+                  onClick={() => openStore(active.rustore, 'RuStore', active.gameId)}
                   className="inline-flex h-[52px] w-full items-center justify-center gap-2 rounded-[26px] bg-primary px-6 font-bold text-primary-foreground"
                 >
                   Скачать в RuStore

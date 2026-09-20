@@ -6,6 +6,7 @@ import GamePurchase from '@/components/GamePurchase';
 import Icon from '@/components/ui/icon';
 import { games } from '@/data/company';
 import { useToast } from '@/hooks/use-toast';
+import { reachGoal } from '@/lib/metrika';
 
 const GamePage = () => {
   const { slug } = useParams();
@@ -16,6 +17,10 @@ const GamePage = () => {
 
   const openStore = (url?: string, store = 'RuStore') => {
     if (url) {
+      reachGoal(store === 'AppGallery' ? 'download_appgallery' : 'download_rustore', {
+        gameId: game.gameId,
+        place: 'game_page',
+      });
       window.open(url, '_blank', 'noopener,noreferrer');
       return;
     }
@@ -90,6 +95,7 @@ const GamePage = () => {
                     href={game.appgallery}
                     target="_blank"
                     rel="noreferrer"
+                    onClick={() => reachGoal('download_appgallery', { gameId: game.gameId, place: 'game_page' })}
                     className="inline-flex h-[56px] items-center gap-2.5 rounded-[28px] bg-foreground px-[30px] text-[17px] font-bold tracking-[-0.01em] text-background transition-transform hover:scale-[1.02] active:scale-[0.99]"
                   >
                     <Icon name="Download" size={20} />
@@ -98,6 +104,7 @@ const GamePage = () => {
                 )}
                 <a
                   href="#purchase"
+                  onClick={() => reachGoal('purchase_view', { gameId: game.gameId })}
                   className="inline-flex h-[56px] items-center gap-2.5 rounded-[28px] bg-secondary px-[30px] text-[17px] font-medium text-foreground transition-colors hover:bg-border"
                 >
                   Покупки в игре
@@ -194,6 +201,7 @@ const GamePage = () => {
                   href={game.appgallery}
                   target="_blank"
                   rel="noreferrer"
+                  onClick={() => reachGoal('download_appgallery', { gameId: game.gameId, place: 'game_page_cta' })}
                   className="inline-flex h-[56px] items-center gap-2.5 rounded-[28px] bg-foreground px-[30px] text-[17px] font-bold text-background transition-transform hover:scale-[1.02] active:scale-[0.99]"
                 >
                   Скачать в AppGallery

@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import Seo from '@/components/Seo';
 import Icon from '@/components/ui/icon';
 import { GAME_PURCHASE_URL } from '@/data/company';
+import { reachGoal } from '@/lib/metrika';
 
 type State = 'checking' | 'paid' | 'pending' | 'error';
 
@@ -35,6 +36,11 @@ const PayDone = () => {
         if (data.status === 'paid') {
           setTitle(data.productId || '');
           setState('paid');
+          reachGoal('purchase_paid', {
+            orderId,
+            productId: data.productId,
+            amount: data.amount,
+          });
           return;
         }
         if (!res.ok) {
