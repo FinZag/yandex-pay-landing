@@ -57,6 +57,7 @@ const Games = () => {
                   src={game.icon}
                   alt={game.title}
                   loading="lazy"
+                  style={{ objectPosition: game.thumbPosition ?? 'center' }}
                   className="h-full w-full object-cover"
                 />
               ) : (

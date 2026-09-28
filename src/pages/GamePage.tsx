@@ -3,6 +3,7 @@ import Seo from '@/components/Seo';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import GamePurchase from '@/components/GamePurchase';
+import ReleaseNotify from '@/components/ReleaseNotify';
 import Icon from '@/components/ui/icon';
 import { games } from '@/data/company';
 import { useToast } from '@/hooks/use-toast';
@@ -114,14 +115,24 @@ const GamePage = () => {
                     Скачать в AppGallery
                   </a>
                 )}
-                <a
-                  href="#purchase"
-                  onClick={() => reachGoal('purchase_view', { gameId: game.gameId })}
-                  className="inline-flex h-[56px] items-center gap-2.5 rounded-[28px] bg-secondary px-[30px] text-[17px] font-medium text-foreground transition-colors hover:bg-border"
-                >
-                  Покупки в игре
-                  <Icon name="ArrowDown" size={18} />
-                </a>
+                {game.comingSoon ? (
+                  <a
+                    href="#notify"
+                    className="inline-flex h-[56px] items-center gap-2.5 rounded-[28px] bg-primary px-[30px] text-[17px] font-bold tracking-[-0.01em] text-primary-foreground transition-transform hover:scale-[1.02] active:scale-[0.99]"
+                  >
+                    <Icon name="BellRing" size={18} />
+                    Сообщить о выходе
+                  </a>
+                ) : (
+                  <a
+                    href="#purchase"
+                    onClick={() => reachGoal('purchase_view', { gameId: game.gameId })}
+                    className="inline-flex h-[56px] items-center gap-2.5 rounded-[28px] bg-secondary px-[30px] text-[17px] font-medium text-foreground transition-colors hover:bg-border"
+                  >
+                    Покупки в игре
+                    <Icon name="ArrowDown" size={18} />
+                  </a>
+                )}
               </div>
 
               <dl className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
@@ -195,6 +206,10 @@ const GamePage = () => {
           </div>
         </section>
 
+        {game.comingSoon && (
+          <ReleaseNotify gameId={game.gameId} gameTitle={game.title} />
+        )}
+
         <GamePurchase gameId={game.gameId} gameTitle={game.title} />
 
         <section className="mx-auto max-w-[1280px] px-5 pt-16 md:px-[76px] md:pt-24">
@@ -207,9 +222,13 @@ const GamePage = () => {
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               {game.comingSoon ? (
-                <span className="inline-flex h-[56px] items-center gap-2.5 rounded-[28px] bg-background/70 px-[30px] text-[17px] font-bold text-foreground">
-                  <Icon name="Hammer" size={18} />В разработке
-                </span>
+                <a
+                  href="#notify"
+                  className="inline-flex h-[56px] items-center gap-2.5 rounded-[28px] bg-primary px-[30px] text-[17px] font-bold text-primary-foreground transition-transform hover:scale-[1.02] active:scale-[0.99]"
+                >
+                  <Icon name="BellRing" size={18} />
+                  Сообщить о выходе
+                </a>
               ) : (
                 <button
                   type="button"

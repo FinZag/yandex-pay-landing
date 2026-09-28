@@ -42,6 +42,7 @@ export type Game = {
   icon?: string;
   comingSoon?: boolean;
   landscape?: boolean;
+  thumbPosition?: string;
   ctaTitle?: string;
   ctaText?: string;
   screenshots: { src: string; alt: string }[];
@@ -221,6 +222,7 @@ export const games: Game[] = [
     size: 'около 150 МБ',
     comingSoon: true,
     landscape: true,
+    thumbPosition: 'center bottom',
     icon: 'https://cdn.poehali.dev/projects/f66c7488-88ec-49b0-bfc4-ee80d5e44ff2/bucket/a804c15b-57d3-41d1-8667-704d2a07db4f.jpg',
     ctaTitle: 'Бокс №6 скоро откроется',
     ctaText:

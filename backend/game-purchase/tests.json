@@ -140,6 +140,36 @@
         "gameId": "kooperativ-6"
       },
       "bodyMatcher": "partial"
+    },
+    {
+      "name": "Подписка на релиз",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "action": "notify-release",
+        "gameId": "kooperativ-6",
+        "email": "test-subscriber@example.com"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "ok": true
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Подписка проверяет почту",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "action": "notify-release",
+        "gameId": "kooperativ-6",
+        "email": "bad"
+      },
+      "expectedStatus": 400,
+      "expectedBody": {
+        "error": "string"
+      },
+      "bodyMatcher": "partial"
     }
   ]
 }

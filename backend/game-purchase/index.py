@@ -171,6 +171,36 @@ def check_order(order_id: str) -> dict:
     })
 
 
+def subscribe_release(game_id: str, email: str) -> dict:
+    if game_id not in GAMES:
+        return reply(400, {'error': 'Неизвестная игра'})
+
+    if not re.match(r'^[^@\s]+@[^@\s]+\.[^@\s]{2,}$', email) or len(email) > 320:
+        return reply(400, {'error': 'Проверьте адрес электронной почты'})
+
+    dsn = os.environ.get('DATABASE_URL')
+    schema = os.environ.get('MAIN_DB_SCHEMA') or 'public'
+
+    if not dsn:
+        return reply(503, {'error': 'Хранилище подписок недоступно'})
+
+    safe_game = game_id.replace("'", "''")
+    safe_email = email.replace("'", "''")
+
+    conn = psycopg2.connect(dsn)
+    try:
+        with conn.cursor() as cur:
+            cur.execute(
+                f"INSERT INTO {schema}.release_subscribers (game_id, email) "
+                f"VALUES ('{safe_game}', '{safe_email}') ON CONFLICT DO NOTHING"
+            )
+        conn.commit()
+    finally:
+        conn.close()
+
+    return reply(200, {'ok': True, 'gameId': game_id, 'game': GAMES[game_id]['title']})
+
+
 def check_player(game_id: str, player_id: str) -> dict:
     if not re.match(r'^[A-Za-z0-9_\-]{1,64}$', player_id):
         return reply(400, {'error': 'Некорректный идентификатор игрока'})
@@ -273,6 +303,12 @@ def handler(event: dict, context) -> dict:
 
     if check_id:
         return check_order(check_id)
+
+    if body.get('action') == 'notify-release':
+        return subscribe_release(
+            (body.get('gameId') or '').strip().lower(),
+            (body.get('email') or '').strip(),
+        )
 
     if body.get('action') == 'purchases':
         return check_player(
