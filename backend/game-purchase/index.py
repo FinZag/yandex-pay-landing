@@ -2,9 +2,12 @@ import base64
 import json
 import os
 import re
+import smtplib
 import urllib.request
 import urllib.error
 import uuid
+from email.header import Header
+from email.mime.text import MIMEText
 
 import psycopg2
 
@@ -201,6 +204,125 @@ def subscribe_release(game_id: str, email: str) -> dict:
     return reply(200, {'ok': True, 'gameId': game_id, 'game': GAMES[game_id]['title']})
 
 
+DEV_CODE = 'fingame-dev-2026'
+MAILBOX = 'game-fin-ip@yandex.ru'
+
+
+def subscribers_stats(game_id: str) -> dict:
+    if game_id not in GAMES:
+        return reply(400, {'error': 'Неизвестная игра'})
+
+    dsn = os.environ.get('DATABASE_URL')
+    schema = os.environ.get('MAIN_DB_SCHEMA') or 'public'
+
+    if not dsn:
+        return reply(503, {'error': 'Хранилище подписок недоступно'})
+
+    safe_game = game_id.replace("'", "''")
+
+    conn = psycopg2.connect(dsn)
+    try:
+        with conn.cursor() as cur:
+            cur.execute(
+                f"SELECT count(*), count(notified_at) FROM {schema}.release_subscribers "
+                f"WHERE game_id = '{safe_game}' AND email NOT LIKE '%@example.com'"
+            )
+            total, notified = cur.fetchone()
+    finally:
+        conn.close()
+
+    return reply(200, {
+        'gameId': game_id,
+        'game': GAMES[game_id]['title'],
+        'total': int(total or 0),
+        'notified': int(notified or 0),
+        'pending': int(total or 0) - int(notified or 0),
+    })
+
+
+def send_release_mail(game_id: str, code: str, subject: str, message: str, test_to: str) -> dict:
+    if code != DEV_CODE:
+        return reply(403, {'error': 'Нет доступа'})
+
+    if game_id not in GAMES:
+        return reply(400, {'error': 'Неизвестная игра'})
+
+    subject = subject.strip() or f"{GAMES[game_id]['title']} — игра вышла"
+    message = message.strip()
+
+    if not message:
+        return reply(400, {'error': 'Напишите текст письма'})
+
+    password = os.environ.get('YANDEX_MAIL_APP_PASSWORD')
+    if not password:
+        return reply(503, {'error': 'Почта пока не подключена'})
+
+    dsn = os.environ.get('DATABASE_URL')
+    schema = os.environ.get('MAIN_DB_SCHEMA') or 'public'
+    if not dsn:
+        return reply(503, {'error': 'Хранилище подписок недоступно'})
+
+    safe_game = game_id.replace("'", "''")
+
+    if test_to:
+        if not re.match(r'^[^@\s]+@[^@\s]+\.[^@\s]{2,}$', test_to):
+            return reply(400, {'error': 'Проверьте адрес для тестового письма'})
+        recipients = [test_to]
+    else:
+        conn = psycopg2.connect(dsn)
+        try:
+            with conn.cursor() as cur:
+                cur.execute(
+                    f"SELECT email FROM {schema}.release_subscribers "
+                    f"WHERE game_id = '{safe_game}' AND notified_at IS NULL "
+                    f"AND email NOT LIKE '%@example.com'"
+                )
+                recipients = [r[0] for r in cur.fetchall()]
+        finally:
+            conn.close()
+
+    if not recipients:
+        return reply(200, {'ok': True, 'sent': 0, 'failed': 0, 'note': 'Некому отправлять'})
+
+    sent, failed = 0, 0
+    delivered = []
+
+    with smtplib.SMTP_SSL('smtp.yandex.ru', 465, timeout=20) as smtp:
+        smtp.login(MAILBOX, password)
+        for addr in recipients:
+            msg = MIMEText(message, 'plain', 'utf-8')
+            msg['Subject'] = Header(subject, 'utf-8')
+            msg['From'] = MAILBOX
+            msg['To'] = addr
+            try:
+                smtp.sendmail(MAILBOX, [addr], msg.as_string())
+                sent += 1
+                delivered.append(addr)
+            except Exception as exc:
+                failed += 1
+                print(f'Release mail to {addr} failed: {exc}')
+
+    if delivered and not test_to:
+        values = ', '.join(f"'{a.replace(chr(39), chr(39) * 2)}'" for a in delivered)
+        conn = psycopg2.connect(dsn)
+        try:
+            with conn.cursor() as cur:
+                cur.execute(
+                    f"UPDATE {schema}.release_subscribers SET notified_at = now() "
+                    f"WHERE game_id = '{safe_game}' AND email IN ({values})"
+                )
+            conn.commit()
+        finally:
+            conn.close()
+
+    return reply(200, {
+        'ok': True,
+        'sent': sent,
+        'failed': failed,
+        'test': bool(test_to),
+    })
+
+
 def check_player(game_id: str, player_id: str) -> dict:
     if not re.match(r'^[A-Za-z0-9_\-]{1,64}$', player_id):
         return reply(400, {'error': 'Некорректный идентификатор игрока'})
@@ -303,6 +425,20 @@ def handler(event: dict, context) -> dict:
 
     if check_id:
         return check_order(check_id)
+
+    if body.get('action') == 'release-stats':
+        if (body.get('code') or '') != DEV_CODE:
+            return reply(403, {'error': 'Нет доступа'})
+        return subscribers_stats((body.get('gameId') or '').strip().lower())
+
+    if body.get('action') == 'release-send':
+        return send_release_mail(
+            (body.get('gameId') or '').strip().lower(),
+            (body.get('code') or '').strip(),
+            (body.get('subject') or ''),
+            (body.get('message') or ''),
+            (body.get('testTo') or '').strip(),
+        )
 
     if body.get('action') == 'notify-release':
         return subscribe_release(

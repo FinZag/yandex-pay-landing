@@ -3,6 +3,7 @@ import { Link, useLocation, useParams } from 'react-router-dom';
 import Seo from '@/components/Seo';
 import Icon from '@/components/ui/icon';
 import MailLink from '@/components/MailLink';
+import ReleaseMailer from '@/components/ReleaseMailer';
 import { GAME_PURCHASE_URL, games } from '@/data/company';
 
 type Product = { productId: string; title: string; amount: number; note?: string };
@@ -175,7 +176,10 @@ const DevDocsPage = () => {
         </div>
 
         <nav className="mt-4 flex flex-wrap gap-2">
-          {nav.map((n) => (
+          {(game.comingSoon
+            ? [...nav, { href: '#mailer', label: 'Письмо о релизе' }]
+            : nav
+          ).map((n) => (
             <a
               key={n.href}
               href={n.href}
@@ -321,6 +325,10 @@ const DevDocsPage = () => {
                 : 'Покупка возвращается в ответе при каждом запросе. Это не новая оплата, а текущий статус игрока — просто применяйте его.'}
             </p>
           </section>
+
+          {game.comingSoon && (
+            <ReleaseMailer gameId={gameId} gameTitle={game.title} gameSlug={game.slug} />
+          )}
         </article>
 
         <div className="mt-10 flex flex-wrap items-center gap-4">

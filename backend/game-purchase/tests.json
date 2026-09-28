@@ -157,6 +157,36 @@
       "bodyMatcher": "partial"
     },
     {
+      "name": "Статистика подписчиков без кода",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "action": "release-stats",
+        "gameId": "kooperativ-6"
+      },
+      "expectedStatus": 403,
+      "expectedBody": {
+        "error": "string"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Рассылка без кода запрещена",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "action": "release-send",
+        "gameId": "kooperativ-6",
+        "subject": "test",
+        "message": "test"
+      },
+      "expectedStatus": 403,
+      "expectedBody": {
+        "error": "string"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
       "name": "Подписка проверяет почту",
       "method": "POST",
       "path": "/",
