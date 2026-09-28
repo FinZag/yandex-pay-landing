@@ -159,7 +159,7 @@ const GamePurchase = ({
                   <p className="mt-1 text-[15px] leading-[1.35] text-muted-foreground">
                     {product.productId === "no-ads"
                       ? `Разовая покупка для ${gameTitle}. Реклама пропадает навсегда, подписки и автосписаний нет.`
-                      : `Монеты зачисляются в ваш профиль в ${gameTitle} сразу после оплаты. Подписки и автосписаний нет.`}
+                      : `${product.note || 'Награда'} зачисляется в ваш профиль в ${gameTitle} сразу после оплаты. Подписки и автосписаний нет.`}
                   </p>
                 </div>
                 <span className="shrink-0 rounded-full bg-background px-4 py-2 font-head text-[18px] font-bold">

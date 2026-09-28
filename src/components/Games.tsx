@@ -80,15 +80,22 @@ const Games = () => {
             </Link>
 
             <div className="mt-auto flex flex-wrap gap-2 pt-2">
-              <button
-                type="button"
-                onClick={() => openStore(game.rustore, 'RuStore', game.gameId)}
-                className="inline-flex h-10 w-full items-center justify-center gap-2 rounded-[20px] bg-primary px-4 text-[14px] font-medium text-primary-foreground transition-transform hover:scale-[1.03] active:scale-[0.98]"
-              >
-                <Icon name="Download" size={16} />
-                Скачать в RuStore
-              </button>
-              {game.appgallery && (
+              {game.comingSoon ? (
+                <span className="inline-flex h-10 w-full items-center justify-center gap-2 rounded-[20px] bg-background px-4 text-[14px] font-medium text-muted-foreground">
+                  <Icon name="Hammer" size={16} />
+                  В разработке
+                </span>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => openStore(game.rustore, 'RuStore', game.gameId)}
+                  className="inline-flex h-10 w-full items-center justify-center gap-2 rounded-[20px] bg-primary px-4 text-[14px] font-medium text-primary-foreground transition-transform hover:scale-[1.03] active:scale-[0.98]"
+                >
+                  <Icon name="Download" size={16} />
+                  Скачать в RuStore
+                </button>
+              )}
+              {!game.comingSoon && game.appgallery && (
                 <a
                   href={game.appgallery}
                   target="_blank"
@@ -139,14 +146,20 @@ const Games = () => {
                 </div>
               </dl>
               <div className="grid gap-2">
-                <button
-                  type="button"
-                  onClick={() => openStore(active.rustore, 'RuStore', active.gameId)}
-                  className="inline-flex h-[52px] w-full items-center justify-center gap-2 rounded-[26px] bg-primary px-6 font-bold text-primary-foreground"
-                >
-                  Скачать в RuStore
-                  <Icon name="ArrowUpRight" size={18} />
-                </button>
+                {active.comingSoon ? (
+                  <span className="inline-flex h-[52px] w-full items-center justify-center gap-2 rounded-[26px] bg-secondary px-6 font-bold text-muted-foreground">
+                    <Icon name="Hammer" size={18} />В разработке
+                  </span>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => openStore(active.rustore, 'RuStore', active.gameId)}
+                    className="inline-flex h-[52px] w-full items-center justify-center gap-2 rounded-[26px] bg-primary px-6 font-bold text-primary-foreground"
+                  >
+                    Скачать в RuStore
+                    <Icon name="ArrowUpRight" size={18} />
+                  </button>
+                )}
                 <Link
                   to={`/games/${active.slug}`}
                   className="inline-flex h-[52px] w-full items-center justify-center gap-2 rounded-[26px] bg-secondary px-6 font-medium text-foreground transition-colors hover:bg-border"

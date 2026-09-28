@@ -13,6 +13,18 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://fingame-coder.ru/games/butter-clicker</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://fingame-coder.ru/games/kooperativ-6</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://fingame-coder.ru/legal</loc>
     <lastmod>2026-09-01</lastmod>
     <changefreq>monthly</changefreq>

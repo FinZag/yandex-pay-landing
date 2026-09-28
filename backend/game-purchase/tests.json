@@ -130,6 +130,16 @@
         "gameId": "butter-clicker"
       },
       "bodyMatcher": "partial"
+    },
+    {
+      "name": "Каталог Кооператив №6",
+      "method": "GET",
+      "path": "/?gameId=kooperativ-6",
+      "expectedStatus": 200,
+      "expectedBody": {
+        "gameId": "kooperativ-6"
+      },
+      "bodyMatcher": "partial"
     }
   ]
 }

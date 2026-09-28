@@ -38,7 +38,11 @@ const GamePage = () => {
     <div className="min-h-screen bg-background">
       <Seo
         title={`${game.title} — ${game.genre} для Android | FinGame`}
-        description={`${game.description} Бесплатно в ${game.appgallery ? 'RuStore и AppGallery' : 'RuStore'}, отключение рекламы — разовая покупка.`}
+        description={
+          game.comingSoon
+            ? `${game.description} Игра в разработке, скоро в RuStore и AppGallery.`
+            : `${game.description} Бесплатно в ${game.appgallery ? 'RuStore и AppGallery' : 'RuStore'}, отключение рекламы — разовая покупка.`
+        }
         path={`/games/${game.slug}`}
       />
       <Header />
@@ -72,7 +76,9 @@ const GamePage = () => {
 
             <div>
               <span className="inline-flex h-8 items-center rounded-full bg-badge px-3.5 text-[13px] font-bold text-badge-foreground">
-                {game.priceLabel} в RuStore{game.appgallery ? ' и AppGallery' : ''}
+                {game.comingSoon
+                  ? 'Скоро в RuStore и AppGallery'
+                  : `${game.priceLabel} в RuStore${game.appgallery ? ' и AppGallery' : ''}`}
               </span>
               <h1 className="mt-3 font-head text-[34px] font-bold leading-[1.05] tracking-[-0.03em] md:text-[52px]">
                 {game.title}
@@ -82,15 +88,21 @@ const GamePage = () => {
               </p>
 
               <div className="mt-6 flex flex-wrap gap-3">
-                <button
-                  type="button"
-                  onClick={() => openStore(game.rustore, 'RuStore')}
-                  className="inline-flex h-[56px] items-center gap-2.5 rounded-[28px] bg-primary px-[30px] text-[17px] font-bold tracking-[-0.01em] text-primary-foreground transition-transform hover:scale-[1.02] active:scale-[0.99]"
-                >
-                  <Icon name="Download" size={20} />
-                  Скачать в RuStore
-                </button>
-                {game.appgallery && (
+                {game.comingSoon ? (
+                  <span className="inline-flex h-[56px] items-center gap-2.5 rounded-[28px] bg-secondary px-[30px] text-[17px] font-bold tracking-[-0.01em] text-muted-foreground">
+                    <Icon name="Hammer" size={20} />В разработке
+                  </span>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => openStore(game.rustore, 'RuStore')}
+                    className="inline-flex h-[56px] items-center gap-2.5 rounded-[28px] bg-primary px-[30px] text-[17px] font-bold tracking-[-0.01em] text-primary-foreground transition-transform hover:scale-[1.02] active:scale-[0.99]"
+                  >
+                    <Icon name="Download" size={20} />
+                    Скачать в RuStore
+                  </button>
+                )}
+                {!game.comingSoon && game.appgallery && (
                   <a
                     href={game.appgallery}
                     target="_blank"
@@ -128,14 +140,20 @@ const GamePage = () => {
           <h2 className="font-head text-[22px] font-medium tracking-[-0.01em] md:text-[26px]">
             Скриншоты
           </h2>
-          <div className="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+          <div
+            className={`mt-5 grid gap-4 ${
+              game.landscape ? 'sm:grid-cols-2 lg:grid-cols-3' : 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-4'
+            }`}
+          >
             {game.screenshots.map((shot, i) => (
               <figure
                 key={shot.src}
                 style={{ animationDelay: `${0.06 * i}s` }}
                 className="animate-rise overflow-hidden rounded-lg bg-secondary"
               >
-                <div className="aspect-[9/16] w-full bg-[#141414]">
+                <div
+                  className={`w-full bg-[#141414] ${game.landscape ? 'aspect-[16/9]' : 'aspect-[9/16]'}`}
+                >
                   <img
                     src={shot.src}
                     alt={shot.alt}
@@ -188,15 +206,21 @@ const GamePage = () => {
               {game.ctaText ?? 'Скачивание бесплатное, регистрация не нужна.'}
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <button
-                type="button"
-                onClick={() => openStore(game.rustore, 'RuStore')}
-                className="inline-flex h-[56px] items-center gap-2.5 rounded-[28px] bg-primary px-[30px] text-[17px] font-bold text-primary-foreground transition-transform hover:scale-[1.02] active:scale-[0.99]"
-              >
-                Скачать в RuStore
-                <Icon name="ArrowUpRight" size={18} />
-              </button>
-              {game.appgallery && (
+              {game.comingSoon ? (
+                <span className="inline-flex h-[56px] items-center gap-2.5 rounded-[28px] bg-background/70 px-[30px] text-[17px] font-bold text-foreground">
+                  <Icon name="Hammer" size={18} />В разработке
+                </span>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => openStore(game.rustore, 'RuStore')}
+                  className="inline-flex h-[56px] items-center gap-2.5 rounded-[28px] bg-primary px-[30px] text-[17px] font-bold text-primary-foreground transition-transform hover:scale-[1.02] active:scale-[0.99]"
+                >
+                  Скачать в RuStore
+                  <Icon name="ArrowUpRight" size={18} />
+                </button>
+              )}
+              {!game.comingSoon && game.appgallery && (
                 <a
                   href={game.appgallery}
                   target="_blank"

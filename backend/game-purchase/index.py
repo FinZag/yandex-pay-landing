@@ -36,6 +36,27 @@ GAMES = {
             'coins-large': {'title': 'Крупный пак', 'amount': 849, 'note': '100 000 монет'},
         },
     },
+    'kooperativ-6': {
+        'title': 'Кооператив №6',
+        'products': {
+            'no-ads': {'title': 'Отключение рекламы', 'amount': 199, 'note': 'навсегда'},
+            'coins-small': {
+                'title': '«Субсидия Председателя»',
+                'amount': 149,
+                'note': '+20 000 игровых ₽',
+            },
+            'coins-medium': {
+                'title': '«Гаражный капитал»',
+                'amount': 399,
+                'note': '+60 000 игровых ₽',
+            },
+            'coins-large': {
+                'title': '«Фонд Взаимопомощи ГСК»',
+                'amount': 999,
+                'note': '+200 000 игровых ₽',
+            },
+        },
+    },
 }
 
 DEFAULT_GAME = 'bytetrace'
