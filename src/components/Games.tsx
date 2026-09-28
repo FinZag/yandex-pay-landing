@@ -58,7 +58,7 @@ const Games = () => {
                   alt={game.title}
                   loading="lazy"
                   style={{ objectPosition: game.thumbPosition ?? 'center' }}
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-cover mx-0 my-[15px]"
                 />
               ) : (
                 <span className="absolute -right-6 -top-6 h-[88px] w-[88px] rounded-full bg-background/25" />
