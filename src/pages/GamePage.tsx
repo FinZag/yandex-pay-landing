@@ -1,3 +1,4 @@
+import type React from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import Seo from '@/components/Seo';
 import Header from '@/components/Header';
@@ -36,8 +37,21 @@ const GamePage = () => {
     { label: 'Размер', value: game.size },
   ];
 
+  const themeStyle = game.theme
+    ? ({
+        '--primary': game.theme.primary,
+        '--ring': game.theme.primary,
+        '--accent': game.theme.accent,
+        '--banner-from': game.theme.from,
+        '--banner-to': game.theme.to,
+      } as React.CSSProperties)
+    : undefined;
+
   return (
-    <div className="min-h-screen bg-background">
+    <div
+      className="min-h-screen bg-[radial-gradient(1000px_560px_at_75%_-5%,hsl(var(--primary)/0.16),transparent_70%),radial-gradient(800px_600px_at_0%_40%,hsl(var(--accent)/0.08),transparent_70%)]"
+      style={themeStyle}
+    >
       <Seo
         title={`${game.title} — ${game.genre} для Android | FinGame`}
         description={
@@ -65,7 +79,7 @@ const GamePage = () => {
 
           <div className="mt-6 grid gap-8 lg:grid-cols-[auto_1fr] lg:items-start">
             <div
-              className={`h-[132px] w-[132px] shrink-0 overflow-hidden rounded-[28px] bg-gradient-to-br ${game.thumb} md:h-[164px] md:w-[164px]`}
+              className={`h-[132px] w-[132px] shrink-0 overflow-hidden rounded-[28px] shadow-[0_0_70px_-10px_hsl(var(--primary)/0.6)] ring-1 ring-primary/40 bg-gradient-to-br ${game.thumb} md:h-[164px] md:w-[164px]`}
             >
               {game.icon && (
                 <img
@@ -82,7 +96,7 @@ const GamePage = () => {
                   ? 'Скоро в RuStore и AppGallery'
                   : `${game.priceLabel} в RuStore${game.appgallery ? ' и AppGallery' : ''}`}
               </span>
-              <h1 className="mt-3 font-head text-[34px] font-bold leading-[1.05] tracking-[-0.03em] md:text-[52px]">
+              <h1 className="mt-3 font-head drop-shadow-[0_0_24px_hsl(var(--primary)/0.35)] text-[34px] font-bold leading-[1.05] tracking-[-0.03em] md:text-[52px]">
                 {game.title}
               </h1>
               <p className="mt-3 max-w-[620px] text-[17px] leading-[1.4] text-muted-foreground md:text-[19px]">
@@ -98,7 +112,7 @@ const GamePage = () => {
                   <button
                     type="button"
                     onClick={() => openStore(game.rustore, 'RuStore')}
-                    className="inline-flex h-[56px] items-center gap-2.5 rounded-[28px] bg-primary px-[30px] text-[17px] font-bold tracking-[-0.01em] text-primary-foreground transition-transform hover:scale-[1.02] active:scale-[0.99]"
+                    className="inline-flex h-[56px] items-center gap-2.5 rounded-[28px] bg-primary px-[30px] text-[17px] font-bold tracking-[-0.01em] text-primary-foreground glow transition-transform hover:scale-[1.02] active:scale-[0.99]"
                   >
                     <Icon name="Download" size={20} />
                     Скачать в RuStore
@@ -119,7 +133,7 @@ const GamePage = () => {
                 {game.comingSoon ? (
                   <a
                     href="#notify"
-                    className="inline-flex h-[56px] items-center gap-2.5 rounded-[28px] bg-primary px-[30px] text-[17px] font-bold tracking-[-0.01em] text-primary-foreground transition-transform hover:scale-[1.02] active:scale-[0.99]"
+                    className="inline-flex h-[56px] items-center gap-2.5 rounded-[28px] bg-primary px-[30px] text-[17px] font-bold tracking-[-0.01em] text-primary-foreground glow transition-transform hover:scale-[1.02] active:scale-[0.99]"
                   >
                     <Icon name="BellRing" size={18} />
                     Сообщить о выходе
@@ -171,7 +185,7 @@ const GamePage = () => {
               <figure
                 key={shot.src}
                 style={{ animationDelay: `${0.06 * i}s` }}
-                className="animate-rise overflow-hidden rounded-lg bg-secondary"
+                className="card-live animate-rise overflow-hidden rounded-lg bg-secondary"
               >
                 <div
                   className={`w-full bg-[#141414] ${game.landscape ? 'aspect-[16/9]' : 'aspect-[9/16]'}`}
@@ -205,8 +219,8 @@ const GamePage = () => {
             </div>
             <div className="grid gap-3 sm:grid-cols-2">
               {game.features.map((f) => (
-                <div key={f.title} className="rounded-lg bg-secondary p-5">
-                  <Icon name={f.icon} fallback="CircleAlert" size={22} />
+                <div key={f.title} className="card-live rounded-lg bg-secondary p-5">
+                  <Icon name={f.icon} fallback="CircleAlert" size={22} className="text-primary" />
                   <h3 className="mt-3 font-head text-[16px] font-bold leading-[1.2]">{f.title}</h3>
                   <p className="mt-1.5 text-[14px] leading-[1.4] text-muted-foreground">
                     {f.text}
@@ -228,7 +242,7 @@ const GamePage = () => {
         )}
 
         <section className="mx-auto max-w-[1280px] px-5 pt-16 md:px-[76px] md:pt-24">
-          <div className="rounded-lg bg-[linear-gradient(105deg,hsl(var(--banner-from))_0%,hsl(var(--banner-to))_100%)] p-6 md:p-10">
+          <div className="rounded-lg border border-border bg-[linear-gradient(105deg,hsl(var(--banner-from))_0%,hsl(var(--banner-to))_100%)] p-6 md:p-10">
             <h2 className="font-head text-[24px] font-bold leading-[1.1] tracking-[-0.02em] md:text-[30px]">
               {game.ctaTitle ?? `Попробуйте ${game.title}`}
             </h2>

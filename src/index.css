@@ -62,60 +62,52 @@
 
 @layer base {
   :root {
-    /* --hero-bg #ffffff */
-    --background: 0 0% 100%;
-    /* --hero-text #202632 */
-    --foreground: 220 23% 16%;
+    --background: 224 45% 6%;
+    --foreground: 200 30% 96%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 220 23% 16%;
+    --card: 224 38% 9%;
+    --card-foreground: 200 30% 96%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 220 23% 16%;
+    --popover: 224 38% 9%;
+    --popover-foreground: 200 30% 96%;
 
-    /* --hero-accent #121214 */
-    --primary: 240 5% 7%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 184 90% 50%;
+    --primary-foreground: 224 45% 6%;
 
-    /* --hero-surface #f5f6f8 */
-    --secondary: 220 18% 97%;
-    --secondary-foreground: 220 23% 16%;
+    --secondary: 224 32% 11%;
+    --secondary-foreground: 200 30% 96%;
 
-    --muted: 220 18% 97%;
-    /* --hero-muted #68748a */
-    --muted-foreground: 219 14% 47%;
+    --muted: 224 32% 11%;
+    --muted-foreground: 215 18% 66%;
 
-    /* --hero-x-plus #7a4df0 */
-    --accent: 257 84% 62%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 266 85% 70%;
+    --accent-foreground: 224 45% 6%;
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 75% 58%;
     --destructive-foreground: 0 0% 100%;
 
-    /* --hero-x-line #e1e3e8 */
-    --border: 223 13% 90%;
-    --input: 223 13% 90%;
-    --ring: 257 84% 62%;
+    --border: 222 26% 18%;
+    --input: 222 26% 20%;
+    --ring: 184 90% 50%;
 
     --radius: 1.25rem;
 
-    /* дополнительные акценты варианта */
-    --banner-from: 260 47% 96%;
-    --banner-to: 263 46% 90%;
-    --badge: 48 100% 65%;
+    --banner-from: 200 60% 11%;
+    --banner-to: 266 45% 18%;
+    --badge: 48 100% 62%;
     --badge-ink: 49 100% 10%;
-    --bar: 0 0% 14%;
-    --bar-ink: 220 16% 96%;
-    --ok: 128 56% 45%;
+    --bar: 224 38% 9%;
+    --bar-ink: 200 30% 96%;
+    --ok: 142 70% 50%;
 
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: 224 38% 9%;
+    --sidebar-foreground: 200 30% 96%;
+    --sidebar-primary: 184 90% 50%;
+    --sidebar-primary-foreground: 224 45% 6%;
+    --sidebar-accent: 224 32% 11%;
+    --sidebar-accent-foreground: 200 30% 96%;
+    --sidebar-border: 222 26% 18%;
+    --sidebar-ring: 184 90% 50%;
   }
 
   .dark {
@@ -181,10 +173,36 @@
     font-family: "YS Text", "Inter", system-ui, sans-serif;
     font-size: 17px;
     overflow-x: hidden;
+    background-image:
+      radial-gradient(900px 500px at 85% -10%, hsl(var(--primary) / 0.10), transparent 70%),
+      radial-gradient(800px 600px at -10% 30%, hsl(var(--accent) / 0.08), transparent 70%),
+      linear-gradient(hsl(var(--foreground) / 0.025) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--foreground) / 0.025) 1px, transparent 1px);
+    background-size: auto, auto, 48px 48px, 48px 48px;
+    background-attachment: fixed;
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.35);
   }
 }
 
 @layer components {
+  .font-head {
+    font-synthesis-weight: none;
+    letter-spacing: 0 !important;
+  }
+  .glow {
+    box-shadow: 0 0 0 1px hsl(var(--primary) / 0.25), 0 10px 40px -12px hsl(var(--primary) / 0.55);
+  }
+  .card-live {
+    @apply border border-border transition-all duration-300;
+  }
+  .card-live:hover {
+    transform: translateY(-4px);
+    border-color: hsl(var(--primary) / 0.5);
+    box-shadow: 0 18px 50px -20px hsl(var(--primary) / 0.45);
+  }
   .cond {
     font-family: "YS Text Cond", "Manrope", sans-serif;
     font-weight: 900;

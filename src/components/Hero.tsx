@@ -3,13 +3,13 @@ import Icon from '@/components/ui/icon';
 const Hero = () => {
   return (
     <section id="top" className="mx-auto max-w-[1280px] px-5 pt-2 md:px-[76px]">
-      <div className="relative flex animate-rise flex-col overflow-hidden rounded-lg bg-[linear-gradient(105deg,hsl(var(--banner-from))_0%,hsl(var(--banner-from))_42%,hsl(var(--banner-to))_100%)] px-6 py-8 md:min-h-[420px] md:px-10 md:py-[38px]">
+      <div className="relative flex animate-rise flex-col overflow-hidden rounded-lg border border-border bg-[linear-gradient(105deg,hsl(var(--banner-from))_0%,hsl(var(--banner-from))_42%,hsl(var(--banner-to))_100%)] px-6 py-8 md:min-h-[420px] md:px-10 md:py-[38px]">
         <div className="cond text-[22px] leading-none tracking-[-0.01em] md:text-[26px]">
           Fin<span className="text-accent">Game</span> · инди-игры на Unity
         </div>
 
         <h1 className="mt-6 max-w-[15ch] font-head text-[30px] font-bold leading-[1.08] tracking-[-0.025em] md:mt-[26px] md:text-[32px]">
-          Бесплатные игры от инди-разработчика
+          Бесплатные игры от <span className="text-primary">инди-разработчика</span>
         </h1>
 
         <p className="mt-4 max-w-[34ch] text-[17px] font-medium leading-[1.4] text-muted-foreground">Мобильные игры на Unity — скачивайте бесплатно в RuStore и AppGallery. Понравилось? Поддержите разработку картой или через СБП.</p>
@@ -17,7 +17,7 @@ const Hero = () => {
         <div className="mt-8 flex flex-wrap items-center gap-3 pb-1 md:mt-auto md:pt-6">
           <a
             href="#games"
-            className="inline-flex h-[56px] shrink-0 items-center whitespace-nowrap rounded-[28px] bg-primary px-[30px] text-[17px] font-bold tracking-[-0.01em] text-primary-foreground transition-transform hover:scale-[1.02] active:scale-[0.99]"
+            className="inline-flex h-[56px] shrink-0 items-center whitespace-nowrap rounded-[28px] bg-primary px-[30px] text-[17px] font-bold tracking-[-0.01em] text-primary-foreground glow transition-transform hover:scale-[1.02] active:scale-[0.99]"
           >
             Смотреть игры
           </a>
@@ -31,7 +31,7 @@ const Hero = () => {
 
         <div className="pointer-events-none absolute right-8 top-1/2 hidden -translate-y-1/2 lg:block">
           <img
-            className="h-[300px] w-[300px] animate-float rounded-[36px] object-cover shadow-[0_24px_60px_-24px_hsl(var(--foreground)/0.45)]"
+            className="h-[300px] w-[300px] animate-float rounded-[36px] object-cover shadow-[0_0_80px_-10px_hsl(var(--primary)/0.55)] ring-1 ring-primary/30"
             alt="Логотип FinGame"
             src="/logo.jpg"
           />

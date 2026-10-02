@@ -23,7 +23,7 @@ export default {
 			},
 			fontFamily: {
 				sans: ['YS Text', 'Inter', 'system-ui', 'sans-serif'],
-				head: ['YS Text', 'Manrope', 'sans-serif'],
+				head: ['Russo One', 'YS Text', 'sans-serif'],
 				cond: ['YS Text Cond', 'Manrope', 'sans-serif'],
 			},
 			colors: {

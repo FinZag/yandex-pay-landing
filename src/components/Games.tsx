@@ -45,7 +45,7 @@ const Games = () => {
           <article
             key={game.id}
             style={{ animationDelay: `${0.06 * i}s` }}
-            className="flex animate-rise flex-col gap-3 rounded-lg bg-secondary p-4 pb-[18px] transition-shadow hover:shadow-[0_8px_28px_-16px_hsl(var(--foreground)/0.35)]"
+            className="card-live group flex animate-rise flex-col gap-3 rounded-lg bg-secondary p-4 pb-[18px]"
           >
             <Link
               to={`/games/${game.slug}`}
@@ -58,7 +58,7 @@ const Games = () => {
                   alt={game.title}
                   loading="lazy"
                   style={{ objectPosition: game.thumbPosition ?? 'center' }}
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.06]"
                 />
               ) : (
                 <span className="absolute -right-6 -top-6 h-[88px] w-[88px] rounded-full bg-background/25" />

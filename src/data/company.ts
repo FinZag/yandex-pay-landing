@@ -46,6 +46,7 @@ export type Game = {
   ctaTitle?: string;
   ctaText?: string;
   screenshots: { src: string; alt: string }[];
+  theme?: { primary: string; accent: string; from: string; to: string };
 };
 
 // ВАЖНО: подставьте реальные ссылки на страницы игр в RuStore.
@@ -53,6 +54,7 @@ export const games: Game[] = [
   {
     id: 'byte-trace',
     slug: 'bytetrace',
+    theme: { primary: '142 85% 52%', accent: '170 80% 45%', from: '150 50% 8%', to: '170 45% 14%' },
     gameId: 'bytetrace',
     title: 'ByteTrace',
     tagline: 'Взломай смартфон пропавшего хакера. Раскрой тайну ByteTrace.',
@@ -118,6 +120,7 @@ export const games: Game[] = [
   {
     id: 'butter-clicker',
     slug: 'butter-clicker',
+    theme: { primary: '45 100% 60%', accent: '30 95% 60%', from: '40 45% 10%', to: '28 50% 18%' },
     gameId: 'butter-clicker',
     title: 'Масло Кликер: Антистресс ASMR',
     tagline: 'Мягкое масло, сочный шлепок и приятная вибрация в вашем телефоне.',
@@ -181,6 +184,7 @@ export const games: Game[] = [
   {
     id: 'garage-6',
     slug: 'kooperativ-6',
+    theme: { primary: '24 90% 56%', accent: '38 85% 55%', from: '20 35% 10%', to: '10 40% 18%' },
     gameId: 'kooperativ-6',
     title: 'Кооператив №6',
     tagline: 'Свой гаражный автосервис в постсоветском ГСК конца 90-х.',
