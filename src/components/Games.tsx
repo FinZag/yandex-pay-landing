@@ -90,10 +90,14 @@ const Games = () => {
 
             <div className="mt-auto flex flex-wrap gap-2 pt-2">
               {game.comingSoon ? (
-                <span className="inline-flex h-10 w-full items-center justify-center gap-2 rounded-[20px] bg-background px-4 text-[14px] font-medium text-muted-foreground">
-                  <Icon name="Hammer" size={16} />
-                  В разработке
-                </span>
+                <Link
+                  to={`/games/${game.slug}#notify`}
+                  onClick={() => reachGoal('notify_click', { gameId: game.gameId, place: 'catalog' })}
+                  className="inline-flex h-10 w-full items-center justify-center gap-2 rounded-[20px] bg-primary px-4 text-[14px] font-bold text-primary-foreground transition-all hover:shadow-[0_8px_24px_-8px_hsl(var(--primary)/0.7)]"
+                >
+                  <Icon name="BellRing" size={16} />
+                  Сообщить о выходе
+                </Link>
               ) : (
                 <button
                   type="button"
