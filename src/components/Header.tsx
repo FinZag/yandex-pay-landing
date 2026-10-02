@@ -30,8 +30,16 @@ const Header = () => {
       )}
     >
       <div className="mx-auto flex h-[76px] max-w-[1280px] items-center justify-between px-5 md:h-[92px] md:px-[76px]">
-        <a
-          href="#top"
+        <Link
+          to="/"
+          onClick={() => {
+            setOpen(false);
+            const onHome = window.location.pathname === '/';
+            window.scrollTo({ top: 0, behavior: onHome ? 'smooth' : 'instant' });
+            if (onHome && window.location.hash) {
+              window.history.replaceState(null, '', '/');
+            }
+          }}
           className="flex shrink-0 items-center gap-2.5"
           aria-label="FinGame — на главную"
         >
@@ -43,7 +51,7 @@ const Header = () => {
           <span className="font-head text-[21px] font-bold tracking-[-0.02em] sm:text-[24px]">
             Fin<span className="cond">Game</span>
           </span>
-        </a>
+        </Link>
 
         <nav className="hidden items-center gap-7 text-[16px] text-muted-foreground xl:flex">
           {links.map((l) =>
