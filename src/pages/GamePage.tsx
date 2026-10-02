@@ -3,6 +3,7 @@ import Seo from '@/components/Seo';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import GamePurchase from '@/components/GamePurchase';
+import Payment from '@/components/Payment';
 import ReleaseNotify from '@/components/ReleaseNotify';
 import Icon from '@/components/ui/icon';
 import { games } from '@/data/company';
@@ -210,7 +211,11 @@ const GamePage = () => {
           <ReleaseNotify gameId={game.gameId} gameTitle={game.title} />
         )}
 
-        <GamePurchase gameId={game.gameId} gameTitle={game.title} />
+        {game.comingSoon ? (
+          <Payment />
+        ) : (
+          <GamePurchase gameId={game.gameId} gameTitle={game.title} />
+        )}
 
         <section className="mx-auto max-w-[1280px] px-5 pt-16 md:px-[76px] md:pt-24">
           <div className="rounded-lg bg-[linear-gradient(105deg,hsl(var(--banner-from))_0%,hsl(var(--banner-to))_100%)] p-6 md:p-10">

@@ -229,24 +229,32 @@ export const games: Game[] = [
       'Игра в разработке. Как только она появится в RuStore и AppGallery, здесь заработают кнопки скачивания.',
     screenshots: [
       {
-        src: 'https://cdn.poehali.dev/projects/f66c7488-88ec-49b0-bfc4-ee80d5e44ff2/bucket/fa64ac68-12e8-4e29-b467-d904c418b4dd.png',
-        alt: 'Кооператив №6 — рабочий бокс: подъёмник, стеллажи с маслом и шинами, верстак',
+        src: 'https://cdn.poehali.dev/projects/f66c7488-88ec-49b0-bfc4-ee80d5e44ff2/bucket/64c0fe88-c51c-4a11-aa2e-eadd817ac0c9.png',
+        alt: 'Кооператив №6 — рабочий бокс: подъёмник, стенд развала, компрессор и шиномонтаж',
       },
       {
-        src: 'https://cdn.poehali.dev/projects/f66c7488-88ec-49b0-bfc4-ee80d5e44ff2/bucket/6dc85265-2f19-4548-89e5-e4820e7bb5f9.png',
+        src: 'https://cdn.poehali.dev/projects/f66c7488-88ec-49b0-bfc4-ee80d5e44ff2/bucket/ff75034b-3208-4470-83e4-f7b254f6b2ae.png',
         alt: 'Кооператив №6 — стенд диагностики и выбор стратегии ремонта',
       },
       {
-        src: 'https://cdn.poehali.dev/projects/f66c7488-88ec-49b0-bfc4-ee80d5e44ff2/bucket/81d28f2a-5317-4ec9-a689-d75c16602db6.png',
-        alt: 'Кооператив №6 — магазин запчастей в планшете игрока',
+        src: 'https://cdn.poehali.dev/projects/f66c7488-88ec-49b0-bfc4-ee80d5e44ff2/bucket/9d498626-efe3-4efb-afbf-adfdb82fffda.png',
+        alt: 'Кооператив №6 — Garage OS: выбор поставщика запчастей',
       },
       {
-        src: 'https://cdn.poehali.dev/projects/f66c7488-88ec-49b0-bfc4-ee80d5e44ff2/bucket/28949150-f88d-4456-b774-bd5a2fdd97bc.png',
-        alt: 'Кооператив №6 — магазин оборудования: газета ГСК и мебель «Мастер-Про»',
+        src: 'https://cdn.poehali.dev/projects/f66c7488-88ec-49b0-bfc4-ee80d5e44ff2/bucket/76cfc355-5073-415f-99cb-8a680a343349.png',
+        alt: 'Кооператив №6 — разборка Толика: дешёвые б/у аналоги',
       },
       {
-        src: 'https://cdn.poehali.dev/projects/f66c7488-88ec-49b0-bfc4-ee80d5e44ff2/bucket/45cceef5-a75d-4c49-adcf-f98012a20ba3.png',
-        alt: 'Кооператив №6 — прокачанный бокс с подъёмником, компрессором и шиномонтажом',
+        src: 'https://cdn.poehali.dev/projects/f66c7488-88ec-49b0-bfc4-ee80d5e44ff2/bucket/cef5b056-8610-443b-a98d-f2811fe1483d.png',
+        alt: 'Кооператив №6 — завод Гайки: качественный оригинал',
+      },
+      {
+        src: 'https://cdn.poehali.dev/projects/f66c7488-88ec-49b0-bfc4-ee80d5e44ff2/bucket/73b8e2d5-264e-4615-a720-3761582ac3ad.png',
+        alt: 'Кооператив №6 — магазин улучшений: баннер у шоссе и шиномонтаж «Вулкан-М»',
+      },
+      {
+        src: 'https://cdn.poehali.dev/projects/f66c7488-88ec-49b0-bfc4-ee80d5e44ff2/bucket/0ca25382-ea5d-4330-a667-784cfddcf011.png',
+        alt: 'Кооператив №6 — Михалыч: лицензия на ночную смену и съёмники ДВС',
       },
     ],
   },
