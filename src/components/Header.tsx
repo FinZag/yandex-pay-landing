@@ -1,5 +1,6 @@
+import type React from 'react';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Icon from '@/components/ui/icon';
 import { cn } from '@/lib/utils';
 
@@ -14,6 +15,19 @@ const links = [
 const Header = () => {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+
+  const goToSection = (e: React.MouseEvent, hash: string) => {
+    e.preventDefault();
+    setOpen(false);
+    if (pathname === '/') {
+      document.querySelector(hash)?.scrollIntoView({ behavior: 'smooth' });
+      window.history.replaceState(null, '', `/${hash}`);
+      return;
+    }
+    navigate(`/${hash}`);
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -60,13 +74,19 @@ const Header = () => {
                 {l.label}
               </Link>
             ) : (
-              <a key={l.href} href={l.href} className="transition-colors hover:text-foreground">
+              <a
+                key={l.href}
+                href={`/${l.href}`}
+                onClick={(e) => goToSection(e, l.href)}
+                className="transition-colors hover:text-foreground"
+              >
                 {l.label}
               </a>
             ),
           )}
           <a
-            href="#games"
+            href="/#games"
+            onClick={(e) => goToSection(e, '#games')}
             className="inline-flex h-[52px] items-center gap-2.5 rounded-[26px] bg-secondary px-6 font-medium text-foreground transition-colors hover:bg-border"
           >
             Скачать игры
@@ -118,8 +138,8 @@ const Header = () => {
             ) : (
               <a
                 key={l.href}
-                href={l.href}
-                onClick={() => setOpen(false)}
+                href={`/${l.href}`}
+                onClick={(e) => goToSection(e, l.href)}
                 className="block border-b border-border py-3.5 text-[17px] last:border-0"
               >
                 {l.label}
