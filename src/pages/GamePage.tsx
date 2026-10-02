@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import type React from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import Seo from '@/components/Seo';
@@ -5,6 +6,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import GamePurchase from '@/components/GamePurchase';
 import Payment from '@/components/Payment';
+import ScreenshotViewer from '@/components/ScreenshotViewer';
 import ReleaseNotify from '@/components/ReleaseNotify';
 import Icon from '@/components/ui/icon';
 import { games } from '@/data/company';
@@ -15,6 +17,7 @@ const GamePage = () => {
   const { slug } = useParams();
   const game = games.find((g) => g.slug === slug);
   const { toast } = useToast();
+  const [shotIndex, setShotIndex] = useState<number | null>(null);
 
   if (!game) return <Navigate to="/" replace />;
 
@@ -190,12 +193,31 @@ const GamePage = () => {
                 <div
                   className={`w-full bg-[#141414] ${game.landscape ? 'aspect-[16/9]' : 'aspect-[9/16]'}`}
                 >
-                  <img
-                    src={shot.src}
-                    alt={shot.alt}
-                    loading="lazy"
-                    className="h-full w-full object-contain"
-                  />
+                  {game.noZoom ? (
+                    <img
+                      src={shot.src}
+                      alt={shot.alt}
+                      loading="lazy"
+                      className="h-full w-full object-contain"
+                    />
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => setShotIndex(i)}
+                      aria-label={`Открыть скриншот: ${shot.alt}`}
+                      className="group/shot relative block h-full w-full cursor-zoom-in"
+                    >
+                      <img
+                        src={shot.src}
+                        alt={shot.alt}
+                        loading="lazy"
+                        className="h-full w-full object-contain transition-transform duration-500 group-hover/shot:scale-[1.04]"
+                      />
+                      <span className="absolute right-3 top-3 inline-flex h-9 w-9 items-center justify-center rounded-full bg-background/80 text-foreground opacity-0 backdrop-blur transition-opacity group-hover/shot:opacity-100">
+                        <Icon name="Maximize2" size={16} />
+                      </span>
+                    </button>
+                  )}
                 </div>
                 <figcaption className="px-4 py-3 text-[13px] leading-[1.35] text-muted-foreground">
                   {shot.alt.replace(`${game.title} — `, '')}
@@ -203,6 +225,14 @@ const GamePage = () => {
               </figure>
             ))}
           </div>
+          {!game.noZoom && (
+            <ScreenshotViewer
+              shots={game.screenshots}
+              index={shotIndex}
+              title={game.title}
+              onChange={setShotIndex}
+            />
+          )}
         </section>
 
         <section className="mx-auto max-w-[1280px] px-5 pt-16 md:px-[76px] md:pt-24">

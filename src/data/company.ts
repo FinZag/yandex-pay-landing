@@ -42,6 +42,7 @@ export type Game = {
   icon?: string;
   comingSoon?: boolean;
   landscape?: boolean;
+  noZoom?: boolean;
   thumbPosition?: string;
   ctaTitle?: string;
   ctaText?: string;
@@ -120,6 +121,7 @@ export const games: Game[] = [
   {
     id: 'butter-clicker',
     slug: 'butter-clicker',
+    noZoom: true,
     theme: { primary: '45 100% 60%', accent: '30 95% 60%', from: '40 45% 10%', to: '28 50% 18%' },
     gameId: 'butter-clicker',
     title: 'Масло Кликер: Антистресс ASMR',
