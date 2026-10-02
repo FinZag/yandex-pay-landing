@@ -1,3 +1,4 @@
+import type React from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Icon from '@/components/ui/icon';
@@ -44,7 +45,12 @@ const Games = () => {
         {games.map((game, i) => (
           <article
             key={game.id}
-            style={{ animationDelay: `${0.06 * i}s` }}
+            style={
+              {
+                animationDelay: `${0.06 * i}s`,
+                ...(game.theme ? { '--glow': game.theme.primary } : {}),
+              } as React.CSSProperties
+            }
             className="card-live group flex animate-rise flex-col gap-3 rounded-lg bg-secondary p-4 pb-[18px]"
           >
             <Link
@@ -66,7 +72,7 @@ const Games = () => {
             </Link>
 
             <div className="flex items-center justify-between gap-3">
-              <h3 className="font-head text-[17px] font-bold tracking-[-0.01em]">{game.title}</h3>
+              <h3 className="font-head text-[17px] font-bold tracking-[-0.01em] transition-colors group-hover:text-[hsl(var(--glow,var(--primary)))]">{game.title}</h3>
               <span className="shrink-0 rounded-full bg-background px-3 py-1 text-[13px] font-medium text-muted-foreground">
                 {game.priceLabel}
               </span>
