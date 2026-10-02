@@ -1,33 +1,15 @@
-import type React from 'react';
 import { useEffect, useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import useSectionNav, { homeSections } from '@/hooks/use-section-nav';
 import Icon from '@/components/ui/icon';
 import { cn } from '@/lib/utils';
 
-const links = [
-  { href: '#about', label: 'О студии' },
-  { href: '#games', label: 'Игры' },
-  { href: '#payment', label: 'Поддержать' },
-  { href: '#faq', label: 'Вопросы' },
-  { href: '#contacts', label: 'Контакты' },
-];
+const links = homeSections;
 
 const Header = () => {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { pathname } = useLocation();
-  const navigate = useNavigate();
-
-  const goToSection = (e: React.MouseEvent, hash: string) => {
-    e.preventDefault();
-    setOpen(false);
-    if (pathname === '/') {
-      document.querySelector(hash)?.scrollIntoView({ behavior: 'smooth' });
-      window.history.replaceState(null, '', `/${hash}`);
-      return;
-    }
-    navigate(`/${hash}`);
-  };
+  const goToSection = useSectionNav(() => setOpen(false));
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);

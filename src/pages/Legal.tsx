@@ -5,6 +5,7 @@ import Icon from '@/components/ui/icon';
 import MailLink from '@/components/MailLink';
 import LegalRequisites from '@/components/LegalRequisites';
 import { company } from '@/data/company';
+import { homeSections } from '@/hooks/use-section-nav';
 
 const nav = [
   { href: '#offer', label: 'Публичная оферта' },
@@ -14,16 +15,21 @@ const nav = [
 ];
 
 const LegalPage = () => {
-  const { hash } = useLocation();
+  const { hash, key } = useLocation();
 
   useEffect(() => {
     if (!hash) {
       window.scrollTo(0, 0);
       return;
     }
-    const el = document.querySelector(hash);
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }, [hash]);
+    const scroll = () => document.querySelector(hash)?.scrollIntoView({ behavior: 'instant', block: 'start' });
+    const frame = window.requestAnimationFrame(scroll);
+    const timers = [150, 500].map((ms) => window.setTimeout(scroll, ms));
+    return () => {
+      window.cancelAnimationFrame(frame);
+      timers.forEach((t) => window.clearTimeout(t));
+    };
+  }, [hash, key]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -68,6 +74,11 @@ const LegalPage = () => {
             <a
               key={l.href}
               href={l.href}
+              onClick={(e) => {
+                e.preventDefault();
+                document.querySelector(l.href)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                window.history.replaceState(null, '', `/legal${l.href}`);
+              }}
               className="inline-flex h-10 items-center rounded-[20px] bg-secondary px-4 text-[14px] font-medium transition-colors hover:bg-border"
             >
               {l.label}
@@ -196,7 +207,14 @@ const LegalPage = () => {
             Вернуться к взносу
             <Icon name="ArrowRight" size={20} />
           </Link>
-          <p className="text-[14px] text-muted-foreground">
+          <nav className="flex flex-wrap gap-x-5 gap-y-2 text-[15px] text-foreground/80">
+            {homeSections.map((l) => (
+              <Link key={l.href} to={`/${l.href}`} className="transition-colors hover:text-primary">
+                {l.label}
+              </Link>
+            ))}
+          </nav>
+          <p className="w-full text-[14px] text-muted-foreground">
             Вопросы по документам — <MailLink subject="Вопрос по документам" />
           </p>
         </div>

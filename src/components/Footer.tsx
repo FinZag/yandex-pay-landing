@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom';
 import { company } from '@/data/company';
+import useSectionNav, { homeSections } from '@/hooks/use-section-nav';
 
 const Footer = () => {
+  const goToSection = useSectionNav();
+
   return (
     <footer className="mx-auto max-w-[1280px] px-5 pb-10 pt-16 md:px-[76px] md:pt-24">
       <div className="flex flex-col gap-4 rounded-[28px] bg-bar px-6 py-5 text-[15px] text-bar-foreground md:flex-row md:items-center md:justify-between md:py-0 md:pl-[26px] md:pr-3 lg:h-[56px]">
@@ -22,7 +25,20 @@ const Footer = () => {
         </Link>
       </div>
 
-      <nav className="mt-5 flex flex-wrap justify-center gap-x-6 gap-y-2 text-[14px] text-muted-foreground">
+      <nav className="mt-6 flex flex-wrap justify-center gap-x-6 gap-y-2 text-[15px] text-foreground/80">
+        {homeSections.map((l) => (
+          <a
+            key={l.href}
+            href={`/${l.href}`}
+            onClick={(e) => goToSection(e, l.href)}
+            className="transition-colors hover:text-primary"
+          >
+            {l.label}
+          </a>
+        ))}
+      </nav>
+
+      <nav className="mt-3 flex flex-wrap justify-center gap-x-6 gap-y-2 text-[14px] text-muted-foreground">
         <Link to="/legal#offer" className="transition-colors hover:text-foreground">
           Публичная оферта
         </Link>
