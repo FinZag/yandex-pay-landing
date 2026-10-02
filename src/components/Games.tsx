@@ -48,7 +48,9 @@ const Games = () => {
             style={
               {
                 animationDelay: `${0.06 * i}s`,
-                ...(game.theme ? { '--glow': game.theme.primary } : {}),
+                ...(game.theme
+                  ? { '--glow': game.theme.primary, '--primary': game.theme.primary, '--ring': game.theme.primary }
+                  : {}),
               } as React.CSSProperties
             }
             className="card-live group flex animate-rise flex-col gap-3 rounded-lg bg-secondary p-4 pb-[18px]"
@@ -96,7 +98,7 @@ const Games = () => {
                 <button
                   type="button"
                   onClick={() => openStore(game.rustore, 'RuStore', game.gameId)}
-                  className="inline-flex h-10 w-full items-center justify-center gap-2 rounded-[20px] bg-primary px-4 text-[14px] font-medium text-primary-foreground transition-transform hover:scale-[1.03] active:scale-[0.98]"
+                  className="inline-flex h-10 w-full items-center justify-center gap-2 rounded-[20px] bg-primary px-4 text-[14px] font-bold text-primary-foreground transition-all hover:shadow-[0_8px_24px_-8px_hsl(var(--primary)/0.7)] hover:scale-[1.03] active:scale-[0.98]"
                 >
                   <Icon name="Download" size={16} />
                   Скачать в RuStore
