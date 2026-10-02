@@ -124,6 +124,16 @@ const GamePage = () => {
                     <Icon name="BellRing" size={18} />
                     Сообщить о выходе
                   </a>
+                ) : null}
+                {game.comingSoon ? (
+                  <a
+                    href="#payment"
+                    onClick={() => reachGoal('support_click', { gameId: game.gameId, place: 'game_page' })}
+                    className="inline-flex h-[56px] items-center gap-2.5 rounded-[28px] bg-foreground px-[30px] text-[17px] font-bold tracking-[-0.01em] text-background transition-transform hover:scale-[1.02] active:scale-[0.99]"
+                  >
+                    <Icon name="Heart" size={18} />
+                    Поддержать игру
+                  </a>
                 ) : (
                   <a
                     href="#purchase"
