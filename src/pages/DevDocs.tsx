@@ -4,6 +4,7 @@ import Seo from '@/components/Seo';
 import Icon from '@/components/ui/icon';
 import MailLink from '@/components/MailLink';
 import ReleaseMailer from '@/components/ReleaseMailer';
+import TestPurchase from '@/components/TestPurchase';
 import { GAME_PURCHASE_URL, games } from '@/data/company';
 
 type Product = { productId: string; title: string; amount: number; note?: string };
@@ -325,6 +326,10 @@ const DevDocsPage = () => {
                 : 'Покупка возвращается в ответе при каждом запросе. Это не новая оплата, а текущий статус игрока — просто применяйте его.'}
             </p>
           </section>
+
+          {products && products.length > 0 && (
+            <TestPurchase gameId={gameId} products={products} />
+          )}
 
           {game.comingSoon && (
             <ReleaseMailer gameId={gameId} gameTitle={game.title} gameSlug={game.slug} />

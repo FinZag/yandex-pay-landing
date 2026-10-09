@@ -383,6 +383,83 @@ def check_player(game_id: str, player_id: str) -> dict:
     })
 
 
+TEST_MARK = 'test'
+
+
+def test_purchase(game_id: str, product_id: str, player_id: str, code: str) -> dict:
+    if code != DEV_CODE:
+        return reply(403, {'error': 'Нет доступа'})
+
+    game = GAMES.get(game_id)
+    if not game:
+        return reply(400, {'error': 'Неизвестная игра'})
+
+    if product_id not in game['products']:
+        return reply(400, {'error': 'Неизвестный товар'})
+
+    if not re.match(r'^[A-Za-z0-9_\-]{1,64}$', player_id):
+        return reply(400, {'error': 'Некорректный идентификатор игрока'})
+
+    dsn = os.environ.get('DATABASE_URL')
+    schema = os.environ.get('MAIN_DB_SCHEMA') or 'public'
+    if not dsn:
+        return reply(503, {'error': 'Хранилище платежей недоступно'})
+
+    order_id = f'game-test-{uuid.uuid4().hex[:16]}'
+    safe_game = game_id.replace("'", "''")
+    safe_product = product_id.replace("'", "''")
+    safe_player = player_id.replace("'", "''")
+
+    conn = psycopg2.connect(dsn)
+    try:
+        with conn.cursor() as cur:
+            cur.execute(
+                f"INSERT INTO {schema}.game_purchases "
+                f"(order_id, game_id, product_id, player_id, amount, email, status, payment_id, delivered_at) "
+                f"VALUES ('{order_id}', '{safe_game}', '{safe_product}', '{safe_player}', 0, "
+                f"'test@fingame.dev', 'paid', '{TEST_MARK}', now())"
+            )
+        conn.commit()
+    finally:
+        conn.close()
+
+    return reply(200, {'ok': True, 'orderId': order_id, 'productId': product_id, 'playerId': player_id})
+
+
+def clear_test_purchases(game_id: str, player_id: str, code: str) -> dict:
+    if code != DEV_CODE:
+        return reply(403, {'error': 'Нет доступа'})
+
+    if game_id not in GAMES:
+        return reply(400, {'error': 'Неизвестная игра'})
+
+    if not re.match(r'^[A-Za-z0-9_\-]{1,64}$', player_id):
+        return reply(400, {'error': 'Некорректный идентификатор игрока'})
+
+    dsn = os.environ.get('DATABASE_URL')
+    schema = os.environ.get('MAIN_DB_SCHEMA') or 'public'
+    if not dsn:
+        return reply(503, {'error': 'Хранилище платежей недоступно'})
+
+    safe_game = game_id.replace("'", "''")
+    safe_player = player_id.replace("'", "''")
+
+    conn = psycopg2.connect(dsn)
+    try:
+        with conn.cursor() as cur:
+            cur.execute(
+                f"DELETE FROM {schema}.game_purchases WHERE game_id = '{safe_game}' "
+                f"AND player_id = '{safe_player}' AND payment_id = '{TEST_MARK}' "
+                f"AND order_id LIKE 'game-test-%'"
+            )
+            removed = cur.rowcount
+        conn.commit()
+    finally:
+        conn.close()
+
+    return reply(200, {'ok': True, 'removed': removed})
+
+
 def handler(event: dict, context) -> dict:
     '''
     Приём оплаты внутриигровых товаров из приложения через ЮKassa и проверка статуса заказа.
@@ -444,6 +521,21 @@ def handler(event: dict, context) -> dict:
         return subscribe_release(
             (body.get('gameId') or '').strip().lower(),
             (body.get('email') or '').strip(),
+        )
+
+    if body.get('action') == 'test-purchase':
+        return test_purchase(
+            (body.get('gameId') or '').strip().lower(),
+            (body.get('productId') or '').strip(),
+            (body.get('playerId') or '').strip(),
+            (body.get('code') or '').strip(),
+        )
+
+    if body.get('action') == 'test-clear':
+        return clear_test_purchases(
+            (body.get('gameId') or '').strip().lower(),
+            (body.get('playerId') or '').strip(),
+            (body.get('code') or '').strip(),
         )
 
     if body.get('action') == 'purchases':

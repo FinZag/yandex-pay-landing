@@ -200,6 +200,55 @@
         "error": "string"
       },
       "bodyMatcher": "partial"
+    },
+    {
+      "name": "Тестовая покупка без кода",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "action": "test-purchase",
+        "gameId": "kooperativ-6",
+        "productId": "coins-small",
+        "playerId": "p1"
+      },
+      "expectedStatus": 403,
+      "expectedBody": {
+        "error": "string"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Тестовая покупка",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "action": "test-purchase",
+        "gameId": "kooperativ-6",
+        "productId": "coins-small",
+        "playerId": "autotest-player",
+        "code": "fingame-dev-2026"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "ok": true
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Очистка тестовых покупок",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "action": "test-clear",
+        "gameId": "kooperativ-6",
+        "playerId": "autotest-player",
+        "code": "fingame-dev-2026"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "ok": true
+      },
+      "bodyMatcher": "partial"
     }
   ]
 }
