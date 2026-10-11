@@ -94,7 +94,7 @@ def fetch_payment_status(payment_id: str) -> str:
     )
 
     try:
-        with urllib.request.urlopen(req, timeout=8) as resp:
+        with urllib.request.urlopen(req, timeout=4) as resp:
             data = json.loads(resp.read().decode('utf-8'))
     except urllib.error.HTTPError as exc:
         print(f'YooKassa status HTTP {exc.code}: {exc.read().decode("utf-8", "replace")[:300]}')
@@ -346,7 +346,9 @@ def check_player(game_id: str, player_id: str) -> dict:
             cur.execute(
                 f"SELECT order_id, payment_id FROM {schema}.game_purchases "
                 f"WHERE game_id = '{safe_game}' AND player_id = '{safe_player}' "
-                f"AND status = 'pending'"
+                f"AND status = 'pending' AND payment_id IS NOT NULL "
+                f"AND created_at > now() - interval '1 day' "
+                f"ORDER BY created_at DESC LIMIT 3"
             )
             pending = cur.fetchall()
 
@@ -489,7 +491,9 @@ def handler(event: dict, context) -> dict:
             {'productId': k, 'title': v['title'], 'amount': v['amount'], 'note': v.get('note', '')}
             for k, v in game['products'].items()
         ]
-        return reply(200, {'gameId': game_id, 'game': game['title'], 'products': items})
+        resp = reply(200, {'gameId': game_id, 'game': game['title'], 'products': items})
+        resp['headers'] = {**CORS, 'Cache-Control': 'public, max-age=600'}
+        return resp
 
     if method != 'POST':
         return reply(405, {'error': 'Method not allowed'})
