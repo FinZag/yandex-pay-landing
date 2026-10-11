@@ -149,5 +149,9 @@ def handler(event: dict, context) -> dict:
                     f"VALUES ('{order_id}', {amount}, '{safe_email}', 'pending', '{safe_payment}') "
                     f"ON CONFLICT (order_id) DO NOTHING"
                 )
+                cur.execute(
+                    f"DELETE FROM {schema}.donations WHERE status = 'pending' "
+                    f"AND created_at < now() - interval '7 days'"
+                )
 
     return reply(200, {'paymentUrl': payment_url, 'orderId': order_id, 'sandbox': test_mode})

@@ -655,6 +655,10 @@ def handler(event: dict, context) -> dict:
                     f"{amount}, '{safe(email)}', 'pending', '{safe(payment_id)}') "
                     f"ON CONFLICT (order_id) DO NOTHING"
                 )
+                cur.execute(
+                    f"DELETE FROM {schema}.game_purchases WHERE status = 'pending' "
+                    f"AND created_at < now() - interval '7 days'"
+                )
 
     return reply(200, {
         'paymentUrl': payment_url,
