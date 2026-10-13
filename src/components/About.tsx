@@ -32,8 +32,8 @@ const About = () => {
       <div className="mt-5 grid gap-6 lg:grid-cols-[1.15fr_1fr]">
         <div className="rounded-lg bg-secondary p-6 md:p-8">
           <p className="font-head text-[19px] font-bold leading-[1.3] tracking-[-0.01em] md:text-[21px]">
-            {company.brand} — инди-разработчик мобильных игр. Всё, что вы видите в играх, я
-            сделала сама.
+            {company.brand} — инди-разработчик мобильных игр. Всё, что вы видите в играх, сделано
+            одним человеком.
           </p>
           <div className="mt-4 space-y-3 text-[16px] leading-[1.5] text-muted-foreground">
             <p>
