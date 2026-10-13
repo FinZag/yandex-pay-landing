@@ -68,7 +68,7 @@ const Socials = () => (
 );
 
 export const SocialIcons = ({ place, size = 'md' }: { place: string; size?: 'sm' | 'md' }) => {
-  const box = size === 'sm' ? 'h-9 w-9' : 'h-[56px] w-[56px]';
+  const box = size === 'sm' ? 'h-10 w-10 bg-secondary' : 'h-[56px] w-[56px] bg-background';
   return (
     <div className="flex items-center gap-2">
       {[socials.youtube, socials.boosty].map((s) => (
@@ -80,11 +80,11 @@ export const SocialIcons = ({ place, size = 'md' }: { place: string; size?: 'sm'
           aria-label={`${s.name} ${s.handle}`}
           title={s.name}
           onClick={() => reachGoal('social_click', { network: s.name, place })}
-          className={`grid ${box} place-items-center rounded-full bg-background text-foreground transition-all hover:scale-[1.06] hover:text-white`}
+          className={`grid ${box} place-items-center rounded-full text-foreground transition-all hover:scale-[1.06] hover:text-white`}
           onMouseEnter={(e) => (e.currentTarget.style.background = s.color)}
           onMouseLeave={(e) => (e.currentTarget.style.background = '')}
         >
-          <Icon name={s.icon} size={size === 'sm' ? 17 : 22} />
+          <Icon name={s.icon} size={size === 'sm' ? 19 : 22} />
         </a>
       ))}
     </div>
