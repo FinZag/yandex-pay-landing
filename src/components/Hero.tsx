@@ -1,4 +1,5 @@
 import Icon from '@/components/ui/icon';
+import { SocialIcons } from '@/components/Socials';
 
 const Hero = () => {
   return (
@@ -27,6 +28,7 @@ const Hero = () => {
           >
             Поддержать студию
           </a>
+          <SocialIcons place="hero" />
         </div>
 
         <div className="pointer-events-none absolute right-8 top-1/2 hidden -translate-y-1/2 lg:block">

@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import MailLink from "@/components/MailLink";
-import { PAYMENT_URL } from "@/data/company";
+import { PAYMENT_URL, socials } from "@/data/company";
 import { useToast } from "@/hooks/use-toast";
 import { reachGoal } from "@/lib/metrika";
 
@@ -241,6 +241,25 @@ const Payment = () => {
               ))}
             </ol>
           </div>
+
+          <a
+            href={socials.boosty.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => reachGoal('social_click', { network: 'Boosty', place: 'payment' })}
+            className="group flex items-center gap-4 rounded-lg bg-[#F15F2C] p-5 text-white transition-transform hover:-translate-y-0.5 md:p-6"
+          >
+            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-white/20">
+              <Icon name="Flame" size={24} />
+            </span>
+            <span className="min-w-0 flex-1">
+              <span className="block font-head text-[17px] font-bold">Поддерживать регулярно на Boosty</span>
+              <span className="mt-0.5 block text-[14px] leading-[1.35] text-white/85">
+                Закулисье разработки и новости раньше всех
+              </span>
+            </span>
+            <Icon name="ArrowUpRight" size={22} className="shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </a>
 
           <div className="rounded-lg bg-secondary p-6 md:p-8">
             <h3 className="font-head text-[18px] font-bold">

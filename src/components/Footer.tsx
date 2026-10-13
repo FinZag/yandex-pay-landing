@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { company } from '@/data/company';
+import { SocialIcons } from '@/components/Socials';
 import useSectionNav, { homeSections } from '@/hooks/use-section-nav';
 
 const Footer = () => {
@@ -17,12 +18,15 @@ const Footer = () => {
           <span className="hidden h-1 w-1 rounded-full bg-bar-foreground/45 md:block" />
           <span className="text-bar-foreground/85">Возврат в течение 14 дней</span>
         </div>
+        <div className="flex items-center gap-3 self-start md:self-auto">
+        <SocialIcons place="footer" size="sm" />
         <Link
           to="/legal"
-          className="inline-flex h-9 shrink-0 items-center self-start rounded-[18px] bg-badge px-5 font-bold text-badge-foreground transition-transform hover:scale-[1.03] md:self-auto"
+          className="inline-flex h-9 shrink-0 items-center rounded-[18px] bg-badge px-5 font-bold text-badge-foreground transition-transform hover:scale-[1.03] md:self-auto"
         >
           Реквизиты и оферта
         </Link>
+        </div>
       </div>
 
       <nav className="mt-6 flex flex-wrap justify-center gap-x-6 gap-y-2 text-[15px] text-foreground/80">

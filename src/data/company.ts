@@ -265,3 +265,20 @@ export const games: Game[] = [
     ],
   },
 ];
+
+export const socials = {
+  youtube: {
+    name: 'YouTube',
+    handle: '@FinGameCoder',
+    url: 'https://www.youtube.com/@FinGameCoder',
+    icon: 'Youtube',
+    color: '#FF0033',
+  },
+  boosty: {
+    name: 'Boosty',
+    handle: 'boosty.to/fingame',
+    url: 'https://boosty.to/fingame',
+    icon: 'Flame',
+    color: '#F15F2C',
+  },
+} as const;
