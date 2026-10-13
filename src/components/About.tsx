@@ -4,8 +4,8 @@ import { company } from '@/data/company';
 const facts = [
   {
     icon: 'User',
-    title: 'Одна разработчица',
-    text: 'FinGame — это инди-разработчица в одном лице: код, дизайн, звук и публикация делаются самостоятельно, без издателя.',
+    title: 'Один разработчик',
+    text: 'FinGame — это инди-разработчик в одном лице: код, дизайн, звук и публикация делаются самостоятельно, без издателя.',
   },
   {
     icon: 'Cpu',
@@ -32,7 +32,7 @@ const About = () => {
       <div className="mt-5 grid gap-6 lg:grid-cols-[1.15fr_1fr]">
         <div className="rounded-lg bg-secondary p-6 md:p-8">
           <p className="font-head text-[19px] font-bold leading-[1.3] tracking-[-0.01em] md:text-[21px]">
-            {company.brand} — инди-разработчица мобильных игр. Всё, что вы видите в играх, я
+            {company.brand} — инди-разработчик мобильных игр. Всё, что вы видите в играх, я
             сделала сама.
           </p>
           <div className="mt-4 space-y-3 text-[16px] leading-[1.5] text-muted-foreground">
