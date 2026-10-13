@@ -246,70 +246,80 @@ const Payment = () => {
             href={socials.boosty.url}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => reachGoal('social_click', { network: 'Boosty', place: 'payment' })}
+            onClick={() =>
+              reachGoal("social_click", { network: "Boosty", place: "payment" })
+            }
             className="group flex items-center gap-4 rounded-lg bg-[#F15F2C] p-5 text-white transition-transform hover:-translate-y-0.5 md:p-6"
           >
             <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-white/20">
               <Icon name="Flame" size={24} />
             </span>
             <span className="min-w-0 flex-1">
-              <span className="block font-head text-[17px] font-bold">Поддерживать регулярно на Boosty</span>
+              <span className="block font-head text-[17px] font-bold">
+                Поддерживать регулярно на Boosty
+              </span>
               <span className="mt-0.5 block text-[14px] leading-[1.35] text-white/85">
                 Закулисье разработки и новости раньше всех
               </span>
             </span>
-            <Icon name="ArrowUpRight" size={22} className="shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            <Icon
+              name="ArrowUpRight"
+              size={22}
+              className="shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+            />
           </a>
-
-          <div className="rounded-lg bg-secondary p-6 md:p-8">
-            <h3 className="font-head text-[18px] font-bold">
-              Условия оплаты и возврата
-            </h3>
-            <ul className="mt-4 space-y-3 text-[15px] leading-[1.4] text-muted-foreground">
-              <li className="flex gap-2.5">
-                <Icon
-                  name="Check"
-                  size={18}
-                  className="mt-0.5 shrink-0 text-ok"
-                />
-                <span>
-                  Скачивание игр бесплатно — сайт не продаёт товары, взнос
-                  является добровольным.
-                </span>
-              </li>
-              <li className="flex gap-2.5">
-                <Icon
-                  name="Check"
-                  size={18}
-                  className="mt-0.5 shrink-0 text-ok"
-                />
-                <span>
-                  Валюта расчётов — российский рубль. Сумму плательщик
-                  определяет сам.
-                </span>
-              </li>
-              <li className="flex gap-2.5">
-                <Icon
-                  name="Check"
-                  size={18}
-                  className="mt-0.5 shrink-0 text-ok"
-                />
-                <span>
-                  Ошибочный платёж возвращается в течение 14 дней по заявке на{" "}
-                  <MailLink subject="Заявление на возврат платежа" />, срок
-                  зачисления — 3–10 рабочих дней.
-                </span>
-              </li>
-              <li className="flex gap-2.5">
-                <Icon
-                  name="Check"
-                  size={18}
-                  className="mt-0.5 shrink-0 text-ok"
-                />
-                <span>Подписки и регулярные списания не оформляются.</span>
-              </li>
-            </ul>
-          </div>
+        </div>
+        <div className="rounded-lg bg-secondary p-6 md:p-8 lg:col-span-2">
+          <h3 className="font-head text-[18px] font-bold">
+            Условия оплаты и возврата
+          </h3>
+          <ul className="mt-4 grid gap-x-10 gap-y-3 md:grid-cols-2 text-[15px] leading-[1.4] text-muted-foreground">
+            <li className="flex gap-2.5">
+              <Icon
+                name="Check"
+                size={18}
+                className="mt-0.5 shrink-0 text-ok"
+              />
+              <span>
+                Скачивание игр бесплатно — сайт не продаёт товары, взнос
+                является добровольным.
+              </span>
+            </li>
+            <li className="flex gap-2.5">
+              <Icon
+                name="Check"
+                size={18}
+                className="mt-0.5 shrink-0 text-ok"
+              />
+              <span>
+                Валюта расчётов — российский рубль. Сумму плательщик определяет
+                сам.
+              </span>
+            </li>
+            <li className="flex gap-2.5">
+              <Icon
+                name="Check"
+                size={18}
+                className="mt-0.5 shrink-0 text-ok"
+              />
+              <span>
+                Ошибочный платёж возвращается в течение 14 дней по заявке на{" "}
+                <MailLink subject="Заявление на возврат платежа" />, срок
+                зачисления — 3–10 рабочих дней.
+              </span>
+            </li>
+            <li className="flex gap-2.5">
+              <Icon
+                name="Check"
+                size={18}
+                className="mt-0.5 shrink-0 text-ok"
+              />
+              <span>
+                На сайте подписки не оформляются — регулярная поддержка возможна
+                только через Boosty.
+              </span>
+            </li>
+          </ul>
         </div>
       </div>
     </section>
