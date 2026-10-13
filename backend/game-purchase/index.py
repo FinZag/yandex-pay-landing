@@ -1,4 +1,5 @@
 import base64
+import hmac
 import json
 import os
 import re
@@ -204,7 +205,9 @@ def subscribe_release(game_id: str, email: str) -> dict:
     return reply(200, {'ok': True, 'gameId': game_id, 'game': GAMES[game_id]['title']})
 
 
-DEV_CODE = 'fingame-dev-2026'
+def dev_ok(code: str) -> bool:
+    secret = (os.environ.get('DEV_PASSWORD') or '').strip()
+    return bool(secret) and bool(code) and hmac.compare_digest(code.strip().encode('utf-8'), secret.encode('utf-8'))
 MAILBOX = 'game-fin-ip@yandex.ru'
 
 
@@ -241,7 +244,7 @@ def subscribers_stats(game_id: str) -> dict:
 
 
 def send_release_mail(game_id: str, code: str, subject: str, message: str, test_to: str) -> dict:
-    if code != DEV_CODE:
+    if not dev_ok(code):
         return reply(403, {'error': 'Нет доступа'})
 
     if game_id not in GAMES:
@@ -389,7 +392,7 @@ TEST_MARK = 'test'
 
 
 def test_purchase(game_id: str, product_id: str, player_id: str, code: str) -> dict:
-    if code != DEV_CODE:
+    if not dev_ok(code):
         return reply(403, {'error': 'Нет доступа'})
 
     game = GAMES.get(game_id)
@@ -429,7 +432,7 @@ def test_purchase(game_id: str, product_id: str, player_id: str, code: str) -> d
 
 
 def clear_test_purchases(game_id: str, player_id: str, code: str) -> dict:
-    if code != DEV_CODE:
+    if not dev_ok(code):
         return reply(403, {'error': 'Нет доступа'})
 
     if game_id not in GAMES:
@@ -507,8 +510,15 @@ def handler(event: dict, context) -> dict:
     if check_id:
         return check_order(check_id)
 
+    if body.get('action') == 'dev-login':
+        if not (os.environ.get('DEV_PASSWORD') or '').strip():
+            return reply(403, {'error': 'Пароль раздела ещё не задан'})
+        if not dev_ok(body.get('code') or ''):
+            return reply(403, {'error': 'Неверный код'})
+        return reply(200, {'ok': True})
+
     if body.get('action') == 'release-stats':
-        if (body.get('code') or '') != DEV_CODE:
+        if not dev_ok(body.get('code') or ''):
             return reply(403, {'error': 'Нет доступа'})
         return subscribers_stats((body.get('gameId') or '').strip().lower())
 

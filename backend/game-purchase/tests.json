@@ -218,7 +218,7 @@
       "bodyMatcher": "partial"
     },
     {
-      "name": "Тестовая покупка",
+      "name": "Тестовая покупка с неверным кодом",
       "method": "POST",
       "path": "/",
       "body": {
@@ -226,27 +226,41 @@
         "gameId": "kooperativ-6",
         "productId": "coins-small",
         "playerId": "autotest-player",
-        "code": "fingame-dev-2026"
+        "code": "wrong-password"
       },
-      "expectedStatus": 200,
+      "expectedStatus": 403,
       "expectedBody": {
-        "ok": true
+        "error": "string"
       },
       "bodyMatcher": "partial"
     },
     {
-      "name": "Очистка тестовых покупок",
+      "name": "Очистка тестовых покупок с неверным кодом",
       "method": "POST",
       "path": "/",
       "body": {
         "action": "test-clear",
         "gameId": "kooperativ-6",
         "playerId": "autotest-player",
-        "code": "fingame-dev-2026"
+        "code": "wrong-password"
       },
-      "expectedStatus": 200,
+      "expectedStatus": 403,
       "expectedBody": {
-        "ok": true
+        "error": "string"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Вход с неверным кодом",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "action": "dev-login",
+        "code": "wrong-password"
+      },
+      "expectedStatus": 403,
+      "expectedBody": {
+        "error": "string"
       },
       "bodyMatcher": "partial"
     }
