@@ -19,7 +19,7 @@ const Games = () => {
 
   const openStore = (url: string | undefined, store: string, gameId?: string) => {
     if (url) {
-      reachGoal(store === 'AppGallery' ? 'download_appgallery' : 'download_rustore', {
+      reachGoal('download_rustore', {
         gameId,
         place: 'catalog',
       });
@@ -38,7 +38,7 @@ const Games = () => {
         <h2 className="font-head text-[22px] font-medium tracking-[-0.01em] md:text-[26px]">
           Каталог игр
         </h2>
-        <span className="text-[15px] text-muted-foreground">Скачивание в RuStore и AppGallery</span>
+        <span className="text-[15px] text-muted-foreground">Скачивание в RuStore</span>
       </div>
 
       <div className="mt-5 grid gap-6 sm:grid-cols-[repeat(auto-fill,minmax(280px,1fr))]">
@@ -107,18 +107,6 @@ const Games = () => {
                   <Icon name="Download" size={16} />
                   Скачать в RuStore
                 </button>
-              )}
-              {!game.comingSoon && game.appgallery && (
-                <a
-                  href={game.appgallery}
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={() => reachGoal('download_appgallery', { gameId: game.gameId, place: 'catalog' })}
-                  className="inline-flex h-10 w-full items-center justify-center gap-2 rounded-[20px] bg-background px-4 text-[14px] font-medium text-foreground transition-transform hover:scale-[1.03] active:scale-[0.98]"
-                >
-                  <Icon name="Download" size={16} />
-                  Скачать в AppGallery
-                </a>
               )}
             </div>
           </article>

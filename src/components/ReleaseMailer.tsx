@@ -29,7 +29,7 @@ const ReleaseMailer = ({
   useEffect(() => {
     setSubject(`${gameTitle} — игра вышла`);
     setMessage(
-      `Здравствуйте!\n\nВы просили сообщить, когда выйдет «${gameTitle}» — игра уже в RuStore и AppGallery, можно скачивать.\n\nСтраница игры: https://fingame-coder.ru/games/${gameSlug}\n\nЭто письмо отправлено один раз, по вашей просьбе. Больше рассылок не будет.\n\nFinGame`,
+      `Здравствуйте!\n\nВы просили сообщить, когда выйдет «${gameTitle}» — игра уже в RuStore, можно скачивать.\n\nСтраница игры: https://fingame-coder.ru/games/${gameSlug}\n\nЭто письмо отправлено один раз, по вашей просьбе. Больше рассылок не будет.\n\nFinGame`,
     );
     setResult(null);
     setError(null);

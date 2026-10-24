@@ -23,7 +23,7 @@ const GamePage = () => {
 
   const openStore = (url?: string, store = 'RuStore') => {
     if (url) {
-      reachGoal(store === 'AppGallery' ? 'download_appgallery' : 'download_rustore', {
+      reachGoal('download_rustore', {
         gameId: game.gameId,
         place: 'game_page',
       });
@@ -59,8 +59,8 @@ const GamePage = () => {
         title={`${game.title} — ${game.genre} для Android | FinGame`}
         description={
           game.comingSoon
-            ? `${game.description} Игра в разработке, скоро в RuStore и AppGallery.`
-            : `${game.description} Бесплатно в ${game.appgallery ? 'RuStore и AppGallery' : 'RuStore'}, отключение рекламы — разовая покупка.`
+            ? `${game.description} Игра в разработке, скоро в RuStore.`
+            : `${game.description} Бесплатно в RuStore, отключение рекламы — разовая покупка.`
         }
         path={`/games/${game.slug}`}
       />
@@ -96,8 +96,8 @@ const GamePage = () => {
             <div>
               <span className="inline-flex h-8 items-center rounded-full bg-badge px-3.5 text-[13px] font-bold text-badge-foreground">
                 {game.comingSoon
-                  ? 'Скоро в RuStore и AppGallery'
-                  : `${game.priceLabel} в RuStore${game.appgallery ? ' и AppGallery' : ''}`}
+                  ? 'Скоро в RuStore'
+                  : `${game.priceLabel} в RuStore`}
               </span>
               <h1 className="mt-3 font-head drop-shadow-[0_0_24px_hsl(var(--primary)/0.35)] text-[34px] font-bold leading-[1.05] tracking-[-0.03em] md:text-[52px]">
                 {game.title}
@@ -120,18 +120,6 @@ const GamePage = () => {
                     <Icon name="Download" size={20} />
                     Скачать в RuStore
                   </button>
-                )}
-                {!game.comingSoon && game.appgallery && (
-                  <a
-                    href={game.appgallery}
-                    target="_blank"
-                    rel="noreferrer"
-                    onClick={() => reachGoal('download_appgallery', { gameId: game.gameId, place: 'game_page' })}
-                    className="inline-flex h-[56px] items-center gap-2.5 rounded-[28px] bg-foreground px-[30px] text-[17px] font-bold tracking-[-0.01em] text-background transition-transform hover:scale-[1.02] active:scale-[0.99]"
-                  >
-                    <Icon name="Download" size={20} />
-                    Скачать в AppGallery
-                  </a>
                 )}
                 {game.comingSoon ? (
                   <a
@@ -297,18 +285,6 @@ const GamePage = () => {
                   Скачать в RuStore
                   <Icon name="ArrowUpRight" size={18} />
                 </button>
-              )}
-              {!game.comingSoon && game.appgallery && (
-                <a
-                  href={game.appgallery}
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={() => reachGoal('download_appgallery', { gameId: game.gameId, place: 'game_page_cta' })}
-                  className="inline-flex h-[56px] items-center gap-2.5 rounded-[28px] bg-foreground px-[30px] text-[17px] font-bold text-background transition-transform hover:scale-[1.02] active:scale-[0.99]"
-                >
-                  Скачать в AppGallery
-                  <Icon name="ArrowUpRight" size={18} />
-                </a>
               )}
             </div>
           </div>

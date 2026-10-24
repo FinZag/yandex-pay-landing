@@ -177,10 +177,7 @@ const DevDocsPage = () => {
         </div>
 
         <nav className="mt-4 flex flex-wrap gap-2">
-          {(game.comingSoon
-            ? [...nav, { href: '#mailer', label: 'Письмо о релизе' }]
-            : nav
-          ).map((n) => (
+          {[...nav, { href: '#mailer', label: 'Письмо о релизе' }].map((n) => (
             <a
               key={n.href}
               href={n.href}
@@ -331,9 +328,7 @@ const DevDocsPage = () => {
             <TestPurchase gameId={gameId} products={products} />
           )}
 
-          {game.comingSoon && (
-            <ReleaseMailer gameId={gameId} gameTitle={game.title} gameSlug={game.slug} />
-          )}
+          <ReleaseMailer gameId={gameId} gameTitle={game.title} gameSlug={game.slug} />
         </article>
 
         <div className="mt-10 flex flex-wrap items-center gap-4">

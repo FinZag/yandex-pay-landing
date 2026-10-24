@@ -64,8 +64,8 @@ const ReleaseNotify = ({ gameId, gameTitle }: { gameId: string; gameTitle: strin
               Сообщить, когда выйдет
             </h2>
             <p className="mt-2 max-w-[520px] text-[16px] leading-[1.45] text-muted-foreground">
-              Оставьте почту — напишем один раз, в день выхода «{gameTitle}» в RuStore
-              и AppGallery. Никакой рассылки и рекламы.
+              Оставьте почту — напишем один раз, в день выхода «{gameTitle}» в RuStore.
+              Никакой рассылки и рекламы.
             </p>
           </div>
 
