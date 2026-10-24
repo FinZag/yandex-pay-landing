@@ -4,6 +4,7 @@ import json
 import os
 import re
 import smtplib
+import time
 import urllib.request
 import urllib.error
 import uuid
@@ -290,8 +291,31 @@ def send_release_mail(game_id: str, code: str, subject: str, message: str, test_
     sent, failed = 0, 0
     delivered = []
 
-    with smtplib.SMTP_SSL('smtp.yandex.ru', 465, timeout=20) as smtp:
-        smtp.login(MAILBOX, password)
+    smtp = None
+    last_error = ''
+    for attempt in range(3):
+        try:
+            smtp = smtplib.SMTP_SSL('smtp.yandex.ru', 465, timeout=10)
+            smtp.login(MAILBOX, password)
+            break
+        except Exception as exc:
+            last_error = str(exc)
+            print(f'SMTP login attempt {attempt + 1} failed: {exc}')
+            try:
+                if smtp:
+                    smtp.close()
+            except Exception:
+                pass
+            smtp = None
+            time.sleep(1)
+
+    if smtp is None:
+        return reply(502, {
+            'error': 'Яндекс-почта временно не пустила отправку. Подождите минуту и нажмите ещё раз — подписчики не потеряются.',
+            'detail': last_error[:200],
+        })
+
+    try:
         for addr in recipients:
             msg = MIMEText(message, 'plain', 'utf-8')
             msg['Subject'] = Header(subject, 'utf-8')
@@ -304,6 +328,11 @@ def send_release_mail(game_id: str, code: str, subject: str, message: str, test_
             except Exception as exc:
                 failed += 1
                 print(f'Release mail to {addr} failed: {exc}')
+    finally:
+        try:
+            smtp.quit()
+        except Exception:
+            pass
 
     if delivered and not test_to:
         values = ', '.join(f"'{a.replace(chr(39), chr(39) * 2)}'" for a in delivered)
