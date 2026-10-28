@@ -43,7 +43,12 @@ GAMES = {
     },
     'little-witch-shop': {
         'title': 'Лавка маленькой ведьмы',
-        'products': {},
+        'products': {
+            'coins-small': {'title': 'Горсть монет', 'amount': 59, 'note': '500 монет'},
+            'coins-medium': {'title': 'Мешочек монет', 'amount': 149, 'note': '1 500 монет'},
+            'coins-large': {'title': 'Сундук монет', 'amount': 299, 'note': '4 000 монет'},
+            'no-ads': {'title': 'Без рекламы', 'amount': 199, 'note': 'навсегда'},
+        },
     },
     'kooperativ-6': {
         'title': 'Кооператив №6',

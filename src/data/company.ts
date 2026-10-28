@@ -40,6 +40,7 @@ export type Game = {
   rustore?: string;
   icon?: string;
   comingSoon?: boolean;
+  shop?: boolean;
   landscape?: boolean;
   noZoom?: boolean;
   thumbPosition?: string;
@@ -266,6 +267,7 @@ export const games: Game[] = [
     id: 'little-witch-shop',
     slug: 'little-witch-shop',
     comingSoon: true,
+    shop: true,
     theme: { primary: '38 80% 58%', accent: '285 45% 62%', from: '150 35% 8%', to: '30 45% 14%' },
     gameId: 'little-witch-shop',
     title: 'Лавка маленькой ведьмы',

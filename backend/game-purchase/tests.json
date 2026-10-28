@@ -270,7 +270,25 @@
       "path": "/?gameId=little-witch-shop",
       "expectedStatus": 200,
       "expectedBody": {
-        "gameId": "little-witch-shop"
+        "gameId": "little-witch-shop",
+        "products": [
+          {
+            "productId": "coins-small",
+            "amount": 59
+          },
+          {
+            "productId": "coins-medium",
+            "amount": 149
+          },
+          {
+            "productId": "coins-large",
+            "amount": 299
+          },
+          {
+            "productId": "no-ads",
+            "amount": 199
+          }
+        ]
       },
       "bodyMatcher": "partial"
     }

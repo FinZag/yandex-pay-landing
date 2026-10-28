@@ -130,7 +130,7 @@ const GamePage = () => {
                     Сообщить о выходе
                   </a>
                 ) : null}
-                {game.comingSoon ? (
+                {game.comingSoon && !game.shop ? (
                   <a
                     href="#payment"
                     onClick={() => reachGoal('support_click', { gameId: game.gameId, place: 'game_page' })}
@@ -253,7 +253,7 @@ const GamePage = () => {
           <ReleaseNotify gameId={game.gameId} gameTitle={game.title} />
         )}
 
-        {game.comingSoon ? (
+        {game.comingSoon && !game.shop ? (
           <Payment />
         ) : (
           <GamePurchase gameId={game.gameId} gameTitle={game.title} />
