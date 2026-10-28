@@ -263,6 +263,16 @@
         "error": "string"
       },
       "bodyMatcher": "partial"
+    },
+    {
+      "name": "Каталог Лавки маленькой ведьмы",
+      "method": "GET",
+      "path": "/?gameId=little-witch-shop",
+      "expectedStatus": 200,
+      "expectedBody": {
+        "gameId": "little-witch-shop"
+      },
+      "bodyMatcher": "partial"
     }
   ]
 }

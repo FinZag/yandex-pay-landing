@@ -41,6 +41,10 @@ GAMES = {
             'coins-large': {'title': 'Крупный пак', 'amount': 849, 'note': '100 000 монет'},
         },
     },
+    'little-witch-shop': {
+        'title': 'Лавка маленькой ведьмы',
+        'products': {},
+    },
     'kooperativ-6': {
         'title': 'Кооператив №6',
         'products': {
