@@ -1,5 +1,5 @@
 import type React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from "@/lib/router-compat";
 
 export const homeSections = [
   { href: '#about', label: 'О студии' },

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from "@/lib/router-compat";
 import Icon from '@/components/ui/icon';
 import { GAME_PURCHASE_URL } from '@/data/company';
 import { reachGoal } from '@/lib/metrika';

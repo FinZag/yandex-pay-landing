@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "@/lib/router-compat";
 import Seo from '@/components/Seo';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';

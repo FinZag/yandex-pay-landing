@@ -1,2 +1,0 @@
-CREATE INDEX IF NOT EXISTS game_purchases_status_created_idx ON t_p34302856_yandex_pay_landing.game_purchases (status, created_at);
-CREATE INDEX IF NOT EXISTS donations_status_created_idx ON t_p34302856_yandex_pay_landing.donations (status, created_at);

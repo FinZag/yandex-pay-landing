@@ -56,7 +56,12 @@ const DevGate = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  if (allowed === null) return <div className="min-h-screen bg-background" />;
+  if (allowed === null)
+    return (
+      <div className="min-h-screen bg-background">
+        <h1 className="sr-only">Закрытый раздел — техническая инструкция для разработчиков игр</h1>
+      </div>
+    );
   if (allowed) return <>{children}</>;
 
   return (

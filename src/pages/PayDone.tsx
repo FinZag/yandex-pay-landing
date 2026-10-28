@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams } from "@/lib/router-compat";
 import Seo from '@/components/Seo';
 import Icon from '@/components/ui/icon';
 import { GAME_PURCHASE_URL } from '@/data/company';

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from "@/lib/router-compat";
 import Seo from '@/components/Seo';
 import Icon from '@/components/ui/icon';
 import MailLink from '@/components/MailLink';

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from "@/lib/router-compat";
 import { company } from '@/data/company';
 import { SocialIcons } from '@/components/Socials';
 import useSectionNav, { homeSections } from '@/hooks/use-section-nav';

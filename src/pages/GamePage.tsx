@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type React from 'react';
-import { useParams, Link, Navigate } from 'react-router-dom';
+import { useParams, Link, Navigate } from "@/lib/router-compat";
 import Seo from '@/components/Seo';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';

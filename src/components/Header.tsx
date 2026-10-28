@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from "@/lib/router-compat";
 import useSectionNav, { homeSections } from '@/hooks/use-section-nav';
 import Icon from '@/components/ui/icon';
 import { cn } from '@/lib/utils';
