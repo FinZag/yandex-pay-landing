@@ -36,7 +36,7 @@ const Header = () => {
               window.history.replaceState(null, '', '/');
             }
           }}
-          className="flex shrink-0 items-center gap-2.5"
+          className="mr-6 flex shrink-0 items-center gap-2.5"
           aria-label="FinGame — на главную"
         >
           <img
@@ -69,7 +69,7 @@ const Header = () => {
           <a
             href="/#games"
             onClick={(e) => goToSection(e, '#games')}
-            className="inline-flex h-[52px] items-center gap-2.5 rounded-[26px] bg-secondary px-5 font-medium text-foreground transition-colors hover:bg-border"
+            className="hidden h-[52px] 2xl:inline-flex items-center gap-2.5 rounded-[26px] bg-secondary px-5 font-medium text-foreground transition-colors hover:bg-border"
           >
             Скачать игры
             <Icon name="Download" size={20} />
