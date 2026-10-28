@@ -6,6 +6,8 @@ import MailLink from '@/components/MailLink';
 import ReleaseMailer from '@/components/ReleaseMailer';
 import TestPurchase from '@/components/TestPurchase';
 import { GAME_PURCHASE_URL, games } from '@/data/company';
+import { SITE_URL } from '@/components/Seo';
+import { buildDevInstruction, downloadTextFile } from '@/lib/dev-instruction';
 
 type Product = { productId: string; title: string; amount: number; note?: string };
 
@@ -115,6 +117,42 @@ const DevDocsPage = () => {
       : ['Ответ приходит при каждом запуске — храните признак локально, чтобы игра работала без интернета.']),
   ];
 
+  const warning = hasCoins
+    ? 'Отключение рекламы возвращается в ответе всегда, монеты — тоже. Поэтому монеты начисляются строго по номеру заказа, иначе при каждом запуске игрок будет получать пак заново.'
+    : 'Покупка возвращается в ответе при каждом запросе. Это не новая оплата, а текущий статус игрока — просто применяйте его.';
+
+  const responseIntro = hasCoins
+    ? 'Игрок купил отключение рекламы и средний пак монет:'
+    : 'Игрок купил отключение рекламы:';
+
+  const download = () => {
+    const text = buildDevInstruction({
+      gameTitle: game.title,
+      gameId,
+      pageUrl: `${SITE_URL}/dev/${game.slug}`,
+      products: products ?? [],
+      checkExample,
+      responseExample,
+      emptyExample,
+      steps,
+      warning,
+      responseIntro,
+    });
+    downloadTextFile(`fingame-${game.slug}-instruction.md`, text);
+  };
+
+  const downloadButton = (
+    <button
+      type="button"
+      onClick={download}
+      disabled={products === null}
+      className="inline-flex h-[52px] items-center gap-2.5 rounded-[26px] bg-badge px-6 text-[16px] font-bold text-badge-foreground transition-transform hover:scale-[1.02] disabled:cursor-wait disabled:opacity-60 disabled:hover:scale-100"
+    >
+      <Icon name={products === null ? 'LoaderCircle' : 'Download'} size={19} className={products === null ? 'animate-spin' : ''} />
+      Скачать инструкцию
+    </button>
+  );
+
   return (
     <div className="min-h-screen bg-background">
       <Seo
@@ -158,6 +196,12 @@ const DevDocsPage = () => {
           у игрока уже оплачено, и выдать это внутри приложения. Никаких ключей и подписей
           не требуется.
         </p>
+        <div className="mt-5 flex flex-wrap items-center gap-3">
+          {downloadButton}
+          <span className="text-[14px] text-muted-foreground">
+            Файл .md с адресом, кодами товаров и примерами — удобно передать в команду
+          </span>
+        </div>
 
         <div className="mt-6 flex flex-wrap gap-2">
           {games.map((g) => (
@@ -264,9 +308,7 @@ const DevDocsPage = () => {
               Пример ответа сервера
             </h2>
             <p className="mt-2 text-[16px] leading-[1.45] text-muted-foreground">
-              {hasCoins
-                ? 'Игрок купил отключение рекламы и средний пак монет:'
-                : 'Игрок купил отключение рекламы:'}
+              {responseIntro}
             </p>
             <Code>{responseExample}</Code>
 
@@ -318,9 +360,7 @@ const DevDocsPage = () => {
             </ol>
             <p className="mt-5 flex items-start gap-2.5 text-[15px] leading-[1.45]">
               <Icon name="TriangleAlert" size={18} className="mt-0.5 shrink-0" />
-              {hasCoins
-                ? 'Отключение рекламы возвращается в ответе всегда, монеты — тоже. Поэтому монеты начисляются строго по номеру заказа, иначе при каждом запуске игрок будет получать пак заново.'
-                : 'Покупка возвращается в ответе при каждом запросе. Это не новая оплата, а текущий статус игрока — просто применяйте его.'}
+              {warning}
             </p>
           </section>
 
@@ -339,6 +379,7 @@ const DevDocsPage = () => {
             Страница игры
             <Icon name="ArrowRight" size={20} />
           </Link>
+          {downloadButton}
           <p className="text-[14px] text-muted-foreground">
             Вопросы по подключению — <MailLink subject="Подключение покупок в игре" />
           </p>
