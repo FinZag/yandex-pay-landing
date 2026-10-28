@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LegalRouteImport } from './routes/legal'
+import { Route as NewsRouteImport } from './routes/news'
 import { Route as ThanksRouteImport } from './routes/thanks'
 import { Route as DevIndexRouteImport } from './routes/dev.index'
 import { Route as DevSlugRouteImport } from './routes/dev.$slug'
@@ -25,6 +26,11 @@ const IndexRoute = IndexRouteImport.update({
 const LegalRoute = LegalRouteImport.update({
   id: '/legal',
   path: '/legal',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NewsRoute = NewsRouteImport.update({
+  id: '/news',
+  path: '/news',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ThanksRoute = ThanksRouteImport.update({
@@ -56,6 +62,7 @@ const PayDoneRoute = PayDoneRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/legal': typeof LegalRoute
+  '/news': typeof NewsRoute
   '/thanks': typeof ThanksRoute
   '/dev/$slug': typeof DevSlugRoute
   '/games/$slug': typeof GamesSlugRoute
@@ -65,6 +72,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/legal': typeof LegalRoute
+  '/news': typeof NewsRoute
   '/thanks': typeof ThanksRoute
   '/dev/$slug': typeof DevSlugRoute
   '/games/$slug': typeof GamesSlugRoute
@@ -75,6 +83,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/legal': typeof LegalRoute
+  '/news': typeof NewsRoute
   '/thanks': typeof ThanksRoute
   '/dev/$slug': typeof DevSlugRoute
   '/games/$slug': typeof GamesSlugRoute
@@ -86,6 +95,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/legal'
+    | '/news'
     | '/thanks'
     | '/dev/$slug'
     | '/games/$slug'
@@ -95,6 +105,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/legal'
+    | '/news'
     | '/thanks'
     | '/dev/$slug'
     | '/games/$slug'
@@ -104,6 +115,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/legal'
+    | '/news'
     | '/thanks'
     | '/dev/$slug'
     | '/games/$slug'
@@ -114,6 +126,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LegalRoute: typeof LegalRoute
+  NewsRoute: typeof NewsRoute
   ThanksRoute: typeof ThanksRoute
   DevSlugRoute: typeof DevSlugRoute
   GamesSlugRoute: typeof GamesSlugRoute
@@ -135,6 +148,13 @@ declare module '@tanstack/react-router' {
       path: '/legal'
       fullPath: '/legal'
       preLoaderRoute: typeof LegalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/news': {
+      id: '/news'
+      path: '/news'
+      fullPath: '/news'
+      preLoaderRoute: typeof NewsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/thanks': {
@@ -178,6 +198,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LegalRoute: LegalRoute,
+  NewsRoute: NewsRoute,
   ThanksRoute: ThanksRoute,
   DevSlugRoute: DevSlugRoute,
   GamesSlugRoute: GamesSlugRoute,

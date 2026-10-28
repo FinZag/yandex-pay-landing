@@ -4,7 +4,7 @@ import useSectionNav, { homeSections } from '@/hooks/use-section-nav';
 import Icon from '@/components/ui/icon';
 import { cn } from '@/lib/utils';
 
-const links = homeSections;
+const links = [...homeSections.slice(0, 2), { href: '/news', label: 'Новости' }, ...homeSections.slice(2)];
 
 const Header = () => {
   const [open, setOpen] = useState(false);
@@ -49,7 +49,7 @@ const Header = () => {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-7 text-[16px] text-muted-foreground xl:flex">
+        <nav className="hidden items-center gap-5 whitespace-nowrap text-[16px] text-muted-foreground xl:flex 2xl:gap-7">
           {links.map((l) =>
             l.href.startsWith('/') ? (
               <Link key={l.href} to={l.href} className="transition-colors hover:text-foreground">
@@ -69,14 +69,14 @@ const Header = () => {
           <a
             href="/#games"
             onClick={(e) => goToSection(e, '#games')}
-            className="inline-flex h-[52px] items-center gap-2.5 rounded-[26px] bg-secondary px-6 font-medium text-foreground transition-colors hover:bg-border"
+            className="inline-flex h-[52px] items-center gap-2.5 rounded-[26px] bg-secondary px-5 font-medium text-foreground transition-colors hover:bg-border"
           >
             Скачать игры
             <Icon name="Download" size={20} />
           </a>
           <Link
             to="/legal"
-            className="inline-flex h-[52px] items-center gap-2.5 rounded-[26px] bg-badge px-6 font-bold text-badge-foreground transition-transform hover:scale-[1.03]"
+            className="inline-flex h-[52px] items-center gap-2.5 rounded-[26px] bg-badge px-5 font-bold text-badge-foreground transition-transform hover:scale-[1.03]"
           >
             <Icon name="FileText" size={20} />
             Документы и реквизиты
